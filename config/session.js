@@ -12,6 +12,10 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.session.html
  */
 
+var parsedRedis = require('url').parse(process.env.REDIS_URL)
+
+console.log(parsedRedis)
+
 module.exports.session = {
 
   /***************************************************************************
@@ -52,7 +56,10 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  client: process.env.REDIS_URL,
+  host: parsedRedis.hostname,
+  port: parsedRedis.port,
+  username: parsedRedis.auth.split(":")[0],
+  password: parsedRedis.auth.split(":")[1]
 
 
   /***************************************************************************
