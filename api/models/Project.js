@@ -8,7 +8,30 @@
 module.exports = {
 
   attributes: {
-
+    name: {
+      type: 'STRING',
+      required: true
+    },
+    androidID: 'STRING',
+    itunesID: 'STRING',
+    website: 'STRING',
+    version: 'STRING',
+    payload: {
+      type: 'JSON',
+      defaultsTo: {}
+    },
+    users: {
+      collection: 'user',
+      via: 'projects'
+    },
+    installations: {
+      collection: 'installation',
+      via: 'project'
+    },
+    blocks: {
+      collection: 'block',
+      via: 'project'
+    },
   }
-};
 
+};

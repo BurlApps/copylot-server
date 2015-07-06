@@ -3,22 +3,26 @@ var bcrypt = require('bcrypt')
 module.exports = {
   attributes: {
     name: {
-      type: 'string',
+      type: 'STRING',
       required: true
     },
     email: {
-      type: 'email',
+      type: 'EMAIL',
       required: true,
       unique: true
     },
     emailVerify: {
-      type: 'string',
+      type: 'STRING',
       unique: true
     },
     password: {
-      type: 'string',
+      type: 'STRING',
       minLength: 6,
       required: true
+    },
+    projects: {
+      collection: 'project',
+      via: 'users'
     },
     toJSON: function() {
       var obj = this.toObject()
