@@ -18,7 +18,7 @@ $ ->
           button.val response.message or "Awesome :)"
 
           if response.user?
-            mixpanel.alias response.user, mixpanel.get_distinct_id()
+            mixpanel.alias response.user
             mixpanel.people.set
               "ID": response.user
               "$name": response.name
