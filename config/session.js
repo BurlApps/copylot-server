@@ -58,8 +58,7 @@ module.exports.session = {
 
   host: parsedRedis.hostname,
   port: parsedRedis.port,
-  username: parsedRedis.auth.split(":")[0],
-  password: parsedRedis.auth.split(":")[1]
+  pass: parsedRedis.auth.split(":")[1]
 
 
   /***************************************************************************
