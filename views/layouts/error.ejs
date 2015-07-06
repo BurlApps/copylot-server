@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/meta.ejs %>
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/global/background.css">
+    <link rel="stylesheet" href="/styles/global/index.css">
+    <!--STYLES END-->
+
+    <!--STYLES CUSTOM-->
+    <% include ../partials/css.ejs %>
+    <link rel="stylesheet" href="/styles/error/index.css">
+    <!--STYLES CUSTOM END-->
+  </head>
+
+  <body>
+    <div class="background error"></div>
+    <%- body %>
+    <% include ../partials/footer.ejs %>
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+    <!--SCRIPTS CUSTOM-->
+    <% include ../partials/config.ejs %>
+    <% include ../partials/javascript.ejs %>
+    <script src="/js/modal/index.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

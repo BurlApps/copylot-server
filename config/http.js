@@ -21,7 +21,7 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-  // middleware: {
+  middleware: {
 
   /***************************************************************************
   *                                                                          *
@@ -30,23 +30,24 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-    // order: [
-    //   'startRequestTimer',
-    //   'cookieParser',
-    //   'session',
-    //   'myRequestLogger',
-    //   'bodyParser',
-    //   'handleBodyParserError',
-    //   'compress',
-    //   'methodOverride',
-    //   'poweredBy',
-    //   '$custom',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    //   '404',
-    //   '500'
-    // ],
+    order: [
+      'startRequestTimer',
+      'cookieParser',
+      'session',
+      'trafficLogger',
+      'setLocals',
+      'bodyParser',
+      'handleBodyParserError',
+      'compress',
+      'methodOverride',
+      'poweredBy',
+      '$custom',
+      'router',
+      'www',
+      'favicon',
+      '404',
+      '500'
+    ],
 
   /****************************************************************************
   *                                                                           *
@@ -54,11 +55,24 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-    // myRequestLogger: function (req, res, next) {
-    //     console.log("Requested :: ", req.method, req.url);
-    //     return next();
-    // }
+    trafficLogger: function (req, res, next) {
+      console.log("Requested :: ", req.method, req.url);
+      return next();
+    },
 
+    setLocals: function (req, res, next) {
+      res.locals.host = sails.getBaseurl()
+      res.locals.url = res.locals.host + req.url
+      res.locals.user = null
+      res.locals.mixpanelToken = req.session.mixpanelToken
+      res.locals.config = {}
+      res.locals.siteTitle = "CoPylot"
+      res.locals.siteName = "CoPylot"
+      res.locals.titleOG = null
+      res.locals.visible = true
+      res.locals.description = ""
+      return next();
+    },
 
   /***************************************************************************
   *                                                                          *
@@ -71,7 +85,7 @@ module.exports.http = {
 
     // bodyParser: require('skipper')
 
-  // },
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -83,5 +97,5 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-  // cache: 31557600000
+  cache: 31557600000
 };
