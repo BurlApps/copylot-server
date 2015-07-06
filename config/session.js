@@ -14,8 +14,6 @@
 
 var parsedRedis = require('url').parse(process.env.REDIS_URL)
 
-console.log(parsedRedis)
-
 module.exports.session = {
 
   /***************************************************************************
