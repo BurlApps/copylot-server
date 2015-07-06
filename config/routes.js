@@ -22,40 +22,19 @@
 
 module.exports.routes = {
 
-  '/register': {
-    view: 'auth/register',
-    locals: {
-      template: "auth/register",
-      layout: 'layouts/modal'
-    }
-  },
-  '/reset': {
-    view: 'auth/reset/index',
-    locals: {
-      template: "auth/reset/index",
-      layout: 'layouts/modal'
-    }
-  },
-  '/reset/success': {
-    view: 'auth/reset/success',
-    locals: {
-      template: "auth/reset/success",
-      layout: 'layouts/modal'
-    }
-  },
-  '/email/success': {
-    view: 'auth/email/success',
-    locals: {
-      template: "auth/email/success",
-      layout: 'layouts/modal'
-    }
-  },
-  '/expired': {
-    view: 'auth/expired',
-    locals: {
-      template: "auth/expired",
-      layout: 'layouts/modal'
-    }
-  }
+  // Home
+  // TODO: Build home pages
+  'get /': "/projects",
 
+  // Authentication
+  'get /login': "AuthController.login",
+  'get /register': "AuthController.register",
+  'get /reset': "AuthController.reset",
+  'get /reset/password/:token': "AuthController.resetPassword",
+  'get /reset/success': "AuthController.resetSuccess",
+  'get /email/success': "AuthController.emailSuccess",
+  'get /logout': "AuthController.logoutUser",
+
+  'post /login': "AuthController.loginUser",
+  'post /register': "AuthController.registerUser",
 };

@@ -38,7 +38,7 @@ module.exports = function sendOK (data, options) {
   if (options.view) {
     return res.view(options.view, {
       data: data,
-      layout: "layouts/error"
+      layout: options.layout || "layouts/layout"
     });
   }
 

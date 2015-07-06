@@ -34,6 +34,8 @@ module.exports.http = {
       'startRequestTimer',
       'cookieParser',
       'session',
+      'passportInit',
+      'passportSession',
       'trafficLogger',
       'setLocals',
       'bodyParser',
@@ -55,16 +57,21 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
+    passportInit    : require('passport').initialize(),
+    passportSession : require('passport').session(),
+
+
     trafficLogger: function (req, res, next) {
       console.log("Requested :: ", req.method, req.url);
       return next();
     },
 
     setLocals: function (req, res, next) {
+      res.locals.user = req.user
       res.locals.host = process.env.HOST || sails.getBaseurl()
       res.locals.url = res.locals.host + req.url
       res.locals.user = null
-      res.locals.mixpanelToken = req.session.mixpanelToken
+      res.locals.mixpanelToken = ""
       res.locals.config = {}
       res.locals.siteTitle = "CoPylot"
       res.locals.siteName = "CoPylot"
