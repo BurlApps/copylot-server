@@ -28,7 +28,7 @@
     "passport": "~0.2.2",
     "passport-local": "~1.0.0",
     "connect-redis": "1.4.5",
-    "mailgun": "0.5.0",
+    "mailgun-js": "0.7.0",
     "url": "0.10.3"
   },
   "scripts": {

@@ -1,5 +1,4 @@
 var bcrypt = require('bcrypt')
-var mailgun = require('mailgun')
 
 module.exports = {
   attributes: {
@@ -13,7 +12,8 @@ module.exports = {
       unique: true
     },
     emailVerify: {
-      type: 'string'
+      type: 'string',
+      unique: true
     },
     password: {
       type: 'string',
@@ -24,21 +24,53 @@ module.exports = {
       var obj = this.toObject()
       delete obj.password
       return obj
+    },
+    verifyEmail: function(cb) {
+      sails.config.mailgun.messages().send({
+        from: 'CoPylot <bot@copylot.io>',
+        to: this.email,
+        subject: "Verify your email for CoPylot",
+        text: ('Welcome to Copylot!\n\nPlease confirm your email address ' +
+              'by clicking this link:\n' + process.env.HOST + '/email/' +
+              this.emailVerify + '/verify')
+      }, function(error, body) {
+        if(cb) cb(error, body)
+      })
+    },
+    resetPassword: function(cb) {
+      this.emailVerify = Math.random().toString(36).slice(2)
+      this.save()
+
+      sails.config.mailgun.messages().send({
+        from: 'CoPylot <bot@copylot.io>',
+        to: this.email,
+        subject: "Reset password for CoPylot",
+        text: ('You requested a password reset for Copylot.\n\n' +
+              'Click this link to reset it:\n' + process.env.HOST + '/reset/' +
+              this.emailVerify + '/password')
+      }, function(error, body) {
+        if(cb) cb(error, body)
+      })
     }
   },
-  beforeCreate: function(user, cb) {
-    user.emailVerify = Math.random().toString(36).slice(2)
-
+  hash: function(data, cb) {
     bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(user.password, salt, function(err, hash) {
-        if (err) {
-          console.log(err)
-          cb(err)
-        } else {
-          user.password = hash
-          cb()
-        }
-      })
+      bcrypt.hash(data, salt, cb)
     })
+  },
+  beforeCreate: function(user, cb) {
+    User.hash(user.password, function(err, hash) {
+      if (err) {
+        console.log(err)
+        cb(err)
+      } else {
+        user.password = hash
+        user.emailVerify = Math.random().toString(36).slice(2)
+        cb()
+      }
+    })
+  },
+  afterCreate: function(user, cb) {
+    user.verifyEmail(cb)
   }
 }

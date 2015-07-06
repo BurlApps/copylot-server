@@ -17,13 +17,14 @@ $ ->
         if response.success
           button.val response.message or "Awesome :)"
 
-          if response.user
+          if response.user?
             mixpanel.alias response.user, mixpanel.get_distinct_id()
             mixpanel.people.set
               "ID": response.user
               "$name": response.name
               "$email": response.email
 
+          if response.next?
             setTimeout((()->
               window.location.href = response.next
             ), response.delay or 300)

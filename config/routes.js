@@ -30,14 +30,16 @@ module.exports.routes = {
   // Authentication
   'get /login': "AuthController.login",
   'get /register': "AuthController.register",
+  'get /logout': "AuthController.logout",
   'get /reset': "AuthController.reset",
-  'get /reset/password/:token': "AuthController.resetPassword",
   'get /reset/success': "AuthController.resetSuccess",
-  'get /email/success': "AuthController.emailSuccess",
-  'get /logout': "AuthController.logoutUser",
+  'get /reset/:token/password': "AuthController.resetPassword",
+  'get /email/:token/verify': "AuthController.emailVerify",
 
   'post /login': "AuthController.loginUser",
   'post /register': "AuthController.registerUser",
+  'post /reset': "AuthController.resetUser",
+  'post /reset/:token/password': "AuthController.resetUserPassword",
 
 
   // Projects

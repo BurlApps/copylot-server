@@ -23,7 +23,8 @@ module.exports.policies = {
 
 	AuthController: {
   	login: "loggedInRedirect",
-  	register: "loggedInRedirect"
+  	register: "loggedInRedirect",
+  	reset: "loggedInRedirect"
 	},
 
 	ProjectController: "isLoggedIn"

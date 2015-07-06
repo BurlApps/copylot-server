@@ -2,6 +2,7 @@ var passport = require('passport')
 
 module.exports = {
 
+  /* GET Requests */
   login: function(req, res) {
     res.success("auth/login", {
       layout: 'layouts/modal',
@@ -16,6 +17,11 @@ module.exports = {
     })
   },
 
+  logout: function(req, res) {
+    req.logout()
+    res.redirect('/')
+  },
+
   reset: function(req, res) {
     res.success("auth/reset/index", {
       layout: 'layouts/modal'
@@ -23,8 +29,19 @@ module.exports = {
   },
 
   resetPassword: function(req, res) {
-    res.success("auth/reset/password", {
-      layout: 'layouts/modal'
+    User.findOne({
+      emailVerify: req.param("token")
+    }).then(function(user) {
+      if(!user) throw Error("User not found!");
+
+      res.success("auth/reset/password", {
+        layout: 'layouts/modal',
+        token: req.param("token")
+      })
+    }).fail(function(error) {
+      res.success("auth/expired", {
+        layout: 'layouts/modal'
+      })
     })
   },
 
@@ -34,33 +51,26 @@ module.exports = {
     })
   },
 
-  emailSuccess: function(req, res) {
-    res.success("auth/email/success", {
-      layout: 'layouts/modal'
-    })
-  },
+  emailVerify: function(req, res) {
+    User.findOne({
+      emailVerify: req.param("token")
+    }).then(function(user) {
+      if(!user) throw Error("User not found!")
 
-  registerUser: function(req, res) {
-    User.create({
-      name: req.param("name"),
-      email: req.param("email"),
-      password: req.param("password")
-    }).exec(function(error, user) {
-      if (error || !user) {
-        return res.error("Email Already Taken :(")
-      }
+      user.emailVerify = null
+      user.save()
 
-      req.logIn(user, function(err) {
-        if (err) res.error(err)
-
-        return res.success({
-          user: user.id,
-          next: req.param("next") || "projects"
-        })
+      res.success("auth/email/success", {
+        layout: 'layouts/modal'
+      })
+    }).fail(function(error) {
+      res.success("auth/expired", {
+        layout: 'layouts/modal'
       })
     })
   },
 
+  /* POST Requests */
   loginUser: function(req, res) {
     passport.authenticate('local', function(err, user, info) {
       if (err || !user) {
@@ -87,8 +97,61 @@ module.exports = {
     })(req, res)
   },
 
-  logoutUser: function(req, res) {
-    req.logout()
-    res.redirect('/')
+  registerUser: function(req, res) {
+    User.create({
+      name: req.param("name"),
+      email: req.param("email"),
+      password: req.param("password")
+    }).exec(function(error, user) {
+      if (error || !user) {
+        console.log(error, user)
+        return res.error("Email Already Taken :(")
+      }
+
+      req.logIn(user, function(err) {
+        if (err) res.error(err)
+
+        return res.success({
+          user: user.id,
+          next: req.param("next") || "projects"
+        })
+      })
+    })
+  },
+
+  resetUser: function(req, res) {
+    User.findOne({
+      email: req.param("email")
+    }).then(function(user) {
+      if(!user) throw Error("User not found!")
+
+      user.resetPassword()
+      res.success({ message: "Sent!" })
+    }).fail(function(error) {
+      console.log(error)
+      res.error("Email Not Found :(")
+    })
+  },
+
+  resetUserPassword: function(req, res) {
+    User.findOne({
+      emailVerify: req.param("token")
+    }).then(function(user) {
+      if(!user) throw Error("User not found!");
+
+      User.hash(req.param("password"), function(err, hash) {
+        if(err) throw Error("Hash failed");
+
+        user.emailVerify = null
+        user.password = hash
+        user.save()
+
+        res.success({
+          next: "/reset/success"
+        })
+      })
+    }).fail(function(error) {
+      res.failed("Something went wrong :(")
+    })
   }
 }
