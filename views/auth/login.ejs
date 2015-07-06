@@ -1,22 +1,20 @@
-<div class="container">
-  <a href="/" class="logo"><%= siteName %></a>
-  <div class="modal">
-    <div class="message">Let's Get Workin!</div>
-    <form action="/login">
-      <input type="hidden" name="_csrf" value="<%= _csrf %>">
-      <input type="email" class="input" name="email" placeholder="Email" value="<%= remember %>" step="1" autofocus required>
-      <input type="password" class="input" name="password" placeholder="Password" step="2" required>
-      <label class="remember">
-        <input type="checkbox" class="checkbox" name="remember" value="true" checked="checked">
-        Remember Me
-      </label>
-      <a class="forgot" href="/reset">Forgot your password?</a>
-      <div class="clear"></div>
-      <input type="submit" class="button" value="Sign In!">
-    </form>
-  </div>
-  <div class="bottom-text">
-    Don't have an account?
-    <a href="/register">Sign Up</a>
-  </div>
+<a href="/" class="logo"><%= siteName %></a>
+<div class="modal">
+  <div class="message">Let's Get Workin!</div>
+  <form action="/login">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>">
+    <input type="email" class="input" name="email" placeholder="Email" value="<%= remember %>" step="1" autofocus required>
+    <input type="password" class="input" name="password" placeholder="Password" step="2" required>
+    <label class="remember">
+      <input type="checkbox" class="checkbox" name="remember" value="true" checked="checked">
+      Remember Me
+    </label>
+    <a class="forgot" href="/reset">Forgot your password?</a>
+    <div class="clear"></div>
+    <input type="submit" class="button" value="Sign In!">
+  </form>
+</div>
+<div class="bottom-text">
+  Don't have an account?
+  <a href="/register">Sign Up</a>
 </div>

@@ -19,24 +19,13 @@
 
 module.exports.policies = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions (`true` allows public     *
-  * access)                                                                  *
-  *                                                                          *
-  ***************************************************************************/
-
   '*': true,
 
-  /***************************************************************************
-  *                                                                          *
-  * Here's an example of mapping some policies to run before a controller    *
-  * and its actions                                                          *
-  *                                                                          *
-  ***************************************************************************/
 	AuthController: {
-  	login: "sessionRedirect",
-  	register: "sessionRedirect"
-	}
+  	login: "loggedInRedirect",
+  	register: "loggedInRedirect"
+	},
+
+	ProjectController: "isLoggedIn"
 
 };

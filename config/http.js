@@ -70,7 +70,6 @@ module.exports.http = {
       res.locals.user = req.user
       res.locals.host = process.env.HOST || sails.getBaseurl()
       res.locals.url = res.locals.host + req.url
-      res.locals.user = null
       res.locals.mixpanelToken = ""
       res.locals.config = {}
       res.locals.siteTitle = "CoPylot"

@@ -26,6 +26,7 @@ module.exports.routes = {
   // TODO: Build home pages
   'get /': "/projects",
 
+
   // Authentication
   'get /login': "AuthController.login",
   'get /register': "AuthController.register",
@@ -37,4 +38,8 @@ module.exports.routes = {
 
   'post /login': "AuthController.loginUser",
   'post /register': "AuthController.registerUser",
+
+
+  // Projects
+  'get /projects': "ProjectController.home",
 };

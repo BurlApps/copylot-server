@@ -10,16 +10,17 @@
 
     <!--STYLES CUSTOM-->
     <% include ../partials/css.ejs %>
-    <link rel="stylesheet" href="/styles/modal/index.css">
+    <link rel="stylesheet" href="/styles/projects/index.css">
     <!--STYLES CUSTOM END-->
   </head>
 
   <body>
     <div class="background <%= template.replace(/\//g, "_") + ' ' + template.split("/")[0] %>"></div>
     <div class="container">
+      <% include ../projects/header.ejs %>
       <%- body %>
+      <% include ../partials/footer.ejs %>
     </div>
-    <% include ../partials/footer.ejs %>
 
     <!--TEMPLATES-->
     
@@ -28,7 +29,7 @@
     <!--SCRIPTS CUSTOM-->
     <% include ../partials/config.ejs %>
     <% include ../partials/javascript.ejs %>
-    <script src="/js/modal/index.js"></script>
+    <script src="/js/projects/index.js"></script>
     <!--SCRIPTS END-->
 
     <!--SCRIPTS-->
