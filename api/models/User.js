@@ -1,4 +1,5 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt')
+var mailgun = require('mailgun')
 
 module.exports = {
   attributes: {
