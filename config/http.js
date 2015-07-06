@@ -61,7 +61,7 @@ module.exports.http = {
     },
 
     setLocals: function (req, res, next) {
-      res.locals.host = sails.getBaseurl()
+      res.locals.host = process.env.HOST || sails.getBaseurl()
       res.locals.url = res.locals.host + req.url
       res.locals.user = null
       res.locals.mixpanelToken = req.session.mixpanelToken
