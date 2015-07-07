@@ -80,6 +80,12 @@ module.exports.http = {
       return next();
     },
 
+    filters: {
+      isActive: function(paneA, paneB) {
+        return (paneA == paneB) ? "active" : ""
+      }
+    }
+
   /***************************************************************************
   *                                                                          *
   * The body parser that will handle incoming multipart HTTP requests. By    *

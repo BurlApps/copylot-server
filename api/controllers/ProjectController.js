@@ -12,7 +12,7 @@ module.exports = {
     res.success("projects/index", {
       layout: 'layouts/projects',
       project: req.project,
-      platform: req.param("platform")
+      pane: req.pane
     })
   },
 
