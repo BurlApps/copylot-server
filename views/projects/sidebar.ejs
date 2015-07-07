@@ -1,13 +1,24 @@
 <div class="sidebar">
   <div class="header">
-    <div class="project">Night Owl</div>
+    <div class="project"><%= project.name %></div>
     <div class="arrow fa fa-chevron-down"></div>
     <div class="clear"></div>
   </div>
+  <div class="dropdown">
+    <% user.projects.forEach(function(project) { %>
+      <a href="/projects/<%= project.id + (platform ? ("/" + platform) : "") %>">
+        <%= project.name %>
+      </a>
+    <% }) %>
+    <a href="/projects/new" class="create">
+      <span class="fa fa-plus"></span>
+      Create Project
+    </a>
+  </div>
   <div class="navigation">
     <div class="header">Platforms</div>
-    <a class="item fa fa-globe active" href="/dashboard/123/global">Global</a>
-    <a class="item fa fa-apple" href="/dashboard/123/ios">iOS</a>
-    <a class="item fa fa-android" href="/dashboard/123/android">Android</a>
+    <a class="item fa fa-globe <%= !platform ? "active" : "" %>" href="/projects/<%= project.id %>/global">Global</a>
+    <a class="item fa fa-apple <%= (platform == "ios") ? "active" : "" %>" href="/projects/<%= project.id %>/ios">iOS</a>
+    <a class="item fa fa-android <%= (platform == "android") ? "active" : "" %>" href="/projects/<%= project.id %>/android">Android</a>
   </div>
 </div>

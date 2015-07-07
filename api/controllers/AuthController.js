@@ -78,7 +78,7 @@ module.exports = {
       }
 
       req.logIn(user, function(err) {
-        if (err) res.error("Something went wrong :(")
+        if (err) res.error("Something went wrong :(", err)
 
         if(req.param("remember") == "true") {
           res.cookie('remember', user.email, {
@@ -102,20 +102,19 @@ module.exports = {
       name: req.param("name"),
       email: req.param("email"),
       password: req.param("password")
-    }).exec(function(error, user) {
-      if (error || !user) {
-        console.log(error, user)
-        return res.error("Email Already Taken :(")
-      }
+    }).then(function(user) {
+      if(!user) throw Error("User not created")
 
       req.logIn(user, function(err) {
-        if (err) res.error(err)
+        if(err) throw Error("User not created")
 
         return res.success({
           user: user.id,
           next: req.param("next") || "projects"
         })
       })
+    }).fail(function(err) {
+      return res.error("Email Already Taken :(", err)
     })
   },
 
@@ -128,8 +127,7 @@ module.exports = {
       user.resetPassword()
       res.success({ message: "Sent!" })
     }).fail(function(error) {
-      console.log(error)
-      res.error("Email Not Found :(")
+      res.error("Email Not Found :(", err)
     })
   },
 
@@ -151,7 +149,7 @@ module.exports = {
         })
       })
     }).fail(function(error) {
-      res.failed("Something went wrong :(")
+      res.failed("Something went wrong :(", err)
     })
   }
 }

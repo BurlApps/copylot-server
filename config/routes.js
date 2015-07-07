@@ -44,4 +44,9 @@ module.exports.routes = {
 
   // Projects
   'get /projects': "ProjectController.home",
+  'get /projects/new': "ProjectController.new",
+  'get /projects/:project': "ProjectController.home",
+  'get /projects/:project/:platform': "ProjectController.home",
+
+  'post /projects/new': "ProjectController.create",
 };

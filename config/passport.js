@@ -7,9 +7,7 @@ passport.serializeUser(function(user, done) {
 })
 
 passport.deserializeUser(function(id, done) {
-  User.findOne({ id: id }, function (err, user) {
-    done(err, user)
-  })
+  User.findOne({ id: id }).populate("projects").exec(done)
 })
 
 passport.use(new LocalStrategy({

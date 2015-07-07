@@ -7,7 +7,7 @@
       your team can remember.
     </div>
     <form action="/projects/new">
-      <input type="hidden" name="_csrf" value="<%= csrf %>">
+      <input type="hidden" name="_csrf" value="<%= _csrf %>">
       <input type="text" class="input" name="name" placeholder="Name" step="1" autofocus required>
       <input type="submit" class="button" value="Create Project!">
     </form>

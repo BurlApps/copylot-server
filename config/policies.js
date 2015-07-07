@@ -27,6 +27,9 @@ module.exports.policies = {
   	reset: "loggedInRedirect"
 	},
 
-	ProjectController: "isLoggedIn"
-
+	ProjectController: {
+  	"*": ["isLoggedIn", "hasProjects"],
+  	"new": "isLoggedIn",
+  	"create": "isLoggedIn"
+  }
 };

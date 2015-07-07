@@ -29,17 +29,11 @@ module.exports = {
       delete obj.password
       return obj
     },
-    verifyEmail: function(cb) {
-      sails.config.mailgun.messages().send({
-        from: 'CoPylot <bot@copylot.io>',
-        to: this.email,
-        subject: "Verify your email for CoPylot",
-        text: ('Welcome to Copylot!\n\nPlease confirm your email address ' +
-              'by clicking this link:\n' + process.env.HOST + '/email/' +
-              this.emailVerify + '/verify')
-      }, function(error, body) {
-        if(cb) cb(error, body)
-      })
+    selectProject: function(id) {
+      var index = this.projects.map(function(project) {
+        return project.id
+      }).indexOf(Number(id))
+      return this.projects[index]
     },
     resetPassword: function(cb) {
       this.emailVerify = Math.random().toString(36).slice(2)
@@ -75,6 +69,13 @@ module.exports = {
     })
   },
   afterCreate: function(user, cb) {
-    user.verifyEmail(cb)
+    sails.config.mailgun.messages().send({
+      from: 'CoPylot <bot@copylot.io>',
+      to: user.email,
+      subject: "Verify your email for CoPylot",
+      text: ('Welcome to Copylot!\n\nPlease confirm your email address ' +
+        'by clicking this link:\n' + process.env.HOST + '/email/' +
+        user.emailVerify + '/verify')
+    }, cb)
   }
 }
