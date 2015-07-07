@@ -38,7 +38,7 @@ module.exports = {
         layout: 'layouts/modal',
         token: req.param("token")
       })
-    }).fail(function(error) {
+    }).fail(function(err) {
       res.success("auth/expired", {
         layout: 'layouts/modal'
       })
@@ -63,7 +63,7 @@ module.exports = {
       res.success("auth/email/success", {
         layout: 'layouts/modal'
       })
-    }).fail(function(error) {
+    }).fail(function(err) {
       res.success("auth/expired", {
         layout: 'layouts/modal'
       })
@@ -126,7 +126,7 @@ module.exports = {
 
       user.resetPassword()
       res.success({ message: "Sent!" })
-    }).fail(function(error) {
+    }).fail(function(err) {
       res.error("Email Not Found :(", err)
     })
   },
@@ -148,8 +148,8 @@ module.exports = {
           next: "/reset/success"
         })
       })
-    }).fail(function(error) {
-      res.failed("Something went wrong :(", err)
+    }).fail(function(err) {
+      res.error("Something went wrong :(", err)
     })
   }
 }
