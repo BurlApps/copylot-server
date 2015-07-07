@@ -30,7 +30,9 @@ module.exports = {
       project.users.add(req.user.id)
       project.save()
 
-      res.success({ next: "/projects" })
+      res.success({
+        next: "/projects/" + project.id
+      })
     }).fail(function(err) {
       res.failed("Something went wrong :(", err)
     })
