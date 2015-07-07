@@ -77,6 +77,7 @@ module.exports.http = {
       res.locals.titleOG = null
       res.locals.visible = true
       res.locals.description = ""
+      res.locals.random = sails.config.systemRandom
       return next();
     },
 

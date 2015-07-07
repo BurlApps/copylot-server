@@ -11,6 +11,9 @@
  * 		https://github.com/Zolmeister/grunt-sails-linker
  *
  */
+
+var random = Math.random().toString(36).slice(2)
+
 module.exports = function(grunt) {
 
 	grunt.config.set('sails-linker', {
@@ -18,7 +21,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--SCRIPTS-->',
 				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
+				fileTmpl: ('<script src="%s?r=' + random + '"></script>'),
 				appRoot: '.tmp/public'
 			},
 			files: {
@@ -32,7 +35,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--SCRIPTS-->',
 				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
+				fileTmpl: ('<script src="%s?r=' + random + '"></script>'),
 				appRoot: '.tmp/public',
 				relative: true
 			},
@@ -47,7 +50,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--SCRIPTS-->',
 				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
+				fileTmpl: ('<script src="%s?r=' + random + '"></script>'),
 				appRoot: '.tmp/public'
 			},
 			files: {
@@ -61,7 +64,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--SCRIPTS-->',
 				endTag: '<!--SCRIPTS END-->',
-				fileTmpl: '<script src="%s"></script>',
+				fileTmpl: ('<script src="%s?r=' + random + '"></script>'),
 				appRoot: '.tmp/public',
 				relative: true
 			},
@@ -76,7 +79,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: ('<link rel="stylesheet" href="%s?r=' + random + '">'),
 				appRoot: '.tmp/public'
 			},
 
@@ -91,7 +94,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: ('<link rel="stylesheet" href="%s?r=' + random + '">'),
 				appRoot: '.tmp/public',
 				relative: true
 			},
@@ -107,7 +110,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: ('<link rel="stylesheet" href="%s?r=' + random + '">'),
 				appRoot: '.tmp/public'
 			},
 			files: {
@@ -121,7 +124,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--STYLES-->',
 				endTag: '<!--STYLES END-->',
-				fileTmpl: '<link rel="stylesheet" href="%s">',
+				fileTmpl: ('<link rel="stylesheet" href="%s?r=' + random + '">'),
 				appRoot: '.tmp/public',
 				relative: true
 			},
@@ -137,7 +140,7 @@ module.exports = function(grunt) {
 			options: {
 				startTag: '<!--TEMPLATES-->',
 				endTag: '<!--TEMPLATES END-->',
-				fileTmpl: '<script type="text/javascript" src="%s"></script>',
+				fileTmpl: '(<script type="text/javascript" src="%s?r=' + random + '"></script>)',
 				appRoot: '.tmp/public'
 			},
 			files: {

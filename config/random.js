@@ -9,3 +9,5 @@ module.exports.random = function(len, an) {
 
   return str;
 }
+
+module.exports.systemRandom = module.exports.random(15)

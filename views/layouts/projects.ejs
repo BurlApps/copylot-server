@@ -4,13 +4,13 @@
     <% include ../partials/meta.ejs %>
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/global/background.css">
-    <link rel="stylesheet" href="/styles/global/index.css">
+    <link rel="stylesheet" href="/styles/global/background.css?r=4hwsh6csyulyp66r">
+    <link rel="stylesheet" href="/styles/global/index.css?r=4hwsh6csyulyp66r">
     <!--STYLES END-->
 
     <!--STYLES CUSTOM-->
     <% include ../partials/css.ejs %>
-    <link rel="stylesheet" href="/styles/projects/index.css">
+    <link rel="stylesheet" href="/styles/projects/index.css?r=<%= random %>">
     <!--STYLES CUSTOM END-->
   </head>
 
@@ -23,13 +23,13 @@
     </div>
 
     <!--TEMPLATES-->
-    
+
     <!--TEMPLATES END-->
 
     <!--SCRIPTS CUSTOM-->
     <% include ../partials/config.ejs %>
     <% include ../partials/javascript.ejs %>
-    <script src="/js/projects/index.js"></script>
+    <script src="/js/projects/index.js?r=<%= random %>"></script>
     <!--SCRIPTS END-->
 
     <!--SCRIPTS-->
