@@ -24,7 +24,6 @@ var cssFilesToInject = [
 var jsFilesToInject = [
 
   // Dependencies like jQuery, or Angular are brought in here
-  'js/dependencies/**/*.js',
   'js/global/*.js'
 ];
 
