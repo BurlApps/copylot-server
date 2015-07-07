@@ -36,7 +36,7 @@ module.exports = {
       return this.projects[index]
     },
     resetPassword: function(cb) {
-      this.emailVerify = Math.random().toString(36).slice(2)
+      this.emailVerify = sails.config.random(20)
       this.save()
 
       sails.config.mailgun.messages().send({
@@ -63,7 +63,7 @@ module.exports = {
         cb(err)
       } else {
         user.password = hash
-        user.emailVerify = Math.random().toString(36).slice(2)
+        user.emailVerify = sails.config.random(20)
         cb()
       }
     })

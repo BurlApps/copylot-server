@@ -17,8 +17,14 @@
   </div>
   <div class="navigation">
     <div class="header">Platforms</div>
-    <a class="item fa fa-globe <%= !platform ? "active" : "" %>" href="/projects/<%= project.id %>/global">Global</a>
-    <a class="item fa fa-apple <%= (platform == "ios") ? "active" : "" %>" href="/projects/<%= project.id %>/ios">iOS</a>
-    <a class="item fa fa-android <%= (platform == "android") ? "active" : "" %>" href="/projects/<%= project.id %>/android">Android</a>
+    <a class="item <%= !platform ? "active" : "" %>" href="/projects/<%= project.id %>/global">
+      <span class="fa fa-globe"></span> Global
+    </a>
+    <a class="item <%= (platform == "ios") ? "active" : "" %>" href="/projects/<%= project.id %>/ios">
+      <span class="fa fa-apple"></span> iOS
+    </a>
+    <a class="item <%= (platform == "android") ? "active" : "" %>" href="/projects/<%= project.id %>/android">
+      <span class="fa fa-android"></span> Android
+    </a>
   </div>
 </div>

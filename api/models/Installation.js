@@ -15,7 +15,7 @@ module.exports = {
     lastName: "STRING",
     fullName: "STRING",
     timeZone: "STRING",
-    projectVersion: "STRING",
+    projectVersion: "INTEGER",
     project: {
       model: 'project'
     },

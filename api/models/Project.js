@@ -15,7 +15,16 @@ module.exports = {
     androidID: 'STRING',
     itunesID: 'STRING',
     website: 'STRING',
-    version: 'STRING',
+    version: {
+      type: "INTEGER",
+      required: true,
+      defaultsTo: 1
+    },
+    secret: {
+      type: 'STRING',
+      required: true,
+      defaultsTo: sails.config.random(36)
+    },
     payload: {
       type: 'JSON',
       defaultsTo: {}
