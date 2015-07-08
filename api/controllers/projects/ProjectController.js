@@ -27,11 +27,11 @@ module.exports = {
   /* POST Requests */
   create: function(req, res) {
     Project.create({
-      name: req.param("name")
+      name: req.param("name"),
     }).then(function(project) {
       if(!project) throw Error("Project not created")
 
-      req.user.projects.add(project.id)
+      project.users.add(req.user.id)
       return project.save()
     }).then(function(project) {
       res.success({

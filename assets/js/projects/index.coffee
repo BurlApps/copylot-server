@@ -13,9 +13,9 @@ $ ()->
     window.location.href = $(this).attr("href")
 
   # Convert Payload Into Object
-  buttons = ['bold', 'italic', 'underline', 'deleted']
-  plugins = ['bufferbuttons']
-  tags    = ['strong', 'em', 'br', 'del', 'u', 'span', 'variable']
+  buttons  = ['bold', 'italic', 'underline', 'deleted', 'alignment']
+  plugins  = ['bufferbuttons']
+  tags     = ['strong', 'em', 'del', 'u', 'span', 'variable', 'div', 'br',]
 
   if not config.production
     buttons.unshift 'html'
@@ -25,15 +25,15 @@ $ ()->
     plugins: plugins
     minHeight: 450
     placeholder: 'Give your block some life...'
-    pastePlainText: true
-    cleanOnPaste: true
-    cleanSpaces: true
+    pastePlainText: false
+    cleanOnPaste: false
+    cleanSpaces: false
     paragraphize: false
     linebreaks: true
-    replaceDivs: true
+    replaceDivs: false
     allowedTags: tags
     removeComments: true
-    removeEmpty: tags
+    removeEmpty: tags.slice 0, -1
     tabAsSpaces: false
     preSpaces: false
 

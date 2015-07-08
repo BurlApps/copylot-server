@@ -30,14 +30,26 @@
     </table>
   <% } else { %>
     <div class="new-block-message">
-      <div class="message">Write A Block</div>
+      <div class="message">
+        Write An <span><%=: pane | platformFormat %></span> Block
+      </div>
       <div class="submessage">
-        Blocks allow you to change your in-app text on the fly.<br>
-        That's right, <strong>no more waiting on Apple!</strong>
+        Blocks allow you to change the text in your<br>
+        app on the fly. You read it correctly,<br>
+        <strong>no more waiting for app review!</strong>
       </div>
       <a class="new-button" href="<%= path %>/blocks/create">
         Lets Do This!
       </a>
+      <div class="subsubmessage">
+        <% if(pane == "global") { %>
+          Global blocks apply to all platforms and can be overwritten<br>
+          by platform specific blocks with the same title.
+        <% } else { %>
+          <%=: pane | platformFormat %> blocks are device specific and supersede any<br>
+          Global blocks with the same title.
+        <% } %>
+      </div>
     </div>
   <% } %>
 </div>
