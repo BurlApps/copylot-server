@@ -22,7 +22,8 @@ module.exports = {
         layout: 'layouts/projects',
         project: req.project,
         pane: req.platform,
-        blocks: blocks
+        blocks: blocks,
+        siteTitle: req.project.name
       })
     }).catch(res.badRequest)
   },
@@ -32,7 +33,8 @@ module.exports = {
       layout: 'layouts/projects',
       project: req.project,
       pane: req.platform,
-      block: null
+      block: null,
+      siteTitle: "Create Block"
     })
   },
 
@@ -46,7 +48,8 @@ module.exports = {
         layout: 'layouts/projects',
         project: req.project,
         pane: req.platform,
-        block: block
+        block: block,
+        siteTitle: block.title
       })
     }).catch(function(err) {
       console.log(err)
@@ -64,8 +67,8 @@ module.exports = {
       if(!block) throw Error("Block not created")
 
       req.project.blocks.add(block)
-      req.project.save()
-
+      return req.project.save()
+    }).then(function(block) {
       res.success({
         block: block.id,
         url: "/projects/" + req.project.id + "/" + req.platform +
@@ -85,8 +88,8 @@ module.exports = {
       block.title = req.param("title")
       block.html = req.param("html")
       block.dirty = true
-      block.save()
-
+      return block.save()
+    }).then(function(block) {
       res.success({
         block: block.id,
         url: req.url
@@ -102,8 +105,8 @@ module.exports = {
     }).then(function(block) {
       if(!block) throw Error("Block not found")
 
-      block.destroy()
-
+      return block.destroy()
+    }).then(function(block) {
       res.success({
         url: "/projects/" + req.project.id + "/" + req.platform
       })

@@ -3,7 +3,8 @@ module.exports = {
   /* GET Requests */
   index: function(req, res) {
     res.success("auth/reset/index", {
-      layout: 'layouts/modal'
+      layout: 'layouts/modal',
+      siteTitle: "Reset Password"
     })
   },
 
@@ -15,18 +16,21 @@ module.exports = {
 
       res.success("auth/reset/password", {
         layout: 'layouts/modal',
-        token: req.param("token")
+        token: req.param("token"),
+        siteTitle: "Reset Password"
       })
     }).fail(function(err) {
       res.success("auth/expired", {
-        layout: 'layouts/modal'
+        layout: 'layouts/modal',
+        siteTitle: "Expired Link"
       })
     })
   },
 
   success: function(req, res) {
     res.success("auth/reset/success", {
-      layout: 'layouts/modal'
+      layout: 'layouts/modal',
+      siteTitle: "Reset Successful"
     })
   },
 

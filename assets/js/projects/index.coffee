@@ -14,7 +14,7 @@ $ ()->
 
   # Convert Payload Into Object
   buttons = ['bold', 'italic', 'underline', 'deleted']
-  plugins = ['bufferbuttons', 'fontsize', 'fontfamily', 'fontcolor']
+  plugins = ['bufferbuttons']
   tags    = ['strong', 'em', 'br', 'del', 'u', 'span', 'variable']
 
   if not config.production
@@ -38,6 +38,11 @@ $ ()->
     preSpaces: false
 
   # Capture Search Event
+  $(".container > .modal .block-title").keydown (e)->
+    if e.keyCode == 9
+      redactor.redactor("focus.setEnd")
+
+  # Capture Search Event
   $(".container > .modal .search").on "keypress keyup", ->
     searchTerm = $(this).val().trim().toLowerCase()
 
@@ -55,14 +60,14 @@ $ ()->
   # Capture Delete Event
   $(".container > .modal .delete-button").click ->
     swal {
-      title: "Are you sure?",
-      text: "You will not be able to recover this block!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel plx!",
-      closeOnConfirm: false,
+      title: "Are you sure?"
+      text: "You will not be able to recover this block!"
+      type: "warning"
+      showCancelButton: true
+      confirmButtonColor: "#D23939"
+      confirmButtonText: "Yes, delete it!"
+      cancelButtonText: "No, cancel plx!"
+      closeOnConfirm: false
       closeOnCancel: true
     }, (isConfirm) ->
       if isConfirm
@@ -73,8 +78,11 @@ $ ()->
             title: "Deleted!"
             text: "Your block has been deleted."
             type: "success"
+            confirmButtonColor: "#38A0DC"
           }, ->
-            location.href = response.next
+            setTimeout ->
+              location.href = response.next
+            , 500
 
   # Capture Save Event
   enablePosting = true
@@ -98,6 +106,7 @@ $ ()->
             title: "#{verb}d!"
             text: "Your block has been #{verb}d."
             type: "success"
+            confirmButtonColor: "#38A0DC"
 
           form.find(".save-button").val "Save"
           form.find(".delete-button").show()
@@ -109,3 +118,4 @@ $ ()->
             title: "Oops..."
             text: "Sadly, something went wrong :("
             type: "error"
+            confirmButtonColor: "#D23939"

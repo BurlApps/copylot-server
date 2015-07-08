@@ -12,13 +12,15 @@ module.exports = {
     res.success("projects/index", {
       layout: 'layouts/projects',
       project: req.project,
-      pane: req.pane
+      pane: req.pane,
+      siteTitle: req.project.name
     })
   },
 
   new: function(req, res) {
     res.success("projects/new", {
-      layout: 'layouts/modal'
+      layout: 'layouts/modal',
+      siteTitle: "New Project"
     })
   },
 
@@ -29,7 +31,7 @@ module.exports = {
     }).then(function(project) {
       if(!project) throw Error("Project not created")
 
-      project.users.add(req.user.id)
+      req.user.projects.add(project.id)
       return project.save()
     }).then(function(project) {
       res.success({

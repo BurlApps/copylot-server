@@ -1,13 +1,14 @@
 body.stop-scrolling {
   height: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 .sweet-overlay {
   background-color: black;
   /* IE8 */
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   /* IE8 */
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
   left: 0;
   right: 0;
@@ -19,9 +20,7 @@ body.stop-scrolling {
 .sweet-alert {
   background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width: 478px;
-  padding: 17px;
-  border-radius: 5px;
+  width: 450px;
   text-align: center;
   position: fixed;
   left: 50%;
@@ -30,7 +29,20 @@ body.stop-scrolling {
   margin-top: -200px;
   overflow: hidden;
   display: none;
-  z-index: 99999; }
+  z-index: 99999;
+
+  padding: 20px 15px;
+  background: #FFFFFF;
+
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+
+  -webkit-box-shadow: 0 0 0 1px rgba(14,41,57,0.12),0 2px 5px rgba(14,41,57,0.44),inset 0 -1px 2px rgba(14,41,57,0.15),inset 0 1px 2px rgba(14,41,57,0.15);
+  -moz-box-shadown: 0 0 0 1px rgba(14,41,57,0.12),0 2px 5px rgba(14,41,57,0.44),inset 0 -1px 2px rgba(14,41,57,0.15),inset 0 1px 2px rgba(14,41,57,0.15);
+  box-shadow: 0 0 0 1px rgba(14,41,57,0.12),0 2px 5px rgba(14,41,57,0.44),inset 0 -1px 2px rgba(14,41,57,0.15),inset 0 1px 2px rgba(14,41,57,0.15);
+}
+
   @media all and (max-width: 540px) {
     .sweet-alert {
       width: auto;

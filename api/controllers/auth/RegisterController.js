@@ -5,7 +5,8 @@ module.exports = {
   /* GET Requests */
   index: function(req, res) {
     res.success("auth/register", {
-      layout: 'layouts/modal'
+      layout: 'layouts/modal',
+      siteTitle: "Register"
     })
   },
 

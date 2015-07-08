@@ -9,7 +9,7 @@ module.exports = function error(message, error) {
     message = message.description || message.message || "Something went wrong :("
   }
 
-  sails.log.verbose(error || message)
+  sails.log.error(error || message)
 
   res.jsonx({
     success: false,

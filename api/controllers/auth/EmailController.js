@@ -11,11 +11,13 @@ module.exports = {
       user.save()
 
       res.success("auth/email/success", {
-        layout: 'layouts/modal'
+        layout: 'layouts/modal',
+        siteTitle: "Email Verified"
       })
     }).catch(function(err) {
       res.success("auth/expired", {
-        layout: 'layouts/modal'
+        layout: 'layouts/modal',
+        siteTitle: "Expired Link"
       })
     })
   }
