@@ -92,6 +92,13 @@ module.exports.http = {
       humanize: function(date) {
         var now = new Date()
         return moment.duration(date - now).humanize(true)
+      },
+      platformFormat: function(platform) {
+        switch(platform) {
+          case "ios": return "iOS"
+          case "android": return "Android"
+          default: return "Global"
+        }
       }
     }
 
