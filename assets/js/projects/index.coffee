@@ -37,6 +37,21 @@ $ ()->
     tabAsSpaces: false
     preSpaces: false
 
+  # Capture Search Event
+  $(".container > .modal .search").on "keypress keyup", ->
+    searchTerm = $(this).val().trim().toLowerCase()
+
+    if searchTerm.length > 0
+      $(".container > .modal tbody tr").each ->
+        title = $(this).find("td").eq(1).text().trim().toLowerCase()
+        value = $(this).find("td").eq(2).text().trim().toLowerCase()
+
+        show = (title.indexOf(searchTerm) > -1 || value.indexOf(searchTerm) > -1)
+
+        $(this).toggle show
+    else
+      $(".container > .modal tbody tr").show()
+
   # Capture Delete Event
   $(".container > .modal .delete-button").click ->
     swal {
