@@ -50,8 +50,11 @@ $ ()->
       $(".container > .modal tbody tr").each ->
         title = $(this).find("td").eq(1).text().trim().toLowerCase()
         value = $(this).find("td").eq(2).text().trim().toLowerCase()
+        date = $(this).find("td").eq(3).text().trim().toLowerCase()
 
-        show = (title.indexOf(searchTerm) > -1 || value.indexOf(searchTerm) > -1)
+        show = (title.indexOf(searchTerm) > -1 or
+                value.indexOf(searchTerm) > -1 or
+                date.indexOf(searchTerm) > -1)
 
         $(this).toggle show
     else
