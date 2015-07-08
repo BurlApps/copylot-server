@@ -3,7 +3,9 @@
   window.config = {
     csrf: "<%= _csrf %>",
     host: "<%= host %>",
+    path: "<%= path %>",
     title: "<%= siteTitle %>",
+    production: <%= production %>
 
     <% Object.keys(config).forEach(function(key) {
       var value = config[key]

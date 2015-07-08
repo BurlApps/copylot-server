@@ -27,7 +27,6 @@ var jsFilesToInject = [
   'js/global/*.js'
 ];
 
-
 // Client-side HTML templates are injected using the sources below
 // The ordering of these templates shouldn't matter.
 // (uses Grunt-style wildcard/glob/splat expressions)
