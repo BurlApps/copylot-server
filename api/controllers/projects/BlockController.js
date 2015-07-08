@@ -87,7 +87,8 @@ module.exports = {
 
       block.title = req.param("title")
       block.html = req.param("html")
-      block.dirty = true
+      block.payload = null
+
       return block.save()
     }).then(function(block) {
       res.success({
