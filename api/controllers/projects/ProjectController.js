@@ -8,7 +8,7 @@
 module.exports = {
 
   /* GET Requests */
-	home: function(req, res) {
+	index: function(req, res) {
     res.success("projects/index", {
       layout: 'layouts/projects',
       project: req.project,
@@ -27,14 +27,16 @@ module.exports = {
     Project.create({
       name: req.param("name")
     }).then(function(project) {
-      project.users.add(req.user.id)
-      project.save()
+      if(!project) throw Error("Project not created")
 
+      project.users.add(req.user.id)
+      return project.save()
+    }).then(function(project) {
       res.success({
-        next: "/projects/" + project.id
+        next: "/projects/" + project.id + "/global"
       })
-    }).fail(function(err) {
-      res.failed("Something went wrong :(", err)
+    }).catch(function(err) {
+      res.error("Something went wrong :(", err)
     })
   }
 };

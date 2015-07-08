@@ -9,6 +9,8 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
 
+ var moment = require("moment")
+
 module.exports.http = {
 
   /****************************************************************************
@@ -62,14 +64,16 @@ module.exports.http = {
 
 
     trafficLogger: function (req, res, next) {
-      console.log("Requested :: ", req.method, req.url);
+      sails.log.info("Request -", req.method, req.url)
       return next();
     },
 
     setLocals: function (req, res, next) {
+      res.locals.production = sails.config.isProduction
       res.locals.user = req.user
       res.locals.host = process.env.HOST || sails.getBaseurl()
       res.locals.url = res.locals.host + req.url
+      res.locals.path = req.url
       res.locals.mixpanelToken = process.env.MIXPANEL
       res.locals.config = {}
       res.locals.siteTitle = "CoPylot"
@@ -84,6 +88,10 @@ module.exports.http = {
     filters: {
       isActive: function(paneA, paneB) {
         return (paneA == paneB) ? "active" : ""
+      },
+      humanize: function(date) {
+        var now = new Date()
+        return moment.duration(date - now).humanize(true)
       }
     }
 

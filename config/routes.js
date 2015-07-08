@@ -28,25 +28,31 @@ module.exports.routes = {
 
 
   // Authentication
-  'get /login': "AuthController.login",
-  'get /register': "AuthController.register",
-  'get /logout': "AuthController.logout",
-  'get /reset': "AuthController.reset",
-  'get /reset/success': "AuthController.resetSuccess",
-  'get /reset/:token/password': "AuthController.resetPassword",
-  'get /email/:token/verify': "AuthController.emailVerify",
+  'get /login': "auth/LoginController.index",
+  'get /register': "auth/RegisterController.index",
+  'get /logout': "auth/LogoutController.index",
+  'get /reset': "auth/ResetController.index",
+  'get /reset/success': "auth/ResetController.success",
+  'get /reset/:token/password': "auth/ResetController.password",
+  'get /email/:token/verify': "auth/EmailController.index",
 
-  'post /login': "AuthController.loginUser",
-  'post /register': "AuthController.registerUser",
-  'post /reset': "AuthController.resetUser",
-  'post /reset/:token/password': "AuthController.resetUserPassword",
+  'post /login': "auth/LoginController.login",
+  'post /register': "auth/RegisterController.register",
+  'post /reset': "auth/ResetController.sendEmail",
+  'post /reset/:token/password': "auth/ResetController.setPassword",
 
 
   // Projects
-  'get /projects': "ProjectController.home",
-  'get /projects/new': "ProjectController.new",
-  'get /projects/:project': "ProjectController.home",
-  'get /projects/:project/:pane': "ProjectController.home",
+  'get /projects': "projects/ProjectController.index",
+  'get /projects/new': "projects/ProjectController.new",
+  'get /projects/:project': "projects/ProjectController.index",
+  'get /projects/:project/settings/:pane': "projects/ProjectController.index",
+  'get /projects/:project/:platform': "projects/BlockController.index",
+  'get /projects/:project/:platform/blocks/create': "projects/BlockController.new",
+  'get /projects/:project/:platform/blocks/:block': "projects/BlockController.block",
 
-  'post /projects/new': "ProjectController.create",
+  'post /projects/new': "projects/ProjectController.create",
+  'post /projects/:project/:platform/blocks/create': "projects/BlockController.create",
+  'post /projects/:project/:platform/blocks/:block': "projects/BlockController.update",
+  'post /projects/:project/:platform/blocks/:block/delete': "projects/BlockController.delete",
 };

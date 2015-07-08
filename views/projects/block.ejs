@@ -1,0 +1,23 @@
+<div class="content">
+  <form class="block-form" action="<%= path %>">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>">
+    <div class="header">
+      <a class="back-button fa fa-chevron-left" href="/projects/<%= project.id %>/<%= pane %>"></a>
+      <% if(block) { %>
+        <input type="text" class="input" name="title" placeholder="Give Your Block A Title" value="<%= block.title %>" step="1" required>
+        <div class="delete-button">Delete</div>
+        <input class="save-button" value="save" type="submit">
+      <% } else { %>
+        <input type="text" class="input" name="title" placeholder="Give Your Block A Title" step="1" autofocus required>
+        <div class="delete-button" style="display: none">Delete</div>
+        <input class="save-button" value="create" type="submit">
+      <% } %>
+      <div class="clear"></div>
+    </div>
+    <div class="block-editor">
+      <textarea class="payload" name="html"><%= block ? block.html : "" %></textarea>
+      <div class="variables"></div>
+    </div>
+  </form>
+  <div class="clear"></div>
+</div>

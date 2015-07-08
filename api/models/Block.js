@@ -8,6 +8,12 @@
 module.exports = {
   attributes: {
     title: "STRING",
+    html: "STRING",
+    platform: {
+      type: "STRING",
+      defaultsTo: "global",
+      enum: ["global", "ios", "android"]
+    },
     dirty: {
       type: "BOOLEAN",
       defaultsTo: true

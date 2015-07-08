@@ -21,15 +21,24 @@ module.exports.policies = {
 
   '*': true,
 
-	AuthController: {
-  	login: "loggedInRedirect",
-  	register: "loggedInRedirect",
-  	reset: "loggedInRedirect"
-	},
+  "auth/LoginController": {
+    "*": "loggedInRedirect",
+    "login": "wantsJSON",
+    "logout": true
+  },
 
-	ProjectController: {
+  "auth/RegisterController": "loggedInRedirect",
+  "auth/ResetController": "loggedInRedirect",
+
+	"projects/ProjectController": {
   	"*": ["isLoggedIn", "hasProjects"],
   	"new": "isLoggedIn",
-  	"create": "isLoggedIn"
+  	"create": ["isLoggedIn", "wantsJSON"]
+  },
+
+  "projects/BlockController": {
+  	"*": ["isLoggedIn", "hasProjects"],
+  	"create": ["isLoggedIn", "hasProjects", "wantsJSON"],
+  	"udpate": ["isLoggedIn", "hasProjects", "wantsJSON"]
   }
 };

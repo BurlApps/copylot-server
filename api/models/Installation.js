@@ -21,7 +21,7 @@ module.exports = {
     },
     deviceType: {
       type: "STRING",
-      enum: ["iOS", "android"]
+      enum: ["ios", "android"]
     }
   }
 

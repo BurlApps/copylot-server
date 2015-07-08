@@ -1,0 +1,41 @@
+<div class="sidebar">
+  <div class="header">
+    <div class="project"><%= project.name %></div>
+    <div class="arrow fa fa-chevron-down"></div>
+    <div class="clear"></div>
+  </div>
+  <div class="dropdown">
+    <% user.projects.forEach(function(project) { %>
+      <a href="/projects/<%= project.id + (pane ? ("/" + pane) : "") %>">
+        <%= project.name %>
+      </a>
+    <% }) %>
+    <a href="/projects/new" class="create">
+      <span class="fa fa-plus"></span>
+      Create Project
+    </a>
+  </div>
+  <div class="navigation">
+    <div class="header">Platforms</div>
+    <a class="item <%=: pane | isActive:("global") %>" href="/projects/<%= project.id %>/global">
+      <span class="fa fa-globe"></span> Global
+    </a>
+    <a class="item <%=: pane | isActive:("ios") %>" href="/projects/<%= project.id %>/ios">
+      <span class="fa fa-apple"></span> iOS
+    </a>
+    <a class="item <%=: pane | isActive:("android") %>" href="/projects/<%= project.id %>/android">
+      <span class="fa fa-android"></span> Android
+    </a>
+
+    <div class="header">Preferences</div>
+    <a class="item <%=: pane | isActive:("management") %>" href="/projects/<%= project.id %>/settings/management">
+      <span class="fa fa-bars"></span> Management
+    </a>
+    <a class="item <%=: pane | isActive:("team") %>" href="/projects/<%= project.id %>/settings/team">
+      <span class="fa fa-user"></span> Team Members
+    </a>
+    <a class="item <%=: pane | isActive:("notifications") %>" href="/projects/<%= project.id %>/settings/notifications">
+      <span class="fa fa-bell"></span> Notifications
+    </a>
+  </div>
+</div>
