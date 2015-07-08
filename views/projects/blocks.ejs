@@ -31,7 +31,11 @@
   <% } else { %>
     <div class="new-block-message">
       <div class="message">
-        Write An <span><%=: pane | platformFormat %></span> Block
+        <% if(pane == "global") { %>
+          Write a <span><%=: pane | platformFormat %></span> Block
+        <% } else { %>
+          Write an <span><%=: pane | platformFormat %></span> Block
+        <% } %>
       </div>
       <div class="submessage">
         Blocks allow you to change the text in your<br>
