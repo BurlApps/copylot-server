@@ -13,7 +13,7 @@ $ ()->
     window.location.href = $(this).attr("href")
 
   # Convert Payload Into Object
-  buttons = ['bold', 'italic', 'underline', 'deleted']
+  buttons = ['bold', 'italic', 'underline', 'deleted', 'alignment']
   plugins = ['bufferbuttons']
   tags    = ['strong', 'em', 'br', 'del', 'u', 'span', 'variable']
 
