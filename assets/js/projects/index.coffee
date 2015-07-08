@@ -57,7 +57,6 @@ $ ()->
     else
       $(".container > .modal tbody tr").show()
 
-
   # Capture Delete Event
   $(".container > .modal .delete-button").click ->
     swal {
