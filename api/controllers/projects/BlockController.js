@@ -17,7 +17,7 @@ module.exports = {
   	Block.find({
       project: req.project.id,
       platform: req.platform
-    }).then(function(blocks) {
+    }).sort('title ASC').then(function(blocks) {
       res.success("projects/blocks", {
         layout: 'layouts/projects',
         project: req.project,

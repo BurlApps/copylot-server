@@ -9,7 +9,7 @@ $ ()->
     $(".modal .sidebar .dropdown").toggle()
 
   # Table Rows Clickable Links
-  $(".container > .modal .data-table tr").click ->
+  $(".container > .modal .data-table tbody tr").click ->
     window.location.href = $(this).attr("href")
 
   # Convert Payload Into Object
