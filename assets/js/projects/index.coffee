@@ -77,6 +77,7 @@ $ ()->
         enablePosting = true
 
         if response.success
+          form.find(".save-button").val "Save"
           form.find(".delete-button").show()
           form.attr("action", response.url)
           history.replaceState(null, null, response.url);
