@@ -77,14 +77,17 @@ $ ()->
         enablePosting = true
 
         if response.success
+          verb = form.find(".save-button").val()
+
+          swal
+            title: "#{verb}d!"
+            text: "Your block has been #{verb}d."
+            type: "success"
+
+          form.find(".save-button").val "Save"
           form.find(".delete-button").show()
           form.attr("action", response.url)
           history.replaceState(null, null, response.url);
-
-          swal
-            title: "Saved!"
-            text: "Your block has been saved."
-            type: "success"
 
         else
           swal
