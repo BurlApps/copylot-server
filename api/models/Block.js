@@ -14,10 +14,6 @@ module.exports = {
       defaultsTo: "global",
       enum: ["global", "ios", "android"]
     },
-    dirty: {
-      type: "BOOLEAN",
-      defaultsTo: true
-    },
     payload: {
       type: 'JSON',
       defaultsTo: []
