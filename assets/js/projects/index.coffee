@@ -31,21 +31,20 @@ class Projects
 
       init: ->
         redactor = @
-
-        @$box.droppable
-          accept: "variable"
-          drop: (ev, ui)->
-            draggable = ui.draggable
-            className = if draggable.hasClass("super") then "super" else "block"
-            element = "<variable spellcheck='false' class='#{className}'>#{draggable.text()}</variable>"
-
-            redactor.dragDrop.insert element
+        cursor = null
 
         self.container.find(".variables variable").click ->
           className = if $(@).hasClass("super") then "super" else "block"
           element = "<variable spellcheck='false' class='#{className}'>#{$(@).text()}</variable>"
-
           redactor.dragDrop.insert element
+
+        @$box.droppable
+          accept: "variable"
+          drop: (ev, ui)=>
+            draggable = ui.draggable
+            className = if draggable.hasClass("super") then "super" else "block"
+            element = "<variable spellcheck='false' class='#{className}'>#{draggable.text()}</variable>"
+            redactor.dragDrop.insert element
 
         self.container.find(".variables variable").draggable
           helper:'clone'
@@ -160,11 +159,13 @@ class Projects
     @content.find(".delete-button").click ->
       swal {
         title: "Are you sure?"
-        text: "You will not be able to recover this block!"
+        text: "<strong>DO NOT DELETE this block if it is being used in your app!</strong> " +
+              "This is permanent and doing so may break your app."
+        html: true
         type: "warning"
         showCancelButton: true
         confirmButtonColor: "#D23939"
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "I'm 100% sure"
         cancelButtonText: "No, cancel plx!"
         closeOnConfirm: false
         closeOnCancel: true
@@ -174,8 +175,7 @@ class Projects
             _csrf: config.csrf
           , (response)->
             swal {
-              title: "Deleted!"
-              text: "Your block has been deleted."
+              title: "Deleted."
               type: "success"
               confirmButtonColor: "#38A0DC"
             }, ->
@@ -190,18 +190,36 @@ class Projects
 
       form = $ @
       data = form.serialize()
+      button = form.find(".save-button")
+      verb = form.find(".save-button").val().toLowerCase()
+
+      if verb == "save"
+        button.addClass("saving").val "deploying"
+      else
+        button.addClass("saving").val "creating"
 
       $.post form.attr("action"), form.serialize(), (response)->
+        button.removeClass("saving").val(verb)
+
         if response.success
-          verb = form.find(".save-button").val()
+          verb = form.find(".save-button").val().toLowerCase()
 
-          swal
-            title: "#{verb}d!"
-            text: "Your block has been #{verb.toLowerCase()}d."
-            type: "success"
-            confirmButtonColor: "#38A0DC"
+          if verb == "create"
+            swal
+              title: "Created!"
+              text: "Your block has been created."
+              type: "success"
+              confirmButtonColor: "#38A0DC"
 
-          form.find(".save-button").val "Save"
+            button.val "save"
+          else
+            button.addClass("saved").val "deployed"
+
+            setTimeout ->
+               button.removeClass("saved").val "deploy"
+            , 3000
+
+          form.find(".block-title").prop('readonly', true)
           form.find(".delete-button").show()
           form.attr("action", response.url)
           history.replaceState(null, null, response.url);
