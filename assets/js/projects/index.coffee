@@ -75,6 +75,7 @@ class Projects
       removeWithoutAttr: [ 'span' ]
       tabAsSpaces: false
       preSpaces: false
+      minHeight: 450
       keyupCallback: @keypressCallback
       keydownCallback: @keypressCallback
       clickCallback: (e)->
@@ -184,7 +185,7 @@ class Projects
 
           swal
             title: "#{verb}d!"
-            text: "Your block has been #{verb}d."
+            text: "Your block has been #{verb.toLowerCase()}d."
             type: "success"
             confirmButtonColor: "#38A0DC"
 
