@@ -23,6 +23,10 @@
           any block in this project.
         </div>
         <div class="variables">
+          <% Object.keys(project.variables).forEach(function(key) { %>
+            <variable class="super"><%= key %></variable>
+          <% }) %>
+          <!-- TODO: Remove when API is live -->
           <variable class="super">user name</variable>
           <variable class="super">user email</variable>
         </div>
@@ -32,6 +36,12 @@
           from this block.
         </div>
         <div class="variables">
+          <% if(block) { %>
+            <% Object.keys(block.variables).forEach(function(key) { %>
+              <variable class="block"><%= key %></variable>
+            <% }) %>
+          <% } %>
+          <!-- TODO: Remove when API is live -->
           <variable class="block">price</variable>
           <variable class="block">discount</variable>
         </div>

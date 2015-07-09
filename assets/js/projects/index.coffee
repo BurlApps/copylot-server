@@ -62,7 +62,6 @@ class Projects
     @redactor = @content.find(".payload").redactor
       buttons: buttons
       plugins: plugins
-      minHeight: 450
       placeholder: 'Give your block some life...'
       pastePlainText: false
       cleanOnPaste: false
