@@ -46,13 +46,8 @@
         Lets Do This!
       </a>
       <div class="subsubmessage">
-        <% if(pane == "global") { %>
-          Global blocks apply to all platforms and can be overwritten<br>
-          by platform specific blocks with the same title.
-        <% } else { %>
-          <%=: pane | platformFormat %> blocks are device specific and supersede any<br>
-          Global blocks with the same title.
-        <% } %>
+        <%=: pane | platformFormat %> blocks are device specific and supersede any<br>
+        Global blocks with the same title.
       </div>
     </div>
   <% } %>

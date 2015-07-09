@@ -19,22 +19,33 @@ class Projects
     self = @
 
     $.Redactor.prototype.dragDrop = ->
+      insert: (element)->
+        if !self.beenFocused and !@focus.isFocused()
+          @focus.setEnd()
+
+        @insert.html element, false
+
+        for node in @selection.getNodes()
+          if node.localName == "variable"
+            return @caret.setAfter node
+
       init: ->
+        redactor = @
+
         @$box.droppable
           accept: "variable"
-          drop: (ev, ui)=>
+          drop: (ev, ui)->
             draggable = ui.draggable
             className = if draggable.hasClass("super") then "super" else "block"
             element = "<variable spellcheck='false' class='#{className}'>#{draggable.text()}</variable>"
 
-            if !self.beenFocused and !@focus.isFocused()
-              @focus.setEnd()
+            redactor.dragDrop.insert element
 
-            @insert.html element, false
+        self.container.find(".variables variable").click ->
+          className = if $(@).hasClass("super") then "super" else "block"
+          element = "<variable spellcheck='false' class='#{className}'>#{$(@).text()}</variable>"
 
-            for node in @selection.getNodes()
-              if node.localName == "variable"
-                return @caret.setAfter node
+          redactor.dragDrop.insert element
 
         self.container.find(".variables variable").draggable
           helper:'clone'
@@ -149,7 +160,7 @@ class Projects
     @content.find(".delete-button").click ->
       swal {
         title: "Are you sure?"
-        text: "You will not be able to recover @ block!"
+        text: "You will not be able to recover this block!"
         type: "warning"
         showCancelButton: true
         confirmButtonColor: "#D23939"
@@ -198,7 +209,7 @@ class Projects
         else
           swal
             title: "Oops..."
-            text: "Sadly, something went wrong :("
+            text: response.message or "Something went wrong :("
             type: "error"
             confirmButtonColor: "#D23939"
 
