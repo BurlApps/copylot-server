@@ -25,7 +25,7 @@ class Projects
           drop: (ev, ui)=>
             draggable = ui.draggable
             className = if draggable.hasClass("project") then "project" else "block"
-            element = "<variable class='#{className}'>#{draggable.text()}</variable>"
+            element = "<variable spellcheck='false' class='#{className}'>#{draggable.text()}</variable>"
 
             if !self.beenFocused and !@focus.isFocused()
               @focus.setEnd()
