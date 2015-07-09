@@ -17,12 +17,20 @@
     <div class="block-editor">
       <textarea class="payload" name="html"><%= block ? block.html : "" %></textarea>
       <div class="variable-selection">
-        <div class="variable-header">Project Variables</div>
+        <div class="variable-header">Super Variables</div>
+        <div class="variable-explanation">
+          Super variables can be accessed from<br>
+          any block in this project.
+        </div>
         <div class="variables">
-          <variable class="project">user name</variable>
-          <variable class="project">user email</variable>
+          <variable class="super">user name</variable>
+          <variable class="super">user email</variable>
         </div>
         <div class="variable-header">Block Variables</div>
+        <div class="variable-explanation">
+          Block variables can only be accessed<br>
+          from this block.
+        </div>
         <div class="variables">
           <variable class="block">price</variable>
           <variable class="block">discount</variable>
