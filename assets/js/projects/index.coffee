@@ -184,7 +184,7 @@ class Projects
 
           swal
             title: "#{verb}d!"
-            text: "Your block has been #{verb}d."
+            text: "Your block has been #{verb.toLowerCase()}d."
             type: "success"
             confirmButtonColor: "#38A0DC"
 
