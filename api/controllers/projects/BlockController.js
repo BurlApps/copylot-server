@@ -62,13 +62,11 @@ module.exports = {
     Block.create({
       title: req.param("title"),
       platform: req.platform,
-      html: req.param("html")
+      html: req.param("html"),
+      project: req.project.id
     }).then(function(block) {
       if(!block) throw Error("Block not created")
 
-      req.project.blocks.add(block)
-      return req.project.save()
-    }).then(function(block) {
       res.success({
         block: block.id,
         url: "/projects/" + req.project.id + "/" + req.platform +
