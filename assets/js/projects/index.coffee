@@ -38,6 +38,7 @@ class Projects
 
         self.container.find(".variables variable").draggable
           helper:'clone'
+          revert: "invalid"
           containment: self.content
           start: (event, ui)=>
             $("div#pseudodroppable").css
@@ -110,7 +111,7 @@ class Projects
 
 
     # Toggle Projects Dropdown
-    @sidebar.find(".header").click =>
+    @sidebar.find("> .header").click =>
       @sidebar.find(".dropdown").toggle()
 
 
