@@ -75,7 +75,7 @@ class Projects
       removeWithoutAttr: [ 'span' ]
       tabAsSpaces: false
       preSpaces: false
-      minHeight: 450
+      minHeight: 418
       keyupCallback: @keypressCallback
       keydownCallback: @keypressCallback
       clickCallback: (e)->
