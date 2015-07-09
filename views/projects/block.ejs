@@ -16,7 +16,18 @@
     </div>
     <div class="block-editor">
       <textarea class="payload" name="html"><%= block ? block.html : "" %></textarea>
-      <div class="variables"></div>
+      <div class="variable-selection">
+        <div class="variable-header">Global Variables</div>
+        <div class="variables">
+          <variable class="global">user name</variable>
+          <variable class="global">user email</variable>
+        </div>
+        <div class="variable-header">Block Variables</div>
+        <div class="variables">
+          <variable class="block">price</variable>
+          <variable class="block">discount</variable>
+        </div>
+      </div>
     </div>
   </form>
   <div class="clear"></div>
