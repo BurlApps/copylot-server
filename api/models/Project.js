@@ -41,6 +41,10 @@ module.exports = {
       collection: 'block',
       via: 'project'
     },
+    variables: {
+      type: 'JSON',
+      defaultsTo: {}
+    }
   }
 
 };

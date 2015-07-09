@@ -24,7 +24,7 @@ class Projects
           accept: "variable"
           drop: (ev, ui)=>
             draggable = ui.draggable
-            className = if draggable.hasClass("global") then "global" else "block"
+            className = if draggable.hasClass("project") then "project" else "block"
             element = "<variable class='#{className}'>#{draggable.text()}</variable>"
 
             if !self.beenFocused and !@focus.isFocused()
@@ -110,7 +110,7 @@ class Projects
 
 
     # Toggle Projects Dropdown
-    @sidebar.find(".header").click ->
+    @sidebar.find(".header").click =>
       @sidebar.find(".dropdown").toggle()
 
 
