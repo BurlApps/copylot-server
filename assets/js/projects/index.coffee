@@ -8,6 +8,7 @@ class Projects
     @modal = @container.find(".modal")
     @sidebar = @modal.find(".sidebar")
     @content = @modal.find(".content")
+    @beenFocused = false
 
     # Initialize Events
     @redactorPlugin()
@@ -15,7 +16,7 @@ class Projects
     @bindEvents()
 
   redactorPlugin: ->
-    _this = @
+    self = @
 
     $.Redactor.prototype.dragDrop = ->
       init: ->
@@ -25,11 +26,19 @@ class Projects
             draggable = ui.draggable
             className = if draggable.hasClass("global") then "global" else "block"
             element = "<variable class='#{className}'>#{draggable.text()}</variable>"
+
+            if !self.beenFocused and !@focus.isFocused()
+              @focus.setEnd()
+
             @insert.html element, false
 
-        _this.container.find(".variables variable").draggable
+            for node in @selection.getNodes()
+              if node.localName == "variable"
+                return @caret.setAfter node
+
+        self.container.find(".variables variable").draggable
           helper:'clone'
-          containment: @$box
+          containment: self.content
           start: (event, ui)=>
             $("div#pseudodroppable").css
               position:"absolute"
@@ -73,11 +82,17 @@ class Projects
         if e.toElement.localName == "variable"
           this.caret.setAfter e.toElement
 
+      focusCallback: =>
+        @beenFocused = true
+
   keypressCallback: (e)->
     if e.keyCode != 91
-      for node in @selection.getNodes()
+      nodes = @selection.getNodes()
+
+      for node in nodes
         if node.localName == "variable"
-          e.preventDefault()
+          if nodes.length == 1
+            e.preventDefault()
 
           if e.keyCode == 8
             return node.remove()
@@ -87,6 +102,7 @@ class Projects
             return @caret.setAfter node
 
   bindEvents: ->
+    self = @
 
     # Toggle Profile Toggle
     @header.find(".profile").click ->
@@ -114,7 +130,7 @@ class Projects
       searchTerm = $(@).val().trim().toLowerCase()
 
       if searchTerm.length > 0
-        @modal.find("tbody tr").each ->
+        self.content.find("tbody tr").each ->
           title = $(@).find("td").eq(1).text().trim().toLowerCase()
           value = $(@).find("td").eq(2).text().trim().toLowerCase()
           date = $(@).find("td").eq(3).text().trim().toLowerCase()
@@ -125,7 +141,7 @@ class Projects
 
           $(@).toggle show
       else
-        @modal.find("tbody tr").show()
+        self.content.find("tbody tr").show()
 
 
     # Capture Delete Event
