@@ -16,7 +16,36 @@
     </div>
     <div class="block-editor">
       <textarea class="payload" name="html"><%= block ? block.html : "" %></textarea>
-      <div class="variables"></div>
+      <div class="variable-selection">
+        <div class="variable-header">Super Variables</div>
+        <div class="variable-explanation">
+          Super variables can be accessed from<br>
+          any block in this project.
+        </div>
+        <div class="variables">
+          <% Object.keys(project.variables).forEach(function(key) { %>
+            <variable class="super"><%= key %></variable>
+          <% }) %>
+          <!-- TODO: Remove when API is live -->
+          <variable class="super">user name</variable>
+          <variable class="super">user email</variable>
+        </div>
+        <div class="variable-header">Block Variables</div>
+        <div class="variable-explanation">
+          Block variables can only be accessed<br>
+          from this block.
+        </div>
+        <div class="variables">
+          <% if(block) { %>
+            <% Object.keys(block.variables).forEach(function(key) { %>
+              <variable class="block"><%= key %></variable>
+            <% }) %>
+          <% } %>
+          <!-- TODO: Remove when API is live -->
+          <variable class="block">price</variable>
+          <variable class="block">discount</variable>
+        </div>
+      </div>
     </div>
   </form>
   <div class="clear"></div>
