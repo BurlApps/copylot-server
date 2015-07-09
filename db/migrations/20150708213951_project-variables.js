@@ -1,7 +1,7 @@
 'use strict';
 
 exports.up = function(knex, Promise) {
-  knex.schema.table('users', function (table) {
+  knex.schema.table('project', function (table) {
     return table.json("variables")
   }).catch(function(err) {
     console.error(err)
@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  knex.schema.table('users', function (table) {
+  knex.schema.table('project', function (table) {
     return table.dropColumn("variables")
   }).catch(function(err) {
     console.error(err)
