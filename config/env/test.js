@@ -18,7 +18,8 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-    connection: 'test'
+    connection: 'test',
+    migrate: 'drop'
   }
 
 };
