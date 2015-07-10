@@ -8,5 +8,5 @@ script:
 before_script:
   - psql -c 'create database copylot-test;' -U postgres
 install:
- — npm install -g mocha
- — npm install
+  — npm install -g mocha
+  — npm install
