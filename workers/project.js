@@ -1,3 +1,8 @@
 module.exports = function(app) {
-  console.log(User)
+  sails.config.queue.consumer("project", function(queue) {
+    queue.handle("project", function(job, ack) {
+      console.log('Project ID: ' + job.id);
+      ack();
+    })
+  })
 }

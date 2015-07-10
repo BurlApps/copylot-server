@@ -1,3 +1,3 @@
 web: $WEB
-block_worker: node worker.js block
-project_worker: node worker.js project
+block_worker: $BLOCK_WORKER
+project_worker: $PROJECT_WORKER
