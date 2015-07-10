@@ -9,6 +9,8 @@ module.exports.queue = {
       queue.create(key, { prefetch: 0 }, function() {
         callback(queue)
       })
+    }).on('error', function(error) {
+      sails.log.error(error)
     })
   },
 
@@ -19,6 +21,8 @@ module.exports.queue = {
       queue.create(key, { prefetch: 5 }, function() {
         callback(queue)
       })
+    }).on('error', function(error) {
+      sails.log.error(error)
     })
   }
 

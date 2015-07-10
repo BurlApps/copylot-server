@@ -20,7 +20,6 @@ require('sails').load({
   }
 }, function(err, app) {
   if(!err && app) {
-    console.log("Requiring Worker")
     return require("./workers/" + process.argv[2])(app)
   } else {
     return console.error(err)
