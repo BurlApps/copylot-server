@@ -38,7 +38,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "test": ""
+    "test": "./node_modules/mocha/bin/mocha "
   },
   "main": "app.js",
   "repository": {
