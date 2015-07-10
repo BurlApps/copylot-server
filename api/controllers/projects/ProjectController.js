@@ -48,8 +48,11 @@ module.exports = {
       platform: req.platform,
       dirty: true
     }).then(function(blocks) {
+      var date = new Date()
+
       return blocks.forEach(function(block) {
         block.dirty = false
+        block.deployedAt = date
         return block.save()
       })
     }).then(function() {
