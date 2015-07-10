@@ -2,7 +2,7 @@
   <form class="block-form" action="<%= path %>">
     <input type="hidden" name="_csrf" value="<%= _csrf %>">
     <div class="header">
-      <a class="back-button fa fa-chevron-left" href="/projects/<%= project.id %>/<%= pane %>"></a>
+      <div class="back-button fa fa-chevron-left" data-href="/projects/<%= project.id %>/<%= pane %>"></div>
       <% if(block) { %>
         <input type="text" class="block-title" name="title" placeholder="Give Your Block A Title" value="<%= block.title %>" step="1" readonly required>
         <div class="delete-button">Delete</div>
@@ -40,10 +40,11 @@
             <% Object.keys(block.variables).forEach(function(key) { %>
               <variable class="block"><%= key %></variable>
             <% }) %>
+
+            <!-- TODO: Remove when API is live -->
+            <variable class="block">price</variable>
+            <variable class="block">discount</variable>
           <% } %>
-          <!-- TODO: Remove when API is live -->
-          <variable class="block">price</variable>
-          <variable class="block">discount</variable>
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ class Projects
     @sidebar = @modal.find(".sidebar")
     @content = @modal.find(".content")
     @beenFocused = false
+    @beenChanged = false
 
     # Initialize Events
     @redactorPlugin()
@@ -93,8 +94,8 @@ class Projects
         if e.toElement.localName == "variable"
           this.caret.setAfter e.toElement
 
-      focusCallback: =>
-        @beenFocused = true
+      focusCallback: => @beenFocused = true
+      changeCallback: => @beenChanged = true
 
   keypressCallback: (e)->
     if e.keyCode != 91
@@ -114,6 +115,32 @@ class Projects
 
   bindEvents: ->
     self = @
+
+    # Detect Back Button
+    @content.find(".back-button").click ->
+      link = $(@).data("href")
+
+      if self.beenChanged
+        swal {
+          title: "Are you sure?"
+          text: "You have changes that have not been deployed."
+          html: true
+          type: "warning"
+          showCancelButton: true
+          confirmButtonColor: "#D23939"
+          confirmButtonText: "I'm 100% sure"
+          cancelButtonText: "No, cancel plx!"
+          closeOnConfirm: false
+          closeOnCancel: true
+        }, (isConfirm) ->
+          if isConfirm
+            setTimeout ->
+              location.href = link
+            , 500
+
+      else
+        location.href = link
+
 
     # Toggle Profile Toggle
     @header.find(".profile").click ->
