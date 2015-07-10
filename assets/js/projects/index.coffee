@@ -246,6 +246,7 @@ class Projects
                button.removeClass("saved").val "deploy"
             , 3000
 
+          self.beenChanged = false
           form.find(".block-title").prop('readonly', true)
           form.find(".delete-button").show()
           form.attr("action", response.url)
