@@ -37,7 +37,8 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": ""
   },
   "main": "app.js",
   "repository": {
