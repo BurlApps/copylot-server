@@ -20,7 +20,10 @@ class Projects
     self = @
 
     $.Redactor.prototype.dragDrop = ->
-      insert: (element)->
+      insert: (block)->
+        className = if block.hasClass("global") then "global" else "block"
+        element = "<variable spellcheck='false' class='#{className}'>#{block.text()}</variable>"
+
         if !self.beenFocused and !@focus.isFocused()
           @focus.setEnd()
 
@@ -35,17 +38,12 @@ class Projects
         cursor = null
 
         self.container.find(".variables variable").click ->
-          className = if $(@).hasClass("super") then "super" else "block"
-          element = "<variable spellcheck='false' class='#{className}'>#{$(@).text()}</variable>"
-          redactor.dragDrop.insert element
+          redactor.dragDrop.insert $(@)
 
         @$box.droppable
           accept: "variable"
           drop: (ev, ui)=>
-            draggable = ui.draggable
-            className = if draggable.hasClass("super") then "super" else "block"
-            element = "<variable spellcheck='false' class='#{className}'>#{draggable.text()}</variable>"
-            redactor.dragDrop.insert element
+            redactor.dragDrop.insert ui.draggable
 
         self.container.find(".variables variable").draggable
           helper:'clone'
