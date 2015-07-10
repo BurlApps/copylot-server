@@ -39,7 +39,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "test": "NODE_ENV=test mocha --timeout 15000 test/bootstrap.test.js test/unit/**/*.test.js"
+    "test": "mocha --timeout 15000 test/bootstrap.test.js test/unit/**/*.test.js"
   },
   "main": "app.js",
   "repository": {

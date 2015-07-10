@@ -1,7 +1,20 @@
 language: node_js
 node_js:
   - "0.10"
+env:
+  - NODE_ENV=test
+  - DATABASE_URL=postgres://postgres:@localhost/copylot_test
+  - DATABASE_TEST_URL=postgres://postgres:@localhost/copylot_test
+  - REDIS_URL=redis://root@localhost:6379
+  - RABBITMQ_BIGWIG_RX_URL=amqp://guest:guest@localhost
+  - RABBITMQ_BIGWIG_TX_URL=amqp://guest:guest@localhost
+
 addons:
   postgresql: "9.3"
+
+services:
+  - redis-server
+  - rabbitmq
+
 before_script:
   - psql -c 'create database copylot_test;' -U postgres
