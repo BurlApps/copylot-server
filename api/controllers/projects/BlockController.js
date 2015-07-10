@@ -63,7 +63,8 @@ module.exports = {
       title: req.param("title"),
       platform: req.platform,
       html: req.param("html"),
-      project: req.project.id
+      project: req.project.id,
+      savedAt: new Date()
     }).then(function(block) {
       if(!block) throw Error("Block not created")
 
@@ -95,6 +96,7 @@ module.exports = {
       block.dirty = true
       block.title = req.param("title")
       block.html = req.param("html")
+      block.savedAt = new Date()
 
       block.sendToWorker()
       return block.save()

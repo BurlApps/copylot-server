@@ -54,6 +54,7 @@ module.exports = {
     project: {
       model: 'project'
     },
+    savedAt: "DATETIME",
     deployedAt: "DATETIME",
     sendToWorker: function() {
       var block = this

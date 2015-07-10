@@ -90,6 +90,8 @@ module.exports.http = {
         return (paneA == paneB) ? "active" : ""
       },
       humanize: function(date) {
+        if(!date) return ""
+
         var now = Date.now()
         return moment.duration(date - now).humanize(true)
       },
