@@ -25,7 +25,11 @@ module.exports = {
       required: true,
       defaultsTo: sails.config.random(36)
     },
-    payload: {
+    ios_payload: {
+      type: 'JSON',
+      defaultsTo: {}
+    },
+    android_payload: {
       type: 'JSON',
       defaultsTo: {}
     },
@@ -44,6 +48,16 @@ module.exports = {
     variables: {
       type: 'JSON',
       defaultsTo: {}
+    },
+    sendToWorker: function(platform) {
+      var project = this
+
+      sails.config.queue.producer("project", function(queue) {
+        queue.publish("project", {
+          id: project.id,
+          platform: platform
+        })
+      })
     }
   }
 

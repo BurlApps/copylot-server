@@ -33,12 +33,13 @@ module.exports.policies = {
 	"projects/ProjectController": {
   	"*": ["isLoggedIn", "hasProjects"],
   	"new": "isLoggedIn",
-  	"create": ["isLoggedIn", "wantsJSON"]
+  	"create": ["isLoggedIn", "wantsJSON"],
+  	"deploy": ["isLoggedIn", "hasProjects", "wantsJSON"]
   },
 
   "projects/BlockController": {
   	"*": ["isLoggedIn", "hasProjects"],
   	"create": ["isLoggedIn", "hasProjects", "wantsJSON"],
-  	"udpate": ["isLoggedIn", "hasProjects", "wantsJSON"]
+  	"update": ["isLoggedIn", "hasProjects", "wantsJSON"]
   }
 };

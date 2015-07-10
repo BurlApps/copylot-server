@@ -21,7 +21,7 @@
       </thead>
       <tbody>
         <% blocks.forEach(function(block) { %>
-          <tr href="<%= path %>/blocks/<%= block.id %>">
+          <tr class="<%= block.dirty ? "dirty": "" %>" href="<%= path %>/blocks/<%= block.id %>">
             <td><div class="fa fa-pencil"></div></td>
             <td><%= block.title %></td>
             <td><%- block.html %></td>

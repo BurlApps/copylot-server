@@ -95,7 +95,6 @@ module.exports = {
       block.dirty = true
       block.title = req.param("title")
       block.html = req.param("html")
-      block.payload = null
 
       block.sendToWorker()
       return block.save()

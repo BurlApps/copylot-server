@@ -184,6 +184,34 @@ class Projects
         self.content.find("tbody tr").show()
 
 
+    # Capture Deploy Event
+    @content.find(".deploy-button").click ->
+      button = $(@)
+      button.addClass("deploying").text "deploying"
+
+      $.post "#{config.path}/deploy", {
+        _csrf: config.csrf
+      }, (response)->
+        button.removeClass("deploying").text "deploy changes"
+
+        if response.success
+          swal
+            title: "Deployed!"
+            text: "Your blocks have been deployed."
+            type: "success"
+            confirmButtonColor: "#38A0DC"
+          , ->
+            setTimeout ->
+              location.reload()
+            , 500
+
+        else
+          swal
+            title: "Oops..."
+            text: response.message or "Something went wrong :("
+            type: "error"
+            confirmButtonColor: "#D23939"
+
     # Capture Delete Event
     @content.find(".delete-button").click ->
       swal {
@@ -245,7 +273,7 @@ class Projects
             button.addClass("saved").val "saved"
 
             setTimeout ->
-               button.removeClass("saved").val "saved"
+               button.removeClass("saved").val "save"
             , 3000
 
           self.beenChanged = false
