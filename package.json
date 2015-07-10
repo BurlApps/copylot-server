@@ -2,7 +2,7 @@
   "name": "Server",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "CoPylot Server Code",
   "keywords": [],
   "dependencies": {
     "bcrypt": "~0.8.0",
@@ -42,7 +42,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Brian/Server/.git"
+    "url": "git://github.com/CoPylot/Server.git"
   },
   "author": "Brian",
   "license": ""
