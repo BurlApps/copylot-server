@@ -38,7 +38,6 @@ module.exports.http = {
       'session',
       'passportInit',
       'passportSession',
-      'trafficLogger',
       'setLocals',
       'bodyParser',
       'handleBodyParserError',
@@ -62,13 +61,11 @@ module.exports.http = {
     passportInit    : require('passport').initialize(),
     passportSession : require('passport').session(),
 
-
-    trafficLogger: function (req, res, next) {
-      sails.log.info("Request -", req.method, req.url)
-      return next();
-    },
-
     setLocals: function (req, res, next) {
+      // Show Traffic
+      sails.log.info("Request -", req.method, req.url)
+
+      // Set Locals
       res.locals.production = sails.config.isProduction
       res.locals.user = req.user
       res.locals.host = process.env.HOST || sails.getBaseurl()
