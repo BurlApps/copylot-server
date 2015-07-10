@@ -1,6 +1,7 @@
 <div class="content">
   <% if(blocks.length > 0) { %>
     <div class="header">
+      <div class="deploy-button">Deploy Changes</div>
       <a href="<%= path %>/blocks/create" class="new-button fa fa-plus"></a>
       <div class="search-box">
         <div class="icon fa fa-search"></div>
@@ -14,7 +15,8 @@
           <td></td>
           <td>Title (unique)</td>
           <td>Text</td>
-          <td>Deployed</td>
+          <td>Last Drafted</td>
+          <td>Last Deployed</td>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +26,11 @@
             <td><%= block.title %></td>
             <td><%- block.html %></td>
             <td><%=: block.updatedAt | humanize %></td>
+            <td>
+              <% if(block.deployedAt) { %>
+                <%=: block.deployedAt | humanize %>
+              <% } %>
+            </td>
           </tr>
         <% }) %>
       </tbody>

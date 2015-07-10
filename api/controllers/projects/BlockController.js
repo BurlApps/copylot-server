@@ -67,6 +67,8 @@ module.exports = {
     }).then(function(block) {
       if(!block) throw Error("Block not created")
 
+      block.sendToWorker()
+
       res.success({
         block: block.id,
         url: "/projects/" + req.project.id + "/" + req.platform +
@@ -90,10 +92,12 @@ module.exports = {
     }).then(function(block) {
       if(!block) throw Error("Block not found")
 
+      block.dirty = true
       block.title = req.param("title")
       block.html = req.param("html")
       block.payload = null
 
+      block.sendToWorker()
       return block.save()
     }).then(function(block) {
       res.success({
@@ -103,9 +107,11 @@ module.exports = {
     }).catch(function(err) {
       var message = "Something went wrong"
 
-      if("slug" in err.invalidAttributes) {
-        message = 'The title "' + req.param("title") +
-                  '" has already been used in this platform :('
+      if(err.invalidAttributes) {
+        if("slug" in err.invalidAttributes) {
+          message = 'The title "' + req.param("title") +
+                    '" has already been used in this platform :('
+        }
       }
 
       res.error(message, err)

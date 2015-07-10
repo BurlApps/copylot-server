@@ -64,6 +64,7 @@ class Projects
             $("div#pseudodroppable").droppable('destroy').hide()
 
   createRedactor: ->
+    self     = @
     buttons  = ['bold', 'italic', 'underline', 'deleted', 'alignment']
     plugins  = ['bufferbuttons', 'dragDrop']
     tags     = ['strong', 'em', 'del', 'u', 'span', 'variable', 'div', 'variable', 'br']
@@ -88,14 +89,15 @@ class Projects
       tabAsSpaces: false
       preSpaces: false
       minHeight: 418
-      keyupCallback: @keypressCallback
+      keyupCallback: (e)->
+        self.beenChanged = true
+        self.keypressCallback.bind(this)(e)
       keydownCallback: @keypressCallback
       clickCallback: (e)->
         if e.toElement.localName == "variable"
           this.caret.setAfter e.toElement
 
       focusCallback: => @beenFocused = true
-      changeCallback: => @beenChanged = true
 
   keypressCallback: (e)->
     if e.keyCode != 91
@@ -120,16 +122,18 @@ class Projects
     @content.find(".back-button").click ->
       link = $(@).data("href")
 
+      console.log(self.beenChanged)
+
       if self.beenChanged
         swal {
           title: "Are you sure?"
-          text: "You have changes that have not been deployed."
+          text: "You have changes that have not been saved."
           html: true
           type: "warning"
           showCancelButton: true
           confirmButtonColor: "#D23939"
           confirmButtonText: "I'm 100% sure"
-          cancelButtonText: "No, cancel plx!"
+          cancelButtonText: "No, cancel plz!"
           closeOnConfirm: false
           closeOnCancel: true
         }, (isConfirm) ->
@@ -193,7 +197,7 @@ class Projects
         showCancelButton: true
         confirmButtonColor: "#D23939"
         confirmButtonText: "I'm 100% sure"
-        cancelButtonText: "No, cancel plx!"
+        cancelButtonText: "No, cancel plz!"
         closeOnConfirm: false
         closeOnCancel: true
       }, (isConfirm) ->
@@ -221,7 +225,7 @@ class Projects
       verb = form.find(".save-button").val().toLowerCase()
 
       if verb == "save"
-        button.addClass("saving").val "deploying"
+        button.addClass("saving").val "saving"
       else
         button.addClass("saving").val "creating"
 
@@ -240,10 +244,10 @@ class Projects
 
             button.val "save"
           else
-            button.addClass("saved").val "deployed"
+            button.addClass("saved").val "saved"
 
             setTimeout ->
-               button.removeClass("saved").val "deploy"
+               button.removeClass("saved").val "saved"
             , 3000
 
           self.beenChanged = false

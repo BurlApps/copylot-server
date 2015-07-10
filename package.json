@@ -32,7 +32,8 @@
     "sails-migrations": "^2.0.7",
     "sails-postgresql": "0.10.15",
     "sails-redis": "~0.10.4",
-    "url": "0.10.3"
+    "url": "0.10.3",
+    "jackrabbit": "3.0.8"
   },
   "scripts": {
     "debug": "node debug app.js",

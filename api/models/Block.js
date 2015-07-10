@@ -41,7 +41,7 @@ module.exports = {
     },
     dirty: {
       type: "BOOLEAN",
-      defaultsTo: false
+      defaultsTo: true
     },
     payload: {
       type: 'JSON',
@@ -53,6 +53,17 @@ module.exports = {
     },
     project: {
       model: 'project'
+    },
+    deployedAt: "DATE",
+    sendToWorker: function() {
+      var block = this
+
+      sails.config.queue.producer("block", function(queue) {
+        queue.publish("block", {
+          id: block.id,
+          html: block.html
+        })
+      })
     }
   },
   beforeValidate: function(values, cb) {
