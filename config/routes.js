@@ -54,6 +54,7 @@ module.exports.routes = {
   'get /projects/:project/:platform/blocks/:block': "projects/BlockController.block",
 
   'post /projects/new': "projects/ProjectController.create",
+  'post /projects/:project/:platform/deploy': "projects/ProjectController.deploy",
   'post /projects/:project/:platform/blocks/create': "projects/BlockController.create",
   'post /projects/:project/:platform/blocks/:block': "projects/BlockController.update",
   'post /projects/:project/:platform/blocks/:block/delete': "projects/BlockController.delete",

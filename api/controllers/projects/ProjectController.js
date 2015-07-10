@@ -40,5 +40,23 @@ module.exports = {
     }).catch(function(err) {
       res.error("Something went wrong :(", err)
     })
+  },
+
+  deploy: function(req, res) {
+    Block.find({
+      project: req.project.id,
+      platform: req.platform,
+      dirty: true
+    }).then(function(blocks) {
+      return blocks.forEach(function(block) {
+        block.dirty = false
+        return block.save()
+      })
+    }).then(function() {
+      req.project.sendToWorker(req.platform)
+      res.success()
+    }).catch(function(err) {
+      res.error("Something went wrong :(", err)
+    })
   }
 };

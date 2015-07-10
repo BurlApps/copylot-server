@@ -2,33 +2,33 @@
   <form class="block-form" action="<%= path %>">
     <input type="hidden" name="_csrf" value="<%= _csrf %>">
     <div class="header">
-      <a class="back-button fa fa-chevron-left" href="/projects/<%= project.id %>/<%= pane %>"></a>
+      <div class="back-button fa fa-chevron-left" data-href="/projects/<%= project.id %>/<%= pane %>"></div>
       <% if(block) { %>
-        <input type="text" class="block-title" name="title" placeholder="Give Your Block A Title" value="<%= block.title %>" step="1" required>
+        <input type="text" class="block-title" name="title" placeholder="Give Your Block A Title" value="<%= block.title %>" step="1" readonly required>
         <div class="delete-button">Delete</div>
-        <input class="save-button" value="Save" type="submit">
+        <input class="save-button" value="save" type="submit">
       <% } else { %>
         <input type="text" class="block-title" name="title" placeholder="Give Your Block A Title" step="1" autofocus required>
         <div class="delete-button" style="display: none">Delete</div>
-        <input class="save-button" value="Create" type="submit">
+        <input class="save-button" value="create" type="submit">
       <% } %>
       <div class="clear"></div>
     </div>
     <div class="block-editor">
       <textarea class="payload" name="html"><%= block ? block.html : "" %></textarea>
       <div class="variable-selection">
-        <div class="variable-header">Super Variables</div>
+        <div class="variable-header">Global Variables</div>
         <div class="variable-explanation">
-          Super variables can be accessed from<br>
+          Global variables can be accessed from<br>
           any block in this project.
         </div>
         <div class="variables">
           <% Object.keys(project.variables).forEach(function(key) { %>
-            <variable class="super"><%= key %></variable>
+            <variable class="global"><%= key %></variable>
           <% }) %>
           <!-- TODO: Remove when API is live -->
-          <variable class="super">user name</variable>
-          <variable class="super">user email</variable>
+          <variable class="global">user name</variable>
+          <variable class="global">user email</variable>
         </div>
         <div class="variable-header">Block Variables</div>
         <div class="variable-explanation">
@@ -40,10 +40,11 @@
             <% Object.keys(block.variables).forEach(function(key) { %>
               <variable class="block"><%= key %></variable>
             <% }) %>
+
+            <!-- TODO: Remove when API is live -->
+            <variable class="block">price</variable>
+            <variable class="block">discount</variable>
           <% } %>
-          <!-- TODO: Remove when API is live -->
-          <variable class="block">price</variable>
-          <variable class="block">discount</variable>
         </div>
       </div>
     </div>

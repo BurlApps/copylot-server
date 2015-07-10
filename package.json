@@ -2,7 +2,7 @@
   "name": "Server",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "CoPylot Server Code",
   "keywords": [],
   "dependencies": {
     "bcrypt": "~0.8.0",
@@ -32,7 +32,8 @@
     "sails-migrations": "^2.0.7",
     "sails-postgresql": "0.10.15",
     "sails-redis": "~0.10.4",
-    "url": "0.10.3"
+    "url": "0.10.3",
+    "jackrabbit": "3.0.8"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -41,7 +42,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Brian/Server/.git"
+    "url": "git://github.com/CoPylot/Server.git"
   },
   "author": "Brian",
   "license": ""

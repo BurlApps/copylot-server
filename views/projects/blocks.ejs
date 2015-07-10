@@ -1,6 +1,7 @@
 <div class="content">
   <% if(blocks.length > 0) { %>
     <div class="header">
+      <div class="deploy-button">Deploy Changes</div>
       <a href="<%= path %>/blocks/create" class="new-button fa fa-plus"></a>
       <div class="search-box">
         <div class="icon fa fa-search"></div>
@@ -12,18 +13,24 @@
       <thead>
         <tr>
           <td></td>
-          <td>Title</td>
-          <td>Dynamic Text</td>
-          <td>Updated</td>
+          <td>Title (unique)</td>
+          <td>Text</td>
+          <td>Last Drafted</td>
+          <td>Last Deployed</td>
         </tr>
       </thead>
       <tbody>
         <% blocks.forEach(function(block) { %>
-          <tr href="<%= path %>/blocks/<%= block.id %>">
+          <tr class="<%= block.dirty ? "dirty": "" %>" href="<%= path %>/blocks/<%= block.id %>">
             <td><div class="fa fa-pencil"></div></td>
             <td><%= block.title %></td>
             <td><%- block.html %></td>
             <td><%=: block.updatedAt | humanize %></td>
+            <td>
+              <% if(block.deployedAt) { %>
+                <%=: block.deployedAt | humanize %>
+              <% } %>
+            </td>
           </tr>
         <% }) %>
       </tbody>
@@ -46,13 +53,8 @@
         Lets Do This!
       </a>
       <div class="subsubmessage">
-        <% if(pane == "global") { %>
-          Global blocks apply to all platforms and can be overwritten<br>
-          by platform specific blocks with the same title.
-        <% } else { %>
-          <%=: pane | platformFormat %> blocks are device specific and supersede any<br>
-          Global blocks with the same title.
-        <% } %>
+        <%=: pane | platformFormat %> blocks are device specific and supersede any<br>
+        Global blocks with the same title.
       </div>
     </div>
   <% } %>

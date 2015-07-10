@@ -9,6 +9,7 @@ class Projects
     @sidebar = @modal.find(".sidebar")
     @content = @modal.find(".content")
     @beenFocused = false
+    @beenChanged = false
 
     # Initialize Events
     @redactorPlugin()
@@ -19,25 +20,34 @@ class Projects
     self = @
 
     $.Redactor.prototype.dragDrop = ->
+      insert: (block)->
+        className = if block.hasClass("global") then "global" else "block"
+        element = "<variable spellcheck='false' class='#{className}'>#{block.text()}</variable>"
+
+        if !self.beenFocused and !@focus.isFocused()
+          @focus.setEnd()
+
+        @insert.html element, false
+
+        for node in @selection.getNodes()
+          if node.localName == "variable"
+            return @caret.setAfter node
+
       init: ->
+        redactor = @
+        cursor = null
+
+        self.container.find(".variables variable").click ->
+          redactor.dragDrop.insert $(@)
+
         @$box.droppable
           accept: "variable"
           drop: (ev, ui)=>
-            draggable = ui.draggable
-            className = if draggable.hasClass("super") then "super" else "block"
-            element = "<variable spellcheck='false' class='#{className}'>#{draggable.text()}</variable>"
-
-            if !self.beenFocused and !@focus.isFocused()
-              @focus.setEnd()
-
-            @insert.html element, false
-
-            for node in @selection.getNodes()
-              if node.localName == "variable"
-                return @caret.setAfter node
+            redactor.dragDrop.insert ui.draggable
 
         self.container.find(".variables variable").draggable
           helper:'clone'
+          revert: "invalid"
           containment: self.content
           start: (event, ui)=>
             $("div#pseudodroppable").css
@@ -52,6 +62,7 @@ class Projects
             $("div#pseudodroppable").droppable('destroy').hide()
 
   createRedactor: ->
+    self     = @
     buttons  = ['bold', 'italic', 'underline', 'deleted', 'alignment']
     plugins  = ['bufferbuttons', 'dragDrop']
     tags     = ['strong', 'em', 'del', 'u', 'span', 'variable', 'div', 'variable', 'br']
@@ -76,14 +87,15 @@ class Projects
       tabAsSpaces: false
       preSpaces: false
       minHeight: 418
-      keyupCallback: @keypressCallback
+      keyupCallback: (e)->
+        self.beenChanged = true
+        self.keypressCallback.bind(this)(e)
       keydownCallback: @keypressCallback
       clickCallback: (e)->
         if e.toElement.localName == "variable"
           this.caret.setAfter e.toElement
 
-      focusCallback: =>
-        @beenFocused = true
+      focusCallback: => @beenFocused = true
 
   keypressCallback: (e)->
     if e.keyCode != 91
@@ -104,13 +116,41 @@ class Projects
   bindEvents: ->
     self = @
 
+    # Detect Back Button
+    @content.find(".back-button").click ->
+      link = $(@).data("href")
+
+      console.log(self.beenChanged)
+
+      if self.beenChanged
+        swal {
+          title: "Are you sure?"
+          text: "You have changes that have not been saved."
+          html: true
+          type: "warning"
+          showCancelButton: true
+          confirmButtonColor: "#D23939"
+          confirmButtonText: "I'm 100% sure"
+          cancelButtonText: "No, cancel plz!"
+          closeOnConfirm: false
+          closeOnCancel: true
+        }, (isConfirm) ->
+          if isConfirm
+            setTimeout ->
+              location.href = link
+            , 500
+
+      else
+        location.href = link
+
+
     # Toggle Profile Toggle
     @header.find(".profile").click ->
       $(@).find(".dropdown").toggle()
 
 
     # Toggle Projects Dropdown
-    @sidebar.find(".header").click =>
+    @sidebar.find("> .header").click =>
       @sidebar.find(".dropdown").toggle()
 
 
@@ -144,16 +184,46 @@ class Projects
         self.content.find("tbody tr").show()
 
 
+    # Capture Deploy Event
+    @content.find(".deploy-button").click ->
+      button = $(@)
+      button.addClass("deploying").text "deploying"
+
+      $.post "#{config.path}/deploy", {
+        _csrf: config.csrf
+      }, (response)->
+        button.removeClass("deploying").text "deploy changes"
+
+        if response.success
+          swal
+            title: "Deployed!"
+            text: "Your blocks have been deployed."
+            type: "success"
+            confirmButtonColor: "#38A0DC"
+          , ->
+            setTimeout ->
+              location.reload()
+            , 500
+
+        else
+          swal
+            title: "Oops..."
+            text: response.message or "Something went wrong :("
+            type: "error"
+            confirmButtonColor: "#D23939"
+
     # Capture Delete Event
     @content.find(".delete-button").click ->
       swal {
         title: "Are you sure?"
-        text: "You will not be able to recover @ block!"
+        text: "<strong>DO NOT DELETE this block if it is being used in your app!</strong> " +
+              "This is permanent and doing so may break your app."
+        html: true
         type: "warning"
         showCancelButton: true
         confirmButtonColor: "#D23939"
-        confirmButtonText: "Yes, delete it!"
-        cancelButtonText: "No, cancel plx!"
+        confirmButtonText: "I'm 100% sure"
+        cancelButtonText: "No, cancel plz!"
         closeOnConfirm: false
         closeOnCancel: true
       }, (isConfirm) ->
@@ -162,8 +232,7 @@ class Projects
             _csrf: config.csrf
           , (response)->
             swal {
-              title: "Deleted!"
-              text: "Your block has been deleted."
+              title: "Deleted."
               type: "success"
               confirmButtonColor: "#38A0DC"
             }, ->
@@ -178,18 +247,37 @@ class Projects
 
       form = $ @
       data = form.serialize()
+      button = form.find(".save-button")
+      verb = form.find(".save-button").val().toLowerCase()
+
+      if verb == "save"
+        button.addClass("saving").val "saving"
+      else
+        button.addClass("saving").val "creating"
 
       $.post form.attr("action"), form.serialize(), (response)->
+        button.removeClass("saving").val(verb)
+
         if response.success
-          verb = form.find(".save-button").val()
+          verb = form.find(".save-button").val().toLowerCase()
 
-          swal
-            title: "#{verb}d!"
-            text: "Your block has been #{verb.toLowerCase()}d."
-            type: "success"
-            confirmButtonColor: "#38A0DC"
+          if verb == "create"
+            swal
+              title: "Created!"
+              text: "Your block has been created."
+              type: "success"
+              confirmButtonColor: "#38A0DC"
 
-          form.find(".save-button").val "Save"
+            button.val "save"
+          else
+            button.addClass("saved").val "saved"
+
+            setTimeout ->
+               button.removeClass("saved").val "save"
+            , 3000
+
+          self.beenChanged = false
+          form.find(".block-title").prop('readonly', true)
           form.find(".delete-button").show()
           form.attr("action", response.url)
           history.replaceState(null, null, response.url);
@@ -197,7 +285,7 @@ class Projects
         else
           swal
             title: "Oops..."
-            text: "Sadly, something went wrong :("
+            text: response.message or "Something went wrong :("
             type: "error"
             confirmButtonColor: "#D23939"
 
