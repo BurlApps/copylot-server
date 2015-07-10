@@ -22,7 +22,9 @@
       <tbody>
         <% blocks.forEach(function(block) { %>
           <tr class="<%= block.dirty ? "dirty": "" %>" href="<%= path %>/blocks/<%= block.id %>">
-            <td><div class="fa fa-pencil"></div></td>
+            <td>
+              <div class="fa fa-<%= block.dirty ? "asterisk" : "pencil" %>"></div>
+            </td>
             <td><%= block.title %></td>
             <td><%- block.html %></td>
             <td><%=: block.savedAt | humanize %></td>
