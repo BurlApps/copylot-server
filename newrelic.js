@@ -8,7 +8,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['CoPylot'],
+  app_name: ['copylot', 'copylot-dev'],
   /**
    * Your New Relic license key.
    */
