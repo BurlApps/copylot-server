@@ -615,6 +615,19 @@
         }
       }
 
+      .deploy-message {
+        width: 100%;
+        padding: 8px 0;
+        font-weight: 700;
+        color: #75819d;
+        font-size: 15px;
+        border-bottom: solid 1px #bfcfd9;
+        font-family: 'Titillium Web', sans-serif;
+        text-align: center;
+        background: #dde9f6;
+        text-transform: uppercase;
+      }
+
       .data-table {
         width: 100%;
         border: none;
@@ -674,8 +687,24 @@
           }
 
           tr {
-            &.dirty td {
-              background: #e9f2ff;
+            &.dirty {
+              td {
+                background: #e8f2ff;
+                font-weight: bold;
+                color: #75819d;
+              }
+
+              &:hover {
+                td {
+                  background: darken(#e9f2ff, 2%);
+                }
+
+                &:active {
+                  td {
+                    background: darken(#e9f2ff, 4%);
+                  }
+                }
+              }
             }
 
             &:hover {

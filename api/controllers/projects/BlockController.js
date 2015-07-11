@@ -17,12 +17,17 @@ module.exports = {
   	Block.find({
       project: req.project.id,
       platform: req.platform
-    }).sort('title ASC').then(function(blocks) {
+    }).sort({
+      slug: 'asc'
+    }).then(function(blocks) {
       res.success("projects/blocks", {
         layout: 'layouts/projects',
         project: req.project,
         pane: req.platform,
         blocks: blocks,
+        dirtyBlocks: blocks.filter(function(block) {
+          if(block.dirty) return true
+        }).length,
         siteTitle: req.project.name
       })
     }).catch(res.badRequest)
@@ -63,7 +68,8 @@ module.exports = {
       title: req.param("title"),
       platform: req.platform,
       html: req.param("html"),
-      project: req.project.id
+      project: req.project.id,
+      savedAt: new Date()
     }).then(function(block) {
       if(!block) throw Error("Block not created")
 
@@ -95,6 +101,7 @@ module.exports = {
       block.dirty = true
       block.title = req.param("title")
       block.html = req.param("html")
+      block.savedAt = new Date()
 
       block.sendToWorker()
       return block.save()

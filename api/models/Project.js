@@ -25,11 +25,11 @@ module.exports = {
       required: true,
       defaultsTo: sails.config.random(36)
     },
-    ios_payload: {
+    iosPayload: {
       type: 'JSON',
       defaultsTo: {}
     },
-    android_payload: {
+    androidPayload: {
       type: 'JSON',
       defaultsTo: {}
     },
@@ -49,6 +49,7 @@ module.exports = {
       type: 'JSON',
       defaultsTo: {}
     },
+    deployedAt: "DATETIME",
     sendToWorker: function(platform) {
       var project = this
 

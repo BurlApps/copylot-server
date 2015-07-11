@@ -3,11 +3,11 @@
 exports.up = function(knex, Promise) {
   Promise.resolve().then(function() {
     return knex.schema.table('block', function (table) {
-      return table.date("deployedAt")
+      return table.dateTime("deployedAt")
     })
   }).then(function() {
     return knex.schema.table('project', function (table) {
-      return table.date("deployedAt")
+      return table.dateTime("deployedAt")
     })
   }).catch(function(err) {
     console.error(err)
