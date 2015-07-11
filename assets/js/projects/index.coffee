@@ -185,7 +185,7 @@ class Projects
 
 
     # Capture Deploy Event
-    @content.find(".deploy-button").click ->
+    @content.find(".deploy-button:not(.disabled)").click ->
       button = $(@)
       button.addClass("deploying").text "deploying"
 
