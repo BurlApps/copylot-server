@@ -2,28 +2,28 @@ var htmlparser = require("htmlparser2")
 
 module.exports = function(app) {
   function parseHtml(html, callback) {
+    var data = []
     var parser = new htmlparser.Parser({
-      onopentag: function(name, attribs){
-        if(name === "script" && attribs.type === "text/javascript"){
-          console.log("JS! Hooray!");
-        }
+      onopentag: function(name, attribs) {
+        console.log(1, name, attribs)
       },
-      ontext: function(text){
-        console.log("-->", text);
+      onattribute: function(name, value) {
+        console.log(2, name, value)
+      },
+      ontext: function(text) {
+        console.log(3, "-->", text);
       },
       onclosetag: function(tagname){
-        if(tagname === "script"){
-          console.log("That's it?!");
-        }
+        console.log(4, tagname)
+      },
+      onend: function() {
+        callback(data)
       }
     }, {
       decodeEntities: true
     })
 
     parser.end(html)
-    parser.parseComplete(function() {
-
-    })
   }
 
   sails.config.queue.consumer("block", function(queue) {
@@ -32,7 +32,10 @@ module.exports = function(app) {
     queue.handle("block", function(job, ack) {
       sails.log.info('Block ID: ' + job.id);
 
-      ack();
+      parseHtml(job.html, function(data) {
+        console.log(data)
+        ack()
+      })
     })
   })
 }
