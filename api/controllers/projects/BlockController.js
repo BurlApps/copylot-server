@@ -17,12 +17,17 @@ module.exports = {
   	Block.find({
       project: req.project.id,
       platform: req.platform
-    }).sort('title ASC').then(function(blocks) {
+    }).sort({
+      slug: 'asc'
+    }).then(function(blocks) {
       res.success("projects/blocks", {
         layout: 'layouts/projects',
         project: req.project,
         pane: req.platform,
         blocks: blocks,
+        dirtyBlocks: blocks.filter(function(block) {
+          if(block.dirty) return true
+        }).length,
         siteTitle: req.project.name
       })
     }).catch(res.badRequest)

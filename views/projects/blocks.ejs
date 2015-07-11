@@ -9,6 +9,11 @@
       </div>
       <div class="clear"></div>
     </div>
+    <% if(dirtyBlocks > 0) { %>
+      <div class="deploy-message">
+        <%= dirtyBlocks %> block<%= dirtyBlocks > 1 ? "s" : "" %> ready to be deployed!
+      </div>
+    <% } %>
     <table class="data-table">
       <thead>
         <tr>
@@ -23,7 +28,7 @@
         <% blocks.forEach(function(block) { %>
           <tr class="<%= block.dirty ? "dirty": "" %>" href="<%= path %>/blocks/<%= block.id %>">
             <td>
-              <div class="fa fa-<%= block.dirty ? "asterisk" : "pencil" %>"></div>
+              <div class="fa fa-pencil"></div>
             </td>
             <td><%= block.title %></td>
             <td><%- block.html %></td>

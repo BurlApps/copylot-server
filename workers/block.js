@@ -19,6 +19,11 @@ module.exports = function(app) {
     }, {
       decodeEntities: true
     })
+
+    parser.end(html)
+    parser.parseComplete(function() {
+
+    })
   }
 
   sails.config.queue.consumer("block", function(queue) {
@@ -26,7 +31,7 @@ module.exports = function(app) {
 
     queue.handle("block", function(job, ack) {
       sails.log.info('Block ID: ' + job.id);
-      //parser.write(job.html);
+
       ack();
     })
   })
