@@ -192,12 +192,9 @@ class Projects
       $.post "#{config.path}/deploy", {
         _csrf: config.csrf
       }, (response)->
-        button.removeClass("deploying").text "deploy changes"
-
         if response.success
           swal
             title: "Deployed!"
-            text: "Your blocks have been deployed."
             type: "success"
             confirmButtonColor: "#38A0DC"
           , ->
@@ -206,6 +203,8 @@ class Projects
             , 500
 
         else
+          button.removeClass("deploying").text "deploy changes"
+
           swal
             title: "Oops..."
             text: response.message or "Something went wrong :("
@@ -264,7 +263,6 @@ class Projects
           if verb == "create"
             swal
               title: "Created!"
-              text: "Your block has been created."
               type: "success"
               confirmButtonColor: "#38A0DC"
 
