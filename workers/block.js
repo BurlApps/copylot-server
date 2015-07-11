@@ -7,9 +7,6 @@ module.exports = function(app) {
       onopentag: function(name, attribs) {
         console.log(1, name, attribs)
       },
-      onattribute: function(name, value) {
-        console.log(2, name, value)
-      },
       ontext: function(text) {
         console.log(3, "-->", text);
       },
