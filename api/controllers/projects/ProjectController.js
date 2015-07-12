@@ -24,7 +24,7 @@ module.exports = {
       res.success("projects/management", {
         layout: 'layouts/projects',
         project: project,
-        pane: req.param("pane"),
+        pane: "management",
         siteTitle: req.project.name
       })
     }).catch(function(err) {
