@@ -15,15 +15,20 @@ module.exports = {
     androidID: 'STRING',
     itunesID: 'STRING',
     website: 'STRING',
-    version: {
-      type: "INTEGER",
-      required: true,
-      defaultsTo: 1
-    },
     secret: {
       type: 'STRING',
       required: true,
       defaultsTo: sails.config.random(36)
+    },
+    iosVersion: {
+      type: "INTEGER",
+      required: true,
+      defaultsTo: 1
+    },
+    androidVersion: {
+      type: "INTEGER",
+      required: true,
+      defaultsTo: 1
     },
     iosPayload: {
       type: 'JSON',
@@ -33,6 +38,8 @@ module.exports = {
       type: 'JSON',
       defaultsTo: {}
     },
+    iosDeployedAt: "DATETIME",
+    androidDeployedAt: "DATETIME",
     users: {
       collection: 'user',
       via: 'projects'
@@ -49,7 +56,6 @@ module.exports = {
       type: 'JSON',
       defaultsTo: {}
     },
-    deployedAt: "DATETIME",
     sendToWorker: function(platform) {
       var project = this
 

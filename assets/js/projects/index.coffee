@@ -22,7 +22,8 @@ class Projects
     $.Redactor.prototype.dragDrop = ->
       insert: (block)->
         className = if block.hasClass("global") then "global" else "block"
-        element = "<variable spellcheck='false' class='#{className}'>#{block.text()}</variable>"
+        element = "<variable spellcheck='false' class='#{className}'" +
+                  "data-source='#{block.data("source")}'>#{block.text()}</variable>"
 
         if !self.beenFocused and !@focus.isFocused()
           @focus.setEnd()
@@ -245,7 +246,6 @@ class Projects
       e.stopPropagation()
 
       form = $ @
-      data = form.serialize()
       button = form.find(".save-button")
       verb = form.find(".save-button").val().toLowerCase()
 
@@ -254,7 +254,13 @@ class Projects
       else
         button.addClass("saving").val "creating"
 
-      $.post form.attr("action"), form.serialize(), (response)->
+      debugger
+
+      $.post form.attr("action"),
+        _csrf: config.csrf
+        title: form.find(".block-title").val()
+        html: form.find("textarea").text()
+      , (response)->
         button.removeClass("saving").val(verb)
 
         if response.success

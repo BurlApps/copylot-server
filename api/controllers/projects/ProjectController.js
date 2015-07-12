@@ -50,7 +50,7 @@ module.exports = {
     }).then(function(blocks) {
       var date = new Date()
 
-      return blocks.forEach(function(block) {
+      return Promise.each(blocks, function(block) {
         block.dirty = false
         block.deployedAt = date
         return block.save()

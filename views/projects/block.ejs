@@ -24,11 +24,11 @@
         </div>
         <div class="variables">
           <% Object.keys(project.variables).forEach(function(key) { %>
-            <variable class="global"><%= key %></variable>
+            <variable class="global" data-source="global"><%= key %></variable>
           <% }) %>
           <!-- TODO: Remove when API is live -->
-          <variable class="global">user name</variable>
-          <variable class="global">user email</variable>
+          <variable class="global" data-source="global">user name</variable>
+          <variable class="global" data-source="global">user email</variable>
         </div>
         <div class="variable-header">Block Variables</div>
         <div class="variable-explanation">
@@ -38,12 +38,12 @@
         <div class="variables">
           <% if(block) { %>
             <% Object.keys(block.variables).forEach(function(key) { %>
-              <variable class="block"><%= key %></variable>
+              <variable class="block" data-source="block"><%= key %></variable>
             <% }) %>
 
             <!-- TODO: Remove when API is live -->
-            <variable class="block">promo name</variable>
-            <variable class="block">promo questions</variable>
+            <variable class="block" data-source="block">promo name</variable>
+            <variable class="block" data-source="block">promo questions</variable>
           <% } %>
         </div>
       </div>
