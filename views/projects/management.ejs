@@ -23,12 +23,17 @@
       <tbody>
         <% project.users.forEach(function(member) { %>
           <tr>
-            <td><%= member.name %></td>
-            <td>
-              <% if(member.id != user.id) { %>
+            <% if(member.id == user.id) { %>
+              <td>
+                <%= member.name %> <span>(me)</span>
+              </td>
+              <td></td>
+            <% } else { %>
+              <td><%= member.name %></td>
+              <td>
                 <a href="<%= path %>/team/<%= member.id %>/remove" class="fa fa-times"></a>
-              <% } %>
-            </td>
+              </td>
+            <% } %>
           </tr>
         <% }) %>
       </tbody>

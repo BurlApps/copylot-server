@@ -21,6 +21,7 @@ class Projects
 
     $.Redactor.prototype.dragDrop = ->
       insert: (block)->
+        node = @utils.isCurrentOrParent('variable')
         className = if block.hasClass("global") then "global" else "block"
         element = "<variable spellcheck='false' class='#{className}'" +
                   "data-source='#{block.data("source")}'>#{block.text()}</variable>"
@@ -28,11 +29,11 @@ class Projects
         if !self.beenFocused and !@focus.isFocused()
           @focus.setEnd()
 
-        @insert.html element, false
+        if node
+          @caret.setAfter node
 
-        for node in @selection.getNodes()
-          if node.localName == "variable"
-            return @caret.setAfter node
+        @insert.html element, false
+        @caret.setAfter @utils.isCurrentOrParent('variable')
 
       init: ->
         redactor = @
@@ -100,19 +101,17 @@ class Projects
 
   keypressCallback: (e)->
     if e.keyCode != 91
-      nodes = @selection.getNodes()
+      node = @utils.isCurrentOrParent('variable')
 
-      for node in nodes
-        if node.localName == "variable"
-          if nodes.length == 1
-            e.preventDefault()
+      if node
+        e.preventDefault()
 
-          if e.keyCode == 8
-            return node.remove()
-          else if e.keyCode == 37
-            return @caret.setBefore node
-          else
-            return @caret.setAfter node
+        if e.keyCode == 8
+          return node.remove()
+        else if e.keyCode == 37
+          return @caret.setBefore node
+        else
+          return @caret.setAfter node
 
   bindEvents: ->
     self = @
