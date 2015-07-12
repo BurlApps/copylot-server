@@ -30,9 +30,10 @@ class Projects
 
         @insert.html element, false
 
-        for node in @selection.getNodes()
-          if node.localName == "variable"
-            return @caret.setAfter node
+        node = @utils.isCurrentOrParent('variable')
+
+        if node
+          return @caret.setAfter node
 
       init: ->
         redactor = @
@@ -100,19 +101,17 @@ class Projects
 
   keypressCallback: (e)->
     if e.keyCode != 91
-      nodes = @selection.getNodes()
+      node = @utils.isCurrentOrParent('variable')
 
-      for node in nodes
-        if node.localName == "variable"
-          if nodes.length == 1
-            e.preventDefault()
+      if node
+        e.preventDefault()
 
-          if e.keyCode == 8
-            return node.remove()
-          else if e.keyCode == 37
-            return @caret.setBefore node
-          else
-            return @caret.setAfter node
+        if e.keyCode == 8
+          return node.remove()
+        else if e.keyCode == 37
+          return @caret.setBefore node
+        else
+          return @caret.setAfter node
 
   bindEvents: ->
     self = @
