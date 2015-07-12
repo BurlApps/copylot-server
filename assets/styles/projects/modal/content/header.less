@@ -1,0 +1,147 @@
+@import "../../../compless/all";
+
+.header {
+  background: #F6F8FA;
+  border-bottom: solid 1px #bfcfd9;
+  padding: 9px 10px;
+  height: 50px;
+
+  .box-sizing(border-box);
+  .box-shadow(-1px 0 0 #3897CD);
+
+  .block-title {
+    position: absolute;
+    left: 50%;
+    margin-left: -335px;
+    display: block;
+    width: 600px;
+    font-size: 20px;
+    color: #055E51;
+    text-align: center;
+    background: transparent;
+    font-family: 'Titillium Web', sans-serif;
+
+    .box-sizing(border-box);
+  }
+
+  .search-box {
+    position: relative;
+    float: right;
+    width: 250px;
+
+    .icon {
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      color: rgba(0, 0, 0, 0.3);
+      font-size: 13px;
+    }
+
+    .input {
+      background: #fff;
+      border: solid 1px rgba(0, 0, 0, 0.15);
+      padding: 4px 12px 4px 25px;
+      font-size: 14px;
+      color: #055E51;
+      width: 100%;
+      font-family: 'Titillium Web', sans-serif;
+
+      .border-radius(4px);
+
+      &:focus {
+        border-color: #94B8CD;
+      }
+    }
+  }
+
+  .new-button, .save-button, .delete-button,
+  .deploy-button, .back-button {
+    float: right;
+    background: #2ac13c;
+    border: solid 1px rgba(0, 0, 0, 0.1);
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    .border-radius(3px);
+    .box-shadow(inset 0 -1px 0 rgba(14,41,57,0.15));
+
+    &.back-button,
+    &.deploy-button {
+      float: left;
+      margin: 0;
+    }
+
+
+    &.deploy-button.disabled {
+      opacity: 0.3;
+      cursor: default;
+
+      &:hover, &:hover:active {
+        background: #2ac13c;
+      }
+    }
+
+    &.back-button,
+    &.new-button {
+      background: #3C99DD;
+
+      &:hover {
+        background: darken(#3C99DD, 5%);
+
+        &:active {
+          background: darken(#3C99DD, 10%);
+        }
+      }
+    }
+
+    &.save-button,
+    &.deploy-button {
+      font-size: 11px;
+
+      &.saving,
+      &.deploying {
+        opacity: 0.6;
+      }
+
+      &.saved,
+      &.deployed {
+        background: #3485bf;
+      }
+    }
+
+    &.active {
+      background: #1fa22f;
+    }
+
+    &.error {
+      background: #d74e4e;
+    }
+
+    &.delete-button {
+      background: #d74e4e;
+      font-size: 11px;
+
+      &:hover {
+        background: darken(#d74e4e, 5%);
+
+        &:active {
+          background: darken(#d74e4e, 10%);
+        }
+      }
+    }
+
+    &:hover {
+      background: #23b634;
+
+      &:active {
+        background: #1fa22f;
+      }
+    }
+  }
+}

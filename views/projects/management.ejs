@@ -1,0 +1,37 @@
+<div class="content management">
+  <div class="information">
+    <div class="header">Information</div>
+    <form class="form" action="<%= path %>" method="POST">
+      <input type="hidden" name="_csrf" value="<%= _csrf %>">
+      <input class="input" name="name" type="text" value="<%= project.name || "" %>" placeholder="Project Name" required/>
+      <input class="input" name="itunesID" type="text" value="<%= project.itunesID || "" %>" placeholder="Apple Store URL"/>
+      <input class="input" name="androidID" type="text" value="<%= project.androidID || "" %>" placeholder="Play Store URL"/>
+      <input class="input" name="website" type="website" value="<%= project.website || "" %>" placeholder="Website"/>
+      <input type="submit" class="button" value="Update Information">
+    </form>
+    <div class="delete-project">Delete Project</div>
+  </div>
+  <div class="team">
+    <div class="header">Team Members</div>
+    <form class="form" action="<%= path %>/team" method="POST">
+      <input type="hidden" name="_csrf" value="<%= _csrf %>">
+      <input class="input" name="email" type="email" placeholder="Member's Email" required/>
+      <input type="submit" class="button" value="Invite">
+      <div class="clear"></div>
+    </form>
+    <table class="table">
+      <tbody>
+        <% project.users.forEach(function(member) { %>
+          <tr>
+            <td><%= member.name %></td>
+            <td>
+              <% if(member.id != user.id) { %>
+                <a href="<%= path %>/team/<%= member.id %>/remove" class="fa fa-times"></a>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

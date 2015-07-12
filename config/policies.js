@@ -32,7 +32,7 @@ module.exports.policies = {
 
 	"projects/ProjectController": {
   	"*": ["isLoggedIn", "hasProjects", "hasPlatform"],
-  	"index": ["isLoggedIn", "hasProjects"],
+  	"management": ["isLoggedIn", "hasProjects"],
   	"new": "isLoggedIn",
   	"create": ["isLoggedIn", "wantsJSON"],
   	"deploy": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"]

@@ -45,10 +45,10 @@ module.exports.routes = {
 
 
   // Projects
-  'get /projects': "projects/ProjectController.index",
+  'get /projects': "projects/BlockController.index",
   'get /projects/new': "projects/ProjectController.new",
-  'get /projects/:project': "projects/ProjectController.index",
-  'get /projects/:project/settings/:pane': "projects/ProjectController.index",
+  'get /projects/:project': "projects/BlockController.index",
+  'get /projects/:project/settings/management': "projects/ProjectController.management",
   'get /projects/:project/:platform': "projects/BlockController.index",
   'get /projects/:project/:platform/blocks/create': "projects/BlockController.new",
   'get /projects/:project/:platform/blocks/:block': "projects/BlockController.block",
