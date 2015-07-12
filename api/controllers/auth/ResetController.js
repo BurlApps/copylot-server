@@ -54,9 +54,7 @@ module.exports = {
     }).then(function(user) {
       if(!user) throw Error("User not found!");
 
-      User.hash(req.param("password"), function(err, hash) {
-        if(err) throw Error("Hash failed");
-
+      return User.hash(req.param("password")).then(function(hash) {
         user.emailVerify = null
         user.password = hash
         user.save()

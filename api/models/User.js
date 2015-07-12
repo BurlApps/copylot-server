@@ -49,23 +49,39 @@ module.exports = {
       }, function(error, body) {
         if(cb) cb(error, body)
       })
+    },
+    compare: function(password) {
+      return User.compare(password, this.password)
     }
   },
-  hash: function(data, cb) {
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(data, salt, cb)
+  hash: function(data) {
+    return new Promise(function(resolve, reject) {
+      bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(data, salt, function(err, hash) {
+          if(err)
+            reject(err)
+          else
+            resolve(hash)
+        })
+      })
     })
   },
-  beforeCreate: function(user, cb) {
-    User.hash(user.password, function(err, hash) {
-      if (err) {
-        console.log(err)
-        cb(err)
-      } else {
-        user.password = hash
-        user.emailVerify = sails.config.random(20)
-        cb()
-      }
+  compare: function(password1, password2) {
+    return new Promise(function(resolve, reject) {
+      bcrypt.compare(password1, password2, function (err, res) {
+        if(err || !res)
+          reject(err)
+        else
+          resolve(res)
+      })
+    })
+  },
+  beforeCreate: function(user) {
+    return User.hash(user.password).then(function(hash) {
+      user.password = hash
+      user.emailVerify = sails.config.random(20)
+    }).catch(function(err) {
+      sails.log.error(error)
     })
   },
   afterCreate: function(user, cb) {

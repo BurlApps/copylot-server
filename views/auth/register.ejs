@@ -5,7 +5,7 @@
     Please enter a secure alphanumeric password<br>
     that is at least 6 characters long.
   </div>
-  <form action="/register">
+  <form action="/register" method="POST">
     <input type="hidden" name="_csrf" value="<%= _csrf %>">
     <input type="hidden" name="next" value="<%= next %>">
     <input type="text" class="input" name="name" placeholder="Full Name" step="1" autofocus required>

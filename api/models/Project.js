@@ -57,7 +57,7 @@ module.exports = {
           text: ("Your friend " + user.name + " invited you to join " +
                 project.name + " on CoPylot. CoPylot is the fastest way to " +
                 "manage and change the text in your apps.\n\nClick this link to accept:\n" +
-                 process.env.HOST + '/invite/' + invite.secret)
+                 process.env.HOST + '/invites/' + invite.secret)
         })
       })
     }

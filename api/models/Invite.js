@@ -23,6 +23,7 @@ module.exports = {
     secret: {
       type: 'STRING',
       required: true,
+      unique: true,
       defaultsTo: sails.config.random(36)
     }
   }

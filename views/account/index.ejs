@@ -1,0 +1,15 @@
+<a href="/" class="logo"><%= siteName %></a>
+<div class="modal">
+  <div class="message">My Account</div>
+  <form action="/account" method="POST">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>">
+    <input type="text" class="input" name="name" placeholder="Name" value="<%= user.name %>" step="1" required>
+    <input type="email" class="input" name="email" placeholder="Email" value="<%= user.email %>" step="2" required>
+    <input type="submit" class="button" value="Update Account!">
+    <a class="change-password" href="/account/password">Change Password</a>
+  </form>
+</div>
+<div class="bottom-text">
+  Ready to get back to work?
+  <a href="/projects">Open Dashboard</a>
+</div>

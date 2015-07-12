@@ -25,19 +25,17 @@ passport.use(new LocalStrategy({
       })
     }
 
-    bcrypt.compare(password, user.password, function (err, res) {
-      if (!res) return done(null, false, {
-        message: 'Invalid Credentials :('
-      })
-
-      var returnUser = {
+    user.compare(password).then(function (err, res) {
+      return done(null, {
         email: user.email,
         createdAt: user.createdAt,
         id: user.id
-      }
-
-      return done(null, returnUser, {
+      }, {
         message: 'Awesome :('
+      })
+    }).catch(function() {
+      return done(null, false, {
+        message: 'Invalid Credentials :('
       })
     })
   })

@@ -30,7 +30,12 @@ module.exports.policies = {
   "auth/RegisterController": "loggedInRedirect",
   "auth/ResetController": "loggedInRedirect",
 
-	"projects/ProjectController": {
+	"account/AccountController": {
+  	"*": "isLoggedIn",
+  	"update": ["isLoggedIn", "wantsJSON"]
+  },
+
+	"project/ProjectController": {
   	"*": ["isLoggedIn", "hasProjects", "hasPlatform"],
   	"new": "isLoggedIn",
   	"create": ["isLoggedIn", "wantsJSON"],
@@ -41,13 +46,13 @@ module.exports.policies = {
   	"deploy": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"],
   },
 
-  "projects/BlockController": {
+  "project/BlockController": {
   	"*": ["isLoggedIn", "hasProjects", "hasPlatform"],
   	"create": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"],
   	"update": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"]
   },
 
-  "projects/InviteController": {
+  "project/InviteController": {
   	"*": "isLoggedIn",
   	"invite": ["isLoggedIn", "hasProjects", "wantsJSON"],
   	"delete": ["isLoggedIn", "hasProjects"]
