@@ -17,7 +17,10 @@ module.exports = {
     timeZone: "STRING",
     projectVersion: "INTEGER",
     project: {
-      model: 'project'
+      model: "project"
+    },
+    platform: {
+      model: "platform"
     },
     deviceType: {
       type: "STRING",

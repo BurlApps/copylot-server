@@ -18,7 +18,8 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-    connection: 'development'
+    connection: 'development',
+    //migrate: 'safe'
   }
 
 };

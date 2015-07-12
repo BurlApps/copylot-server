@@ -1,7 +1,7 @@
 <div class="content">
   <% if(blocks.length > 0) { %>
     <div class="header">
-      <div class="deploy-button">Deploy Changes</div>
+      <div class="deploy-button <%= (dirtyBlocks == 0) ? "disabled" : "" %>">Deploy Changes</div>
       <a href="<%= path %>/blocks/create" class="new-button fa fa-plus"></a>
       <div class="search-box">
         <div class="icon fa fa-search"></div>
