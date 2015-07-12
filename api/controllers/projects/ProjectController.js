@@ -50,6 +50,26 @@ module.exports = {
     })
   },
 
+  update: function(req, res) {
+    req.project.name = req.param("name")
+    req.project.itunesID = req.param("itunesID") || null
+    req.project.androidID = req.param("androidID") || null
+    req.project.website = req.param("website") || null
+    req.project.save().then(function() {
+      res.redirect(req.url)
+    }).catch(function(err) {
+      res.error("Something went wrong :(", err)
+    })
+  },
+
+  delete: function(req, res) {
+    req.project.destroy().then(function() {
+      res.redirect("/projects")
+    }).catch(function(err) {
+      res.error("Something went wrong :(", err)
+    })
+  },
+
   deploy: function(req, res) {
     Block.find({
       project: req.project.id,
