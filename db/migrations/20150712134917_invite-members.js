@@ -1,7 +1,7 @@
 'use strict';
 
 exports.up = function(knex, Promise) {
-  knex.schema.createTable('inviteTest', function (table) {
+  knex.schema.createTable('invite', function (table) {
     table.increments("id")
     table.integer("inviter")
     table.integer("project")
@@ -15,7 +15,7 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  knex.schema.dropTable('inviteTest').catch(function(err) {
+  knex.schema.dropTable('invite').catch(function(err) {
     console.error(err)
   })
 };
