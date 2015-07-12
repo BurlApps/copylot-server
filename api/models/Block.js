@@ -34,11 +34,6 @@ module.exports = {
       }
     },
     html: "STRING",
-    platform: {
-      type: "STRING",
-      defaultsTo: "global",
-      enum: ["ios", "android"]
-    },
     dirty: {
       type: "BOOLEAN",
       defaultsTo: true
@@ -54,8 +49,21 @@ module.exports = {
     project: {
       model: 'project'
     },
+    platform: {
+      model: 'platform'
+    },
     savedAt: "DATETIME",
     deployedAt: "DATETIME",
+    createPayload: function(html) {
+      var block = this
+
+      return BlockPayload(html).then(function(payload) {
+        sails.log.info(payload)
+
+        block.payload = payload
+        return block.save()
+      })
+    },
     sendToWorker: function() {
       var block = this
 

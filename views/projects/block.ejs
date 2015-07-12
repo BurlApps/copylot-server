@@ -23,7 +23,7 @@
           any block in this project.
         </div>
         <div class="variables">
-          <% Object.keys(project.variables).forEach(function(key) { %>
+          <% Object.keys(platform.variables).forEach(function(key) { %>
             <variable class="global" data-source="global"><%= key %></variable>
           <% }) %>
           <!-- TODO: Remove when API is live -->

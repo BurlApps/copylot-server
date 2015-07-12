@@ -12,7 +12,7 @@ module.exports = {
     res.success("projects/index", {
       layout: 'layouts/projects',
       project: req.project,
-      pane: req.pane,
+      pane: req.param("pane"),
       siteTitle: req.project.name
     })
   },
@@ -35,7 +35,7 @@ module.exports = {
       return project.save()
     }).then(function(project) {
       res.success({
-        next: "/projects/" + project.id + "/global"
+        next: "/projects/" + project.id + "/ios"
       })
     }).catch(function(err) {
       res.error("Something went wrong :(", err)
@@ -45,7 +45,7 @@ module.exports = {
   deploy: function(req, res) {
     Block.find({
       project: req.project.id,
-      platform: req.platform,
+      platform: req.platform.id,
       dirty: true
     }).then(function(blocks) {
       var date = new Date()
@@ -56,7 +56,7 @@ module.exports = {
         return block.save()
       })
     }).then(function() {
-      req.project.sendToWorker(req.platform)
+      req.platform.sendToWorker()
       res.success()
     }).catch(function(err) {
       res.error("Something went wrong :(", err)

@@ -31,15 +31,16 @@ module.exports.policies = {
   "auth/ResetController": "loggedInRedirect",
 
 	"projects/ProjectController": {
-  	"*": ["isLoggedIn", "hasProjects"],
+  	"*": ["isLoggedIn", "hasProjects", "hasPlatform"],
+  	"index": ["isLoggedIn", "hasProjects"],
   	"new": "isLoggedIn",
   	"create": ["isLoggedIn", "wantsJSON"],
-  	"deploy": ["isLoggedIn", "hasProjects", "wantsJSON"]
+  	"deploy": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"]
   },
 
   "projects/BlockController": {
-  	"*": ["isLoggedIn", "hasProjects"],
-  	"create": ["isLoggedIn", "hasProjects", "wantsJSON"],
-  	"update": ["isLoggedIn", "hasProjects", "wantsJSON"]
+  	"*": ["isLoggedIn", "hasProjects", "hasPlatform"],
+  	"create": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"],
+  	"update": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"]
   }
 };

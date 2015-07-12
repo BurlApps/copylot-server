@@ -254,12 +254,10 @@ class Projects
       else
         button.addClass("saving").val "creating"
 
-      debugger
-
       $.post form.attr("action"),
         _csrf: config.csrf
         title: form.find(".block-title").val()
-        html: form.find("textarea").text()
+        html: form.find("textarea").val()
       , (response)->
         button.removeClass("saving").val(verb)
 

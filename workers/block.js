@@ -12,11 +12,7 @@ module.exports = function(app) {
       }).then(function(block) {
         if(!block) throw Error("Block not found")
 
-        return Payload(job.html).then(function(payload) {
-          sails.log.info(payload)
-          block.payload = payload
-          return block.save()
-        })
+        return block.createPayload(job.html)
       }).then(function() {
         return done()
       }).catch(function(err) {

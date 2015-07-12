@@ -20,26 +20,6 @@ module.exports = {
       required: true,
       defaultsTo: sails.config.random(36)
     },
-    iosVersion: {
-      type: "INTEGER",
-      required: true,
-      defaultsTo: 1
-    },
-    androidVersion: {
-      type: "INTEGER",
-      required: true,
-      defaultsTo: 1
-    },
-    iosPayload: {
-      type: 'JSON',
-      defaultsTo: {}
-    },
-    androidPayload: {
-      type: 'JSON',
-      defaultsTo: {}
-    },
-    iosDeployedAt: "DATETIME",
-    androidDeployedAt: "DATETIME",
     users: {
       collection: 'user',
       via: 'projects'
@@ -48,24 +28,34 @@ module.exports = {
       collection: 'installation',
       via: 'project'
     },
-    blocks: {
-      collection: 'block',
+    android: {
+      model: 'project'
+    },
+    ios: {
+      model: 'project'
+    },
+    installations: {
+      collection: 'installation',
       via: 'project'
-    },
-    variables: {
-      type: 'JSON',
-      defaultsTo: {}
-    },
-    sendToWorker: function(platform) {
-      var project = this
-
-      sails.config.queue.producer("project", function(queue) {
-        queue.publish("project", {
-          id: project.id,
-          platform: platform
-        })
-      })
     }
+  },
+  afterCreate: function(project, cb) {
+    Promise.resolve().then(function() {
+      return Platform.create({
+        name: "ios",
+        project: project.id
+      }).then(function(platform) {
+        project.ios = platform
+      })
+    }).then(function() {
+      return Platform.create({
+        name: "android",
+        project: project.id
+      }).then(function(platform) {
+        project.android = platform
+      })
+    }).then(function() {
+      return cb()
+    })
   }
-
 };

@@ -1,6 +1,4 @@
 module.exports = function(req, res, next) {
-  var platforms = ["ios", "android"]
-
   if(req.user.projects.length == 0) {
     return res.redirect("/projects/new")
   }
@@ -10,17 +8,11 @@ module.exports = function(req, res, next) {
 
     return res.redirect("/projects/" + projectID + "/ios")
   } else {
-    var projectID = req.param("project")
-    req.project = req.user.selectProject(projectID)
-    req.platform = req.param("platform")
-    req.pane = req.param("pane")
+    req.project = req.user.selectProject(req.param("project"))
 
     if(!req.project)
       return res.redirect("/projects")
 
-    else if(platforms.indexOf(req.platform) == -1 && !req.pane)
-      return res.redirect("/projects/" + projectID + "/ios")
+    next()
   }
-
-  next()
 };

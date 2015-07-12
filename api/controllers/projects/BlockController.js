@@ -9,21 +9,16 @@ module.exports = {
 
   /* GET Requests */
 	index: function(req, res) {
-  	var platforms = ["global", "ios", "android"]
-
-  	if(platforms.indexOf(req.platform) == -1)
-  	  return res.redirect("/projects")
-
   	Block.find({
       project: req.project.id,
-      platform: req.platform
+      platform: req.platform.id
     }).sort({
       slug: 'asc'
     }).then(function(blocks) {
       res.success("projects/blocks", {
         layout: 'layouts/projects',
         project: req.project,
-        pane: req.platform,
+        pane: req.platform.name,
         blocks: blocks,
         dirtyBlocks: blocks.filter(function(block) {
           if(block.dirty) return true
@@ -37,7 +32,8 @@ module.exports = {
     res.success("projects/block", {
       layout: 'layouts/projects',
       project: req.project,
-      pane: req.platform,
+      platform: req.platform,
+      pane: req.platform.name,
       block: null,
       siteTitle: "Create Block"
     })
@@ -52,13 +48,14 @@ module.exports = {
       res.success("projects/block", {
         layout: 'layouts/projects',
         project: req.project,
-        pane: req.platform,
+        pane: req.platform.name,
+        platform: req.platform,
         block: block,
         siteTitle: block.title
       })
     }).catch(function(err) {
       console.log(err)
-      res.redirect("/projects/" + req.project.id + "/" + req.platform)
+      res.redirect("/projects/" + req.project.id + "/" + req.platform.name)
     })
   },
 
@@ -66,7 +63,7 @@ module.exports = {
   create: function(req, res) {
     Block.create({
       title: req.param("title"),
-      platform: req.platform,
+      platform: req.platform.id,
       html: req.param("html"),
       project: req.project.id,
       savedAt: new Date()
@@ -77,7 +74,7 @@ module.exports = {
 
       res.success({
         block: block.id,
-        url: "/projects/" + req.project.id + "/" + req.platform +
+        url: "/projects/" + req.project.id + "/" + req.platform.name +
              "/blocks/" + block.id
       })
     }).catch(function(err) {
@@ -133,7 +130,7 @@ module.exports = {
       return block.destroy()
     }).then(function(block) {
       res.success({
-        url: "/projects/" + req.project.id + "/" + req.platform
+        url: "/projects/" + req.project.id + "/" + req.platform.name
       })
     }).catch(function(err) {
       res.error("Something went wrong :(", err)
