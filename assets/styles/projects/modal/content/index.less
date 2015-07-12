@@ -1,0 +1,36 @@
+@import "../../../compless/all";
+
+.content {
+  position: relative;
+  width: 870px;
+  min-height: 500px;
+  float: right;
+
+  .box-shadow(-1px 0 0 #bfcfd9);
+
+  @import "./header";
+  @import "./block-message";
+  @import "./editor";
+  @import "./table";
+  @import "./management";
+
+  variable {
+    padding: 4px 6px;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    margin: 5px 1px;
+    display: inline-block;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 15px;
+    background: #C95858;
+
+    .border-radius(3px);
+    .box-sizing(border-box);
+
+    &.block {
+      background: #58B3C9;
+    }
+  }
+}

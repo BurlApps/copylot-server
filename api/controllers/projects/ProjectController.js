@@ -8,19 +8,27 @@
 module.exports = {
 
   /* GET Requests */
-	index: function(req, res) {
-    res.success("projects/index", {
-      layout: 'layouts/projects',
-      project: req.project,
-      pane: req.param("pane"),
-      siteTitle: req.project.name
-    })
-  },
-
   new: function(req, res) {
     res.success("projects/new", {
       layout: 'layouts/modal',
       siteTitle: "New Project"
+    })
+  },
+
+  management: function(req, res) {
+    Project.findOne({
+      id: req.project.id
+    }).populate("users").then(function(project) {
+      if(!project) throw Error("Project was not found")
+
+      res.success("projects/management", {
+        layout: 'layouts/projects',
+        project: project,
+        pane: req.param("pane"),
+        siteTitle: req.project.name
+      })
+    }).catch(function(err) {
+      res.error("Something went wrong :(", err)
     })
   },
 

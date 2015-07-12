@@ -1,0 +1,73 @@
+@import "../../../compless/all";
+
+.new-block-message {
+  width: 100%;
+  text-align: center;
+  padding-top: 80px;
+  height: 500px;
+  background-color: #38A0DC;
+  background: url("/images/transparent.png");
+  background-repeat: repeat;
+  color: #fff;
+
+  .box-shadow(-1px 0 0 #3897CD);
+  .box-sizing(border-box);
+
+  .message {
+    font-size: 35px;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+    font-weight: 900;
+
+    span {
+      color: #58B3C9;
+    }
+  }
+
+  .submessage {
+    font-size: 25px;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 50px;
+  }
+
+  .subsubmessage {
+    font-size: 18px;
+    font-family: 'Titillium Web', sans-serif;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+  }
+
+  .new-button {
+    text-transform: uppercase;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+    font-family: 'Titillium Web', sans-serif;
+    padding: 8px 20px;
+    font-size: 22px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 40px;
+    display: inline-block;
+
+    .border-radius(3px);
+    .box-sizing(border-box);
+    .box-shadow(~"inset 0 1px 1px #77bdf4,0 2px 2px 3px rgba(0,0,0,0.2)");
+    .linear-gradient(#61adf0, #6ab5f2, #53a0ee);
+
+    &:hover {
+      background: darken(#5fabf1, 5%);
+
+      &:active {
+        background: darken(#5fabf1, 10%);
+      }
+    }
+  }
+}
