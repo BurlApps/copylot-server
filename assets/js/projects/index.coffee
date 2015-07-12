@@ -21,6 +21,7 @@ class Projects
 
     $.Redactor.prototype.dragDrop = ->
       insert: (block)->
+        node = @utils.isCurrentOrParent('variable')
         className = if block.hasClass("global") then "global" else "block"
         element = "<variable spellcheck='false' class='#{className}'" +
                   "data-source='#{block.data("source")}'>#{block.text()}</variable>"
@@ -28,12 +29,11 @@ class Projects
         if !self.beenFocused and !@focus.isFocused()
           @focus.setEnd()
 
-        @insert.html element, false
-
-        node = @utils.isCurrentOrParent('variable')
-
         if node
-          return @caret.setAfter node
+          @caret.setAfter node
+
+        @insert.html element, false
+        @caret.setAfter @utils.isCurrentOrParent('variable')
 
       init: ->
         redactor = @
