@@ -11,8 +11,15 @@ module.exports = function error(message, error) {
 
   sails.log.verbose(error || message)
 
-  res.jsonx({
-    success: false,
-    message: message
-  })
+  if(req.wantsJSON) {
+    res.jsonx({
+      success: false,
+      message: message
+    })
+  } else {
+    return res.view("errors/custom", {
+      layout: "layouts/error",
+      message: message
+    })
+  }
 };

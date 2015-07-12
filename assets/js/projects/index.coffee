@@ -184,6 +184,66 @@ class Projects
         self.content.find("tbody tr").show()
 
 
+    # Capture Update Event
+    @content.find(".information form").on "submit", (e)->
+      e.preventDefault()
+      e.stopPropagation()
+
+      form = $ @
+      button = form.find(".button")
+
+      button.addClass("updating").val "updating"
+
+      $.post form.attr("action"), form.serialize(), (response)->
+        if response.success
+          swal
+            title: "Updated!"
+            type: "success"
+            confirmButtonColor: "#38A0DC"
+          , ->
+            setTimeout ->
+              location.reload()
+            , 500
+
+        else
+          button.removeClass("updating").val("Update Information")
+
+          swal
+            title: "Oops..."
+            text: response.message or "Something went wrong :("
+            type: "error"
+            confirmButtonColor: "#D23939"
+
+
+    # Capture Invite Event
+    @content.find(".team form").on "submit", (e)->
+      e.preventDefault()
+      e.stopPropagation()
+
+      form = $ @
+      button = form.find(".button")
+      button.addClass("inviting").val "inviting"
+
+      $.post "#{config.path}/team/invite", form.serialize(), (response)->
+        if response.success
+          swal
+            title: "Invited!"
+            type: "success"
+            confirmButtonColor: "#38A0DC"
+          , ->
+            setTimeout ->
+              location.reload()
+            , 500
+
+        else
+          button.removeClass("inviting").val "invite"
+
+          swal
+            title: "Oops..."
+            text: response.message or "Something went wrong :("
+            type: "error"
+            confirmButtonColor: "#D23939"
+
     # Capture Deploy Event
     @content.find(".deploy-button:not(.disabled)").click ->
       button = $(@)
@@ -211,7 +271,36 @@ class Projects
             type: "error"
             confirmButtonColor: "#D23939"
 
-    # Capture Delete Event
+    # Capture Project Delete Event
+    @content.find(".delete-project").click ->
+      swal {
+        title: "Are you sure?"
+        text: "<strong>DO NOT DELETE this project if it is being used in your app!</strong> " +
+              "This is permanent and doing so may break your app."
+        html: true
+        type: "warning"
+        showCancelButton: true
+        confirmButtonColor: "#D23939"
+        confirmButtonText: "I'm 100% sure"
+        cancelButtonText: "No, cancel plz!"
+        closeOnConfirm: false
+        closeOnCancel: true
+      }, (isConfirm) ->
+        if isConfirm
+          $.post "#{config.path}/delete",
+            _csrf: config.csrf
+          , (response)->
+            swal {
+              title: "Deleted."
+              type: "success"
+              confirmButtonColor: "#38A0DC"
+            }, ->
+              setTimeout ->
+                location.href = response.next
+              , 500
+
+
+    # Capture Block Delete Event
     @content.find(".delete-button").click ->
       swal {
         title: "Are you sure?"
@@ -261,8 +350,6 @@ class Projects
         button.removeClass("saving").val(verb)
 
         if response.success
-          verb = form.find(".save-button").val().toLowerCase()
-
           if verb == "create"
             swal
               title: "Created!"

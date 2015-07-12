@@ -6,7 +6,8 @@ module.exports = {
   index: function(req, res) {
     res.success("auth/register", {
       layout: 'layouts/modal',
-      siteTitle: "Register"
+      siteTitle: "Register",
+      next: req.param("next") || ""
     })
   },
 
@@ -24,7 +25,7 @@ module.exports = {
 
         return res.success({
           user: user.id,
-          next: req.param("next") || "projects"
+          next: req.param("next") || "/projects"
         })
       })
     }).catch(function(err) {

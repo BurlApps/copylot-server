@@ -43,7 +43,7 @@ module.exports = {
         from: 'CoPylot <bot@copylot.io>',
         to: this.email,
         subject: "Reset password for CoPylot",
-        text: ('You requested a password reset for Copylot.\n\n' +
+        text: ('You requested a password reset for CoPylot.\n\n' +
               'Click this link to reset it:\n' + process.env.HOST + '/reset/' +
               this.emailVerify + '/password')
       }, function(error, body) {
@@ -73,7 +73,7 @@ module.exports = {
       from: 'CoPylot <bot@copylot.io>',
       to: user.email,
       subject: "Verify your email for CoPylot",
-      text: ('Welcome to Copylot!\n\nPlease confirm your email address ' +
+      text: ('Welcome to CoPylot!\n\nPlease confirm your email address ' +
         'by clicking this link:\n' + process.env.HOST + '/email/' +
         user.emailVerify + '/verify')
     }, cb)

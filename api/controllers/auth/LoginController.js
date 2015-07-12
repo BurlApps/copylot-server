@@ -7,7 +7,7 @@ module.exports = {
     res.success("auth/login", {
       layout: 'layouts/modal',
       remember: req.cookies.remember || "",
-      next: req.param("next"),
+      next: req.param("next") || "",
       siteTitle: "Sign In"
     })
   },
@@ -33,7 +33,7 @@ module.exports = {
 
         return res.success({
           user: user.id,
-          next: req.param("next") || "projects"
+          next: req.param("next") || "/projects"
         })
       })
     })(req, res)

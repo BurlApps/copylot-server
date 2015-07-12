@@ -44,11 +44,16 @@ module.exports.routes = {
   'post /reset/:token/password': "auth/ResetController.setPassword",
 
 
+  // Invites
+  'get /invite/:invite': "projects/InviteController.index",
+
   // Projects
   'get /projects': "projects/BlockController.index",
   'get /projects/new': "projects/ProjectController.new",
   'get /projects/:project': "projects/BlockController.index",
   'get /projects/:project/settings/management': "projects/ProjectController.management",
+  'get /projects/:project/settings/management/team/invite/:invite/remove': "projects/InviteController.delete",
+  'get /projects/:project/settings/management/team/user/:user/remove': "projects/ProjectController.remove_user",
   'get /projects/:project/:platform': "projects/BlockController.index",
   'get /projects/:project/:platform/blocks/create': "projects/BlockController.new",
   'get /projects/:project/:platform/blocks/:block': "projects/BlockController.block",
@@ -56,6 +61,7 @@ module.exports.routes = {
   'post /projects/new': "projects/ProjectController.create",
   'post /projects/:project/settings/management': "projects/ProjectController.update",
   'post /projects/:project/settings/management/delete': "projects/ProjectController.delete",
+  'post /projects/:project/settings/management/team/invite': "projects/InviteController.invite",
   'post /projects/:project/:platform/deploy': "projects/ProjectController.deploy",
   'post /projects/:project/:platform/blocks/create': "projects/BlockController.create",
   'post /projects/:project/:platform/blocks/:block': "projects/BlockController.update",

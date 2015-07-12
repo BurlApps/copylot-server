@@ -37,12 +37,19 @@ module.exports.policies = {
   	"update": ["isLoggedIn", "hasProjects"],
     "delete": ["isLoggedIn", "hasProjects"],
     "management": ["isLoggedIn", "hasProjects"],
-  	"deploy": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"]
+    "remove_user": ["isLoggedIn", "hasProjects"],
+  	"deploy": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"],
   },
 
   "projects/BlockController": {
   	"*": ["isLoggedIn", "hasProjects", "hasPlatform"],
   	"create": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"],
   	"update": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"]
-  }
+  },
+
+  "projects/InviteController": {
+  	"*": "isLoggedIn",
+  	"invite": ["isLoggedIn", "hasProjects", "wantsJSON"],
+  	"delete": ["isLoggedIn", "hasProjects"]
+  },
 };

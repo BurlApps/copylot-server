@@ -19,7 +19,6 @@ module.exports = {
 
   models: {
     connection: 'development',
-    migrate: 'alter'
   }
 
 };
