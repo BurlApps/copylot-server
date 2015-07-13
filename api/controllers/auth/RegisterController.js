@@ -13,8 +13,6 @@ module.exports = {
 
   /* POST Requests */
   register: function(req, res) {
-    console.log(req.param("email"))
-
     User.create({
       name: req.param("name"),
       email: req.param("email"),
