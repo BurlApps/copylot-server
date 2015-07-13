@@ -78,6 +78,7 @@ module.exports.http = {
       res.locals.url = res.locals.host + req.url
       res.locals.path = req.url
       res.locals.mixpanelToken = process.env.MIXPANEL
+      res.locals.heapToken = process.env.HEAP
       res.locals.config = {}
       res.locals.siteTitle = "CoPylot"
       res.locals.siteName = "CoPylot"
