@@ -58,6 +58,8 @@ module.exports = {
       var block = this
 
       return BlockPayload(html).then(function(payload) {
+        sails.log.info(payload)
+
         block.payload = payload
         return block.save()
       })
