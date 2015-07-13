@@ -11,6 +11,10 @@ env:
     - RABBITMQ_BIGWIG_RX_URL=amqp://guest:guest@localhost
     - RABBITMQ_BIGWIG_TX_URL=amqp://guest:guest@localhost
 
+notifications:
+  email: false
+  slack: 'copylot:SWgYRBrkvxmjso4HWhhQ42IT#development'
+
 addons:
   postgresql: "9.3"
 
