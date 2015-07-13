@@ -53,6 +53,8 @@ module.exports = {
       }).then(function(blocks) {
         return PlatformPayload(platform, blocks)
       }).then(function(payload) {
+        sails.log.info(JSON.stringify(payload))
+
         platform.version = payload.version
         platform.deployedAt = payload.deployAt
         platform.payload = payload

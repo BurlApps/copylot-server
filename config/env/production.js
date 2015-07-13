@@ -19,7 +19,7 @@ module.exports = {
 
   models: {
     connection: 'production',
-    migrate: 'alter'
+    migrate: 'safe'
   },
 
   /***************************************************************************

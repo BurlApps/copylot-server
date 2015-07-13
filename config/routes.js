@@ -43,6 +43,7 @@ module.exports.routes = {
   'post /reset': "auth/ResetController.sendEmail",
   'post /reset/:token/password': "auth/ResetController.setPassword",
 
+
   // Account
   'get /account': "account/AccountController.index",
   'get /account/password': "account/AccountController.password",
@@ -50,8 +51,10 @@ module.exports.routes = {
   'post /account': "account/AccountController.update",
   'post /account/password': "account/AccountController.update_password",
 
+
   // Invites
   'get /invites/:invite': "project/InviteController.index",
+
 
   // Projects
   'get /projects': "project/BlockController.index",
@@ -72,4 +75,7 @@ module.exports.routes = {
   'post /projects/:project/:platform/blocks/create': "project/BlockController.create",
   'post /projects/:project/:platform/blocks/:block': "project/BlockController.update",
   'post /projects/:project/:platform/blocks/:block/delete': "project/BlockController.delete",
+
+  // API
+  'get /api/v1.0/:platform/payload': "api/v1-0/InstallationController.payload"
 };
