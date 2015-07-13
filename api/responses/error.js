@@ -10,7 +10,7 @@ module.exports = function error(message, error) {
   }
 
   sails.log.verbose(error || message)
-  sails.config.captureError(error)
+  sails.config.sentry.captureError(data)
 
   if(req.wantsJSON) {
     res.jsonx({
