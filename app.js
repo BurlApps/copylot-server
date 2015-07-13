@@ -57,14 +57,6 @@ process.chdir(__dirname);
     }
   }
 
-  // Require Clusters
-  require("throng")(start, {
-    workers: process.env.WEB_CONCURRENCY || 1,
-    lifetime: Infinity
-  });
-
   // Start server
-  function start() {
-    sails.lift(rc('sails'));
-  }
+  sails.lift(rc('sails'));
 })()
