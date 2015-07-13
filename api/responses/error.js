@@ -10,7 +10,10 @@ module.exports = function error(message, error) {
   }
 
   sails.log.verbose(error || message)
-  sails.config.sentry.captureError(data)
+
+  if(error !== undefined && sails.config.isProduction) {
+    sails.config.sentry.captureError(error)
+  }
 
   if(req.wantsJSON) {
     res.jsonx({

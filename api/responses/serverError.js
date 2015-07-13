@@ -24,7 +24,9 @@ module.exports = function serverError (data, options) {
 
   // Log error to console
   if (data !== undefined) {
-    sails.config.sentry.captureError(data)
+    if(sails.config.isProduction)
+      sails.config.sentry.captureError(data)
+
     sails.log.error('Sending 500 ("Server Error") response: \n',data);
   }
   else sails.log.error('Sending empty 500 ("Server Error") response');

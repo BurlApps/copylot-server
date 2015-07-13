@@ -33,10 +33,12 @@ module.exports = {
       via: 'project'
     },
     android: {
-      model: 'project'
+      required: true,
+      model: 'platform'
     },
     ios: {
-      model: 'project'
+      required: true,
+      model: 'platform'
     },
     installations: {
       collection: 'installation',

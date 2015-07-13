@@ -22,39 +22,43 @@ module.exports.policies = {
   '*': true,
 
   "auth/LoginController": {
-    "*": "loggedInRedirect",
-    "login": "wantsJSON",
+    "*": "site/loggedInRedirect",
+    "login": "site/wantsJSON",
     "logout": true
   },
 
-  "auth/RegisterController": "loggedInRedirect",
-  "auth/ResetController": "loggedInRedirect",
+  "auth/RegisterController": "site/loggedInRedirect",
+  "auth/ResetController": "site/loggedInRedirect",
 
 	"account/AccountController": {
-  	"*": "isLoggedIn",
-  	"update": ["isLoggedIn", "wantsJSON"]
+  	"*": "site/isLoggedIn",
+  	"update": ["site/wantsJSON", "site/isLoggedIn"]
   },
 
 	"project/ProjectController": {
-  	"*": ["isLoggedIn", "hasProjects", "hasPlatform"],
-  	"new": "isLoggedIn",
-  	"create": ["isLoggedIn", "wantsJSON"],
-  	"update": ["isLoggedIn", "hasProjects"],
-    "delete": ["isLoggedIn", "hasProjects"],
-    "management": ["isLoggedIn", "hasProjects"],
-    "remove_user": ["isLoggedIn", "hasProjects"],
-  	"deploy": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"],
+  	"*": ["site/isLoggedIn", "site/hasProjects", "site/hasPlatform"],
+  	"new": "site/isLoggedIn",
+  	"create": ["site/wantsJSON", "site/isLoggedIn"],
+  	"update": ["site/isLoggedIn", "site/hasProjects"],
+    "delete": ["site/isLoggedIn", "site/hasProjects"],
+    "management": ["site/isLoggedIn", "site/hasProjects"],
+    "remove_user": ["site/isLoggedIn", "site/hasProjects"],
+  	"deploy": ["site/wantsJSON", "site/isLoggedIn", "site/hasProjects", "site/hasPlatform"],
   },
 
   "project/BlockController": {
-  	"*": ["isLoggedIn", "hasProjects", "hasPlatform"],
-  	"create": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"],
-  	"update": ["isLoggedIn", "hasProjects", "hasPlatform", "wantsJSON"]
+  	"*": ["site/isLoggedIn", "site/hasProjects", "site/hasPlatform"],
+  	"create": ["site/wantsJSON", "site/isLoggedIn", "site/hasProjects", "site/hasPlatform"],
+  	"update": [ "site/wantsJSON", "site/isLoggedIn", "site/hasProjects", "site/hasPlatform"]
   },
 
   "project/InviteController": {
-  	"*": "isLoggedIn",
-  	"invite": ["isLoggedIn", "hasProjects", "wantsJSON"],
-  	"delete": ["isLoggedIn", "hasProjects"]
+  	"*": "site/isLoggedIn",
+  	"invite": ["site/wantsJSON", "site/isLoggedIn", "site/hasProjects"],
+  	"delete": ["site/isLoggedIn", "site/hasProjects"]
+  },
+
+  "api/v1-0/InstallationController": {
+    "*": ["api/wantsJSON", "api/hasProject", "api/hasInstallation"]
   },
 };
