@@ -275,8 +275,8 @@ class Projects
     @content.find(".delete-project").click ->
       swal {
         title: "Are you sure?"
-        text: "<strong>DO NOT DELETE this project if it is being used in your app!</strong> " +
-              "This is permanent and doing so may break your app."
+        text: "<strong>DO NOT DELETE this project if it is being used<br>in your app!</strong> " +
+              "This is permanent and doing so may<br>break your app."
         html: true
         type: "warning"
         showCancelButton: true
@@ -304,8 +304,8 @@ class Projects
     @content.find(".delete-button").click ->
       swal {
         title: "Are you sure?"
-        text: "<strong>DO NOT DELETE this block if it is being used in your app!</strong> " +
-              "This is permanent and doing so may break your app."
+        text: "<strong>DO NOT DELETE this block if it is being used in<br>your app!</strong> " +
+              "This is permanent and doing so may<br>break your app."
         html: true
         type: "warning"
         showCancelButton: true
