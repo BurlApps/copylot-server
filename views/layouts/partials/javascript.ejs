@@ -1,5 +1,6 @@
 <!-- Javascript -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="//cdn.ravenjs.com/1.1.15/jquery,native/raven.min.js"></script>
 
 <!-- start Mixpanel -->
 <script type="text/javascript">
@@ -10,17 +11,17 @@ mixpanel.init("<%= mixpanelToken %>", {
   upgrade: true
 });
 
-<% if(user != null && user.id != null) { %>
+<% if(user) { %>
   mixpanel.identify("<%= user.id %>")
   mixpanel.people.set({
     "ID": "<%= user.id %>",
-    "$name": <%- user.name ? ('"' + user.name + '"') : "null" %>,
-    "$email": <%- user.email ? ('"' + user.email + '"') : "null" %>
+    "$name": "<%= user.name  %>",
+    "$email": "<%= user.email %>"
   })
   mixpanel.register({
     "User ID": "<%= user.id %>",
-    "User Name": <%- user.name ? ('"' + user.name + '"') : "null" %>,
-    "User Email": <%- user.email ? ('"' + user.email + '"') : "null" %>
+    "User Name": "<%= user.name  %>",
+    "User Email": "<%= user.email %>"
   });
 <% } %>
 
@@ -30,3 +31,23 @@ mixpanel.track('Web.Page.View', {
 })
 </script>
 <!-- end Mixpanel -->
+
+
+<!-- start Sentry -->
+<% if(hostname != "localhost") { %>
+  <script type="text/javascript">
+    Raven.config('<%= sentry %>', {
+      release: "<%= random %>",
+      whitelistUrls: ['<%= hostname %>']
+    }).install()
+
+    <% if(user) { %>
+      Raven.setUserContext({
+        name: "<%= user.name  %>",
+        email: "<%= user.email %>",
+        id: '<%= user.id %>'
+      })
+    <% } %>
+  </script>
+<% } %>
+<!-- end Sentry -->

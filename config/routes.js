@@ -43,21 +43,33 @@ module.exports.routes = {
   'post /reset': "auth/ResetController.sendEmail",
   'post /reset/:token/password': "auth/ResetController.setPassword",
 
+  // Account
+  'get /account': "account/AccountController.index",
+  'get /account/password': "account/AccountController.password",
+
+  'post /account': "account/AccountController.update",
+  'post /account/password': "account/AccountController.update_password",
+
+  // Invites
+  'get /invites/:invite': "project/InviteController.index",
 
   // Projects
-  'get /projects': "projects/BlockController.index",
-  'get /projects/new': "projects/ProjectController.new",
-  'get /projects/:project': "projects/BlockController.index",
-  'get /projects/:project/settings/management': "projects/ProjectController.management",
-  'get /projects/:project/:platform': "projects/BlockController.index",
-  'get /projects/:project/:platform/blocks/create': "projects/BlockController.new",
-  'get /projects/:project/:platform/blocks/:block': "projects/BlockController.block",
+  'get /projects': "project/BlockController.index",
+  'get /projects/new': "project/ProjectController.new",
+  'get /projects/:project': "project/BlockController.index",
+  'get /projects/:project/settings/management': "project/ProjectController.management",
+  'get /projects/:project/settings/management/team/invite/:invite/remove': "project/InviteController.delete",
+  'get /projects/:project/settings/management/team/user/:user/remove': "project/ProjectController.remove_user",
+  'get /projects/:project/:platform': "project/BlockController.index",
+  'get /projects/:project/:platform/blocks/create': "project/BlockController.new",
+  'get /projects/:project/:platform/blocks/:block': "project/BlockController.block",
 
-  'post /projects/new': "projects/ProjectController.create",
-  'post /projects/:project/settings/management': "projects/ProjectController.update",
-  'post /projects/:project/settings/management/delete': "projects/ProjectController.delete",
-  'post /projects/:project/:platform/deploy': "projects/ProjectController.deploy",
-  'post /projects/:project/:platform/blocks/create': "projects/BlockController.create",
-  'post /projects/:project/:platform/blocks/:block': "projects/BlockController.update",
-  'post /projects/:project/:platform/blocks/:block/delete': "projects/BlockController.delete",
+  'post /projects/new': "project/ProjectController.create",
+  'post /projects/:project/settings/management': "project/ProjectController.update",
+  'post /projects/:project/settings/management/delete': "project/ProjectController.delete",
+  'post /projects/:project/settings/management/team/invite': "project/InviteController.invite",
+  'post /projects/:project/:platform/deploy': "project/ProjectController.deploy",
+  'post /projects/:project/:platform/blocks/create': "project/BlockController.create",
+  'post /projects/:project/:platform/blocks/:block': "project/BlockController.update",
+  'post /projects/:project/:platform/blocks/:block/delete': "project/BlockController.delete",
 };

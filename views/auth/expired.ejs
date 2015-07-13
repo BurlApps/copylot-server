@@ -6,5 +6,9 @@
     first time using this link,
     <a href="/contact">contact support</a>.
   </div>
-  <a href="/login" class="button">Login In</a>
+  <% if(user) { %>
+    <a href="/projects" class="button">Open Dashboard</a>
+  <% } else { %>
+    <a href="/login" class="button">Login In</a>
+  <% } %>
 </div>

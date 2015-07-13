@@ -4,8 +4,8 @@
     <form class="form" action="<%= path %>" method="POST">
       <input type="hidden" name="_csrf" value="<%= _csrf %>">
       <input class="input" name="name" type="text" value="<%= project.name || "" %>" placeholder="Project Name" required/>
-      <input class="input" name="itunesID" type="text" value="<%= project.itunesID || "" %>" placeholder="Apple Store URL"/>
-      <input class="input" name="androidID" type="text" value="<%= project.androidID || "" %>" placeholder="Play Store URL"/>
+      <input class="input" name="itunesID" type="text" value="<%= project.itunesID || "" %>" placeholder="Apple Store ID"/>
+      <input class="input" name="androidID" type="text" value="<%= project.androidID || "" %>" placeholder="Play Store ID"/>
       <input class="input" name="website" type="website" value="<%= project.website || "" %>" placeholder="Website"/>
       <input type="submit" class="button" value="Update Information">
     </form>
@@ -21,6 +21,16 @@
     </form>
     <table class="table">
       <tbody>
+        <% project.invites.forEach(function(invite) { %>
+          <tr>
+            <td>
+              <%= invite.email %> <span>(invited)</span>
+            </td>
+            <td>
+              <a href="<%= path %>/team/invite/<%= invite.id %>/remove" class="fa fa-times"></a>
+            </td>
+          </tr>
+        <% }) %>
         <% project.users.forEach(function(member) { %>
           <tr>
             <% if(member.id == user.id) { %>
@@ -31,7 +41,7 @@
             <% } else { %>
               <td><%= member.name %></td>
               <td>
-                <a href="<%= path %>/team/<%= member.id %>/remove" class="fa fa-times"></a>
+                <a href="<%= path %>/team/user/<%= member.id %>/remove" class="fa fa-times"></a>
               </td>
             <% } %>
           </tr>

@@ -20,6 +20,10 @@ module.exports = {
       required: true,
       defaultsTo: sails.config.random(36)
     },
+    invites: {
+      collection: 'invite',
+      via: 'project'
+    },
     users: {
       collection: 'user',
       via: 'projects'
@@ -37,6 +41,25 @@ module.exports = {
     installations: {
       collection: 'installation',
       via: 'project'
+    },
+    sendInvite: function(user, email) {
+      var project = this
+
+      return Invite.create({
+        email: email,
+        inviter: user.id,
+        project: this.id
+      }).then(function(invite) {
+        return sails.config.mailgun.messages().send({
+          from: 'CoPylot <bot@copylot.io>',
+          to: email,
+          subject: user.name + " invites you to " + project.name,
+          text: ("Your friend " + user.name + " invited you to join " +
+                project.name + " on CoPylot. CoPylot is the fastest way to " +
+                "manage and change the text in your apps.\n\nClick this link to accept:\n" +
+                 process.env.HOST + '/invites/' + invite.secret)
+        })
+      })
     }
   },
   afterCreate: function(project, cb) {
@@ -56,6 +79,8 @@ module.exports = {
       })
     }).then(function() {
       return cb()
+    }).catch(function(err) {
+      return cb(err)
     })
   }
 };

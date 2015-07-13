@@ -5,5 +5,9 @@
     Your email has been verified.<br>
     Open up the dashboard to start working!
   </div>
-  <a href="/projects" class="button">Open Dashboard</a>
+  <% if(user) { %>
+    <a href="/projects" class="button">Open Dashboard</a>
+  <% } else { %>
+    <a href="/login" class="button">Login In</a>
+  <% } %>
 </div>

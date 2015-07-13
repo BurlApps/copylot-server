@@ -1,8 +1,9 @@
 <a href="/" class="logo"><%= siteName %></a>
 <div class="modal">
   <div class="message">Let's Get Workin!</div>
-  <form action="/login">
+  <form action="/login" method="POST">
     <input type="hidden" name="_csrf" value="<%= _csrf %>">
+    <input type="hidden" name="next" value="<%= next %>">
     <input type="email" class="input" name="email" placeholder="Email" value="<%= remember %>" step="1" autofocus required>
     <input type="password" class="input" name="password" placeholder="Password" step="2" required>
     <label class="remember">
@@ -16,5 +17,5 @@
 </div>
 <div class="bottom-text">
   Don't have an account?
-  <a href="/register">Sign Up</a>
+  <a href="/register?next=<%= next %>">Sign Up</a>
 </div>

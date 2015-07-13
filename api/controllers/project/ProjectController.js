@@ -18,17 +18,26 @@ module.exports = {
   management: function(req, res) {
     Project.findOne({
       id: req.project.id
-    }).populate("users").then(function(project) {
+    }).populate("users").populate("invites").then(function(project) {
       if(!project) throw Error("Project was not found")
 
       res.success("projects/management", {
         layout: 'layouts/projects',
         project: project,
-        pane: "management",
+        pane: "settings/management",
         siteTitle: req.project.name
       })
     }).catch(function(err) {
       res.error("Something went wrong :(", err)
+    })
+  },
+
+  remove_user: function(req, res) {
+    req.project.users.remove(req.param("user"))
+    req.project.save().then(function() {
+      res.redirect("/projects/" + req.project.id + "/settings/management")
+    }).catch(function(err) {
+      res.error(err.message, err)
     })
   },
 
@@ -56,7 +65,7 @@ module.exports = {
     req.project.androidID = req.param("androidID") || null
     req.project.website = req.param("website") || null
     req.project.save().then(function() {
-      res.redirect(req.url)
+      res.success()
     }).catch(function(err) {
       res.error("Something went wrong :(", err)
     })
@@ -64,7 +73,9 @@ module.exports = {
 
   delete: function(req, res) {
     req.project.destroy().then(function() {
-      res.redirect("/projects")
+      res.success({
+        next: "/projects/"
+      })
     }).catch(function(err) {
       res.error("Something went wrong :(", err)
     })

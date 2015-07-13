@@ -25,14 +25,11 @@
     </a>
 
     <div class="header">Preferences</div>
-    <a class="item <%=: pane | isActive:("management") %>" href="/projects/<%= project.id %>/settings/management">
+    <a class="item <%=: pane | isActive:("settings/management") %>" href="/projects/<%= project.id %>/settings/management">
       <span class="fa fa-bars"></span> Management
     </a>
-    <a class="item <%=: pane | isActive:("install") %>" href="/projects/<%= project.id %>/settings/install">
+    <a class="item <%=: pane | isActive:("settings/install") %>" href="/projects/<%= project.id %>/settings/install">
       <span class="fa fa-terminal"></span> Install SDK
-    </a>
-    <a class="item <%=: pane | isActive:("notifications") %>" href="/projects/<%= project.id %>/settings/notifications">
-      <span class="fa fa-bullseye"></span> Push Notifications
     </a>
   </div>
 </div>

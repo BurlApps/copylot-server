@@ -9,7 +9,8 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
 
- var moment = require("moment")
+var moment = require("moment")
+var raven = require("raven")
 
 module.exports.http = {
 
@@ -33,6 +34,7 @@ module.exports.http = {
   ***************************************************************************/
 
     order: [
+      'registerSentry',
       'startRequestTimer',
       'cookieParser',
       'session',
@@ -61,14 +63,18 @@ module.exports.http = {
     passportInit    : require('passport').initialize(),
     passportSession : require('passport').session(),
 
+    registerSentry: raven.middleware.express(process.env.SENTRY),
+
     setLocals: function (req, res, next) {
       // Show Traffic
       sails.log.info("Request -", req.method, req.url)
 
       // Set Locals
+      res.locals.sentry = process.env.SENTRY_WEB
       res.locals.production = sails.config.isProduction
       res.locals.user = req.user
       res.locals.host = process.env.HOST || sails.getBaseurl()
+      res.locals.hostname = req.host
       res.locals.url = res.locals.host + req.url
       res.locals.path = req.url
       res.locals.mixpanelToken = process.env.MIXPANEL
