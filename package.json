@@ -38,7 +38,8 @@
     "sails-redis": "~0.10.4",
     "supertest": "1.0.1",
     "throng": "^1.0.0",
-    "url": "0.10.3"
+    "url": "0.10.3",
+    "raven": "0.8.1"
   },
   "scripts": {
     "debug": "node debug app.js",

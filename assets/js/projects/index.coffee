@@ -377,4 +377,9 @@ class Projects
             type: "error"
             confirmButtonColor: "#D23939"
 
-$ -> new Projects()
+$ ->
+  try
+    new Projects()
+
+  catch error
+    Raven.captureException error
