@@ -13,6 +13,8 @@ module.exports = {
 
   /* POST Requests */
   register: function(req, res) {
+    console.log(req.param("email"))
+
     User.create({
       name: req.param("name"),
       email: req.param("email"),
@@ -29,7 +31,7 @@ module.exports = {
         })
       })
     }).catch(function(err) {
-      return res.error("Email Already Taken :(", err)
+      res.error("Email Already Taken :(", err)
     })
   }
 

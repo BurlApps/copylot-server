@@ -76,12 +76,13 @@ module.exports = {
       })
     })
   },
-  beforeCreate: function(user) {
+  beforeCreate: function(user, cb) {
     return User.hash(user.password).then(function(hash) {
       user.password = hash
       user.emailVerify = sails.config.random(20)
+      cb()
     }).catch(function(err) {
-      sails.log.error(error)
+      cb(error)
     })
   },
   afterCreate: function(user, cb) {
