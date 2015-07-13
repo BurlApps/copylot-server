@@ -7,6 +7,8 @@
       <input class="input" name="itunesID" type="text" value="<%= project.itunesID || "" %>" placeholder="Apple Store ID"/>
       <input class="input" name="androidID" type="text" value="<%= project.androidID || "" %>" placeholder="Play Store ID"/>
       <input class="input" name="website" type="website" value="<%= project.website || "" %>" placeholder="Website"/>
+      <div class="input readonly first">APP ID: <span><%= project.id %></span></div>
+      <div class="input readonly last">APP Secret: <span><%= project.secret %></span></div>
       <input type="submit" class="button" value="Update Information">
     </form>
     <div class="delete-project">Delete Project</div>
