@@ -25,7 +25,6 @@
     "include-all": "~0.1.3",
     "jackrabbit": "3.0.8",
     "mailgun-js": "0.7.0",
-    "mocha": "2.2.5",
     "moment": "2.10.3",
     "newrelic": "1.20.2",
     "passport": "~0.2.2",
@@ -36,10 +35,13 @@
     "sails-migrations": "^2.0.7",
     "sails-postgresql": "0.10.15",
     "sails-redis": "~0.10.4",
-    "supertest": "1.0.1",
     "throng": "^1.0.0",
     "url": "0.10.3",
     "raven": "0.8.1"
+  },
+  "devDependencies": {
+    "supertest": "^1.0.1",
+    "mocha": "2.2.5"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -52,8 +54,5 @@
     "url": "git://github.com/CoPylot/Server.git"
   },
   "author": "Brian",
-  "license": "",
-  "devDependencies": {
-    "supertest": "^1.0.1"
-  }
+  "license": ""
 }

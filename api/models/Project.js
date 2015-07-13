@@ -53,7 +53,7 @@ module.exports = {
         return sails.config.mailgun.messages().send({
           from: 'CoPylot <bot@copylot.io>',
           to: email,
-          subject: user.name + " invites you to " + project.name,
+          subject: user.name + " invited you to " + project.name,
           text: ("Your friend " + user.name + " invited you to join " +
                 project.name + " on CoPylot. CoPylot is the fastest way to " +
                 "manage and change the text in your apps.\n\nClick this link to accept:\n" +

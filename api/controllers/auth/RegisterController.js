@@ -29,7 +29,7 @@ module.exports = {
         })
       })
     }).catch(function(err) {
-      return res.error("Email Already Taken :(", err)
+      res.error("Email Already Taken :(", err)
     })
   }
 
