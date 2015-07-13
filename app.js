@@ -22,18 +22,12 @@ if(process.env.NEW_RELIC_LICENSE_KEY) {
   require("newrelic")
 }
 
-// Require Clusters
-require("throng")(start, {
-  workers: process.env.WEB_CONCURRENCY || 1,
-  lifetime: Infinity
-});
-
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 process.chdir(__dirname);
 
 // Ensure a "sails" can be located:
-function start() {
+(function() {
   var sails;
   try {
     sails = require('sails');
@@ -65,4 +59,4 @@ function start() {
 
   // Start server
   sails.lift(rc('sails'));
-}
+})()
