@@ -13,8 +13,8 @@
 
   .information {
     position: relative;
-    width: 42%;
-    min-height: 500px;
+    width: 50%;
+    min-height: 550px;
     float: left;
 
     .delete-project {
@@ -40,8 +40,7 @@
       .input {
         display: block;
         width: 100%;
-        padding: 10px 15px;
-        margin-top: 10px;
+        padding: 20px 15px 10px;
         font-size: 16px;
         color: #055E51;
         font-family: 'Titillium Web', sans-serif;
@@ -49,7 +48,26 @@
 
         .box-sizing(border-box);
 
-        &:focus {
+        &.readonly {
+          background: #f3faff;
+          font-weight: bold;
+          font-size: 14px;
+
+          span {
+            font-weight: 400;
+          }
+
+          &.first {
+            border-bottom: none;
+            padding: 10px 15px 5px;
+          }
+
+          &.last {
+            padding: 5px 15px 10px;
+          }
+        }
+
+        &:not(.readonly):focus {
           border-bottom: solid 1px #b7b7b7;
         }
       }
@@ -65,7 +83,7 @@
         text-align: center;
         vertical-align: middle;
         width: 90%;
-        margin: 25px auto;
+        margin: 25px auto 0;
         cursor: pointer;
         font-weight: bold;
         text-decoration: none;
@@ -88,8 +106,8 @@
   }
 
   .team {
-    width: 58%;
-    min-height: 500px;
+    width: 50%;
+    min-height: 550px;
     border-left: solid 1px rgba(0, 0, 0, 0.1);
     float: right;
     background: #fbfbff;
@@ -107,7 +125,7 @@
       .box-shadow(inset 0 1px 2px 0 rgba(0, 0, 0, 0.1));
 
       .input {
-        width: 80%;
+        width: 75%;
         margin: 0;
         padding: 18px 15px;
         font-size: 16px;

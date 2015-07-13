@@ -33,11 +33,9 @@ module.exports = {
       via: 'project'
     },
     android: {
-      required: true,
       model: 'platform'
     },
     ios: {
-      required: true,
       model: 'platform'
     },
     installations: {
@@ -70,19 +68,15 @@ module.exports = {
         name: "ios",
         project: project.id
       }).then(function(platform) {
-        project.ios = platform
+        project.ios = platform.id
       })
     }).then(function() {
       return Platform.create({
         name: "android",
         project: project.id
       }).then(function(platform) {
-        project.android = platform
+        project.android = platform.id
       })
-    }).then(function() {
-      return cb()
-    }).catch(function(err) {
-      return cb(err)
-    })
+    }).then(cb).catch(cb)
   }
 };
