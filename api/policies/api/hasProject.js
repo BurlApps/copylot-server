@@ -7,15 +7,15 @@ module.exports = function(req, res, next) {
   if(!user)
     return res.error("Project ID & Secret are required!")
 
+  if(["ios", "android"].indexOf(platform) == -1)
+    throw Error("Platforms available are ios and android")
+
   Project.findOne({
     id: user.name,
     secret: user.pass
   }).populate(platform).then(function(project) {
     if(!project)
       throw Error("Project not found")
-
-    if(["ios", "android"].indexOf(platform) == -1)
-      throw Error("Platform not ios or android")
 
     req.project = project
     req.platform = project[platform]
