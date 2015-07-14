@@ -1,5 +1,5 @@
 module.exports = function(req, res, next) {
-  var installationID = req.param("userID")
+  var installationID = req.param("installation")
 
   Promise.resolve().then(function() {
     if(installationID) {
