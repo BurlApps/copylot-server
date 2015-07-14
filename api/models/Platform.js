@@ -22,11 +22,6 @@ module.exports = {
       required: true,
       defaultsTo: 1
     },
-    version: {
-      type: "INTEGER",
-      required: true,
-      defaultsTo: 1
-    },
     payload: {
       type: 'JSON',
       defaultsTo: {}

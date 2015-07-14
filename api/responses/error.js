@@ -9,6 +9,7 @@ module.exports = function error(message, error) {
     message = message.description || message.message || "Something went wrong :("
   }
 
+  console.log(error || message)
   sails.log.verbose(error || message)
 
   if(error !== undefined && sails.config.isProduction) {
