@@ -4,7 +4,10 @@ module.exports = function(req, res, next) {
   Promise.resolve().then(function() {
     if(installationID) {
       return Installation.findOne({
-        id: installationID
+        id: installationID,
+        project: req.project.id,
+        platform: req.platform.id,
+        deviceType: req.platform.name
       }).then(function(installation) {
         if(!installation)
           throw Error("User not found")
