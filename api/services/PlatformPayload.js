@@ -9,7 +9,7 @@ module.exports = function(platform, blocks) {
     return Promise.each(blocks, function(block) {
       return payload.blocks[block.slug] = {
         slug: block.slug,
-        payload: block.payload,
+        segments: block.payload,
         variables: block.variables
       }
     })
