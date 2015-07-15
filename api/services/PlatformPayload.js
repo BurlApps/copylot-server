@@ -1,7 +1,6 @@
 module.exports = function(platform, blocks) {
   var payload = {
     version: platform.version + 1,
-    deployedAt: new Date(),
     blocks: {},
     variables: platform.variables,
   }

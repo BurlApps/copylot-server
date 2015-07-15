@@ -51,7 +51,7 @@ module.exports = {
         sails.log.info(JSON.stringify(payload))
 
         platform.version = payload.version
-        platform.deployedAt = payload.deployAt
+        platform.deployedAt = new Date()
         platform.payload = payload
         return platform.save()
       })

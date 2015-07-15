@@ -4,9 +4,7 @@ module.exports = {
     var data = {
       newPayload: false,
       installation: req.installation.id,
-      platform: {
-        version: req.platform.version
-      }
+      platform: null
     }
 
     if(req.param("version") != req.platform.version) {
