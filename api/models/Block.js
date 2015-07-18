@@ -35,6 +35,7 @@ module.exports = {
     },
     html: "STRING",
     dirty: {
+      required: true,
       type: "BOOLEAN",
       defaultsTo: true
     },
@@ -43,6 +44,7 @@ module.exports = {
       defaultsTo: []
     },
     variables: {
+      required: true,
       type: 'JSON',
       defaultsTo: {}
     },

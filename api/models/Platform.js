@@ -28,6 +28,7 @@ module.exports = {
     },
     variables: {
       type: 'JSON',
+      required: true,
       defaultsTo: {}
     },
     deployedAt: "DATETIME",

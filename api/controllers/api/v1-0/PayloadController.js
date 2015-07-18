@@ -21,7 +21,7 @@ module.exports = {
       platform: req.platform.id,
       html: req.param("text"),
       project: req.project.id,
-      variables: req.param("variables"),
+      variables: req.param("variables") || {},
       savedAt: new Date()
     }).then(function(block) {
       if(!block) throw Error("Block not created")
