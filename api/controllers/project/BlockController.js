@@ -80,7 +80,7 @@ module.exports = {
     }).catch(function(err) {
       var message = "Something went wrong"
 
-      if("slug" in err.invalidAttributes) {
+      if(err.invalidAttributes && "slug" in err.invalidAttributes) {
         message = 'The title "' + req.param("title") +
                   '" has already been used in this platform :('
       }
@@ -132,7 +132,7 @@ module.exports = {
       return block.destroy()
     }).then(function(block) {
       res.success({
-        url: "/projects/" + req.project.id + "/" + req.platform.name
+        next: "/projects/" + req.project.id + "/" + req.platform.name
       })
     }).catch(function(err) {
       res.error("Something went wrong :(", err)
