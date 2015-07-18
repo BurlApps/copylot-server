@@ -127,6 +127,8 @@ module.exports = {
     }).then(function(block) {
       if(!block) throw Error("Block not found")
 
+      req.platform.sendToWorker()
+
       return block.destroy()
     }).then(function(block) {
       res.success({

@@ -8,6 +8,7 @@ module.exports = function(platform, blocks) {
   return Promise.resolve().then(function() {
     return Promise.each(blocks, function(block) {
       return payload.blocks[block.slug] = {
+        id: block.id,
         slug: block.slug,
         segments: block.payload,
         variables: block.variables

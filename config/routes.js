@@ -77,5 +77,9 @@ module.exports.routes = {
   'post /projects/:project/:platform/blocks/:block/delete': "project/BlockController.delete",
 
   // API
-  'get /api/v1.0/:platform/payload': "api/v1-0/InstallationController.payload"
+  'get /api/v1.0/:platform/payload': "api/v1-0/PayloadController.payload",
+
+  'post /api/v1.0/:platform/variables': "api/v1-0/PayloadController.global_variables",
+  'post /api/v1.0/:platform/blocks/new': "api/v1-0/PayloadController.block",
+  'post /api/v1.0/:platform/blocks/:block/variables': "api/v1-0/PayloadController.block_variables"
 };

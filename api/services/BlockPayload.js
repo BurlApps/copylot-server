@@ -75,7 +75,7 @@ function proccessVariable(element, attribs, payload) {
     return payload.push({
       type: "variable",
       source: element.attribs["data-source"],
-      variable: element.children[0].data,
+      variable: element.children[0].data.trim(),
       attributes: attribs
     })
   })
@@ -89,7 +89,9 @@ module.exports = function(html) {
       resolve(dom)
     })
 
-    var parser = new htmlparser.Parser(handler)
+    var parser = new htmlparser.Parser(handler, {
+      decodeEntities: true
+    })
     parser.done(html)
   }).then(function(dom) {
     var payload = []
