@@ -78,14 +78,14 @@ module.exports = {
              "/blocks/" + block.id
       })
     }).catch(function(err) {
-      var message = "Something went wrong"
-
-      if(err.invalidAttributes && "slug" in err.invalidAttributes) {
-        message = 'The title "' + req.param("title") +
-                  '" has already been used in this platform :('
+      if("slug" in err.invalidAttributes) {
+        res.error(
+          'The title "' + req.param("title") +
+          '" has already been used in this platform :('
+        )
+      } else {
+        res.error("Something went wrong", err)
       }
-
-      res.error(message, err)
     })
   },
 
