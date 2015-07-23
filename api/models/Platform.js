@@ -22,17 +22,13 @@ module.exports = {
       required: true,
       defaultsTo: 1
     },
-    version: {
-      type: "INTEGER",
-      required: true,
-      defaultsTo: 1
-    },
     payload: {
       type: 'JSON',
       defaultsTo: {}
     },
     variables: {
       type: 'JSON',
+      required: true,
       defaultsTo: {}
     },
     deployedAt: "DATETIME",
@@ -56,7 +52,7 @@ module.exports = {
         sails.log.info(JSON.stringify(payload))
 
         platform.version = payload.version
-        platform.deployedAt = payload.deployAt
+        platform.deployedAt = new Date()
         platform.payload = payload
         return platform.save()
       })

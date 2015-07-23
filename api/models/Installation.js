@@ -10,11 +10,8 @@ module.exports = {
   attributes: {
     GCMSenderID: "STRING",
     deviceToken: "STRING",
-    firstName: "STRING",
-    lastName: "STRING",
-    fullName: "STRING",
     timeZone: "STRING",
-    projectVersion: "INTEGER",
+    version: "INTEGER",
     project: {
       required: true,
       model: "project"

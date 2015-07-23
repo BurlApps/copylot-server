@@ -368,7 +368,8 @@ class Projects
           form.find(".block-title").prop('readonly', true)
           form.find(".delete-button").show()
           form.attr("action", response.url)
-          history.replaceState(null, null, response.url);
+          history.replaceState(null, null, response.url)
+          config.path = response.url
 
         else
           swal

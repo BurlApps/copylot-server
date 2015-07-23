@@ -1,7 +1,6 @@
 module.exports = function(platform, blocks) {
   var payload = {
     version: platform.version + 1,
-    deployedAt: new Date(),
     blocks: {},
     variables: platform.variables,
   }
@@ -9,9 +8,9 @@ module.exports = function(platform, blocks) {
   return Promise.resolve().then(function() {
     return Promise.each(blocks, function(block) {
       return payload.blocks[block.slug] = {
-        title: block.title,
+        id: block.id,
         slug: block.slug,
-        payload: block.payload,
+        segments: block.payload,
         variables: block.variables
       }
     })

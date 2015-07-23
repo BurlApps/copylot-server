@@ -78,14 +78,14 @@ module.exports = {
              "/blocks/" + block.id
       })
     }).catch(function(err) {
-      var message = "Something went wrong"
-
       if("slug" in err.invalidAttributes) {
-        message = 'The title "' + req.param("title") +
-                  '" has already been used in this platform :('
+        res.error(
+          'The title "' + req.param("title") +
+          '" has already been used in this platform :('
+        )
+      } else {
+        res.error("Something went wrong", err)
       }
-
-      res.error(message, err)
     })
   },
 
@@ -127,10 +127,12 @@ module.exports = {
     }).then(function(block) {
       if(!block) throw Error("Block not found")
 
+      req.platform.sendToWorker()
+
       return block.destroy()
     }).then(function(block) {
       res.success({
-        url: "/projects/" + req.project.id + "/" + req.platform.name
+        next: "/projects/" + req.project.id + "/" + req.platform.name
       })
     }).catch(function(err) {
       res.error("Something went wrong :(", err)

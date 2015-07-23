@@ -58,7 +58,7 @@ module.exports.policies = {
   	"delete": ["site/isLoggedIn", "site/hasProjects"]
   },
 
-  "api/v1-0/InstallationController": {
+  "api/v1-0/PayloadController": {
     "*": ["api/wantsJSON", "api/hasProject", "api/hasInstallation"]
   },
 };
