@@ -41,19 +41,18 @@
   <% } else { %>
     <div class="new-block-message">
       <div class="message">
-        <% if(pane == "global") { %>
-          Write a <span><%=: pane | platformFormat %></span> Block
-        <% } else { %>
-          Write an <span><%=: pane | platformFormat %></span> Block
-        <% } %>
+        Add <span>CoPylot</span> to Your App
       </div>
       <div class="submessage">
-        Blocks allow you to change the text in your<br>
-        app on the fly. You read it correctly,<br>
-        <strong>no more waiting for app review!</strong>
+        All the text in your app will <strong>appear here</strong> once you<br>
+        install our SDK and run your <%=: pane | platformFormat %> app once.<br>
       </div>
-      <a class="new-button" href="<%= path %>/blocks/create">
-        Lets Do This!
+      <a class="new-button" target="_blank"
+        href="//docs.copylot.io/docs/<%= pane != "settings/management" ? pane : "ios" %>?app[id]=<%= project.id %>&app[secret]=<%= project.secret %>">
+        Install CoPylot
+      </a>
+      <a class="invite-button" href="/projects/<%= project.id %>/settings/management">
+        Invite Your Developer
       </a>
     </div>
   <% } %>
