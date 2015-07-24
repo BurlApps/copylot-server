@@ -57,7 +57,8 @@ module.exports = function badRequest(data, options) {
   if (options.view) {
     return res.view(options.view, {
       data: data,
-      layout: "layouts/error"
+      layout: "layouts/error",
+      template: "errors/400"
     });
   }
 

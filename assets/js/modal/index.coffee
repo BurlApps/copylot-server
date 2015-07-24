@@ -8,12 +8,16 @@ $ ->
 
       if enablePosting
         form = $ this
-        button = form.find(".button").val "Sending..."
+        button = form.find ".button"
         enablePosting = false
+
+        button.addClass("active").val("Sending...").text("Sending...")
 
         $.post form.attr("action"), form.serialize(), (response)->
           button.toggleClass "error", !response.success
-          button.toggleClass "active", response.success
+          button.removeClass "active"
+
+          console.log(response.success)
 
           if response.success
             button.val response.message or "Awesome :)"
@@ -32,8 +36,9 @@ $ ->
 
           else
             enablePosting = true
-            button.val response.message or "Something Went Wrong :("
-            form.find("input[type=password]").val ""
+            message = response.message or "Something Went Wrong :("
+            button.val(message).text(message)
+            form.find("input[type=password]").val("").text("")
 
   catch error
     Raven.captureException error

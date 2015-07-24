@@ -24,9 +24,6 @@ module.exports = function notFound (data, options) {
   var res = this.res;
   var sails = req._sails;
 
-  // Set status code
-  res.status(404);
-
   // Log error to console
   if (data !== undefined) {
     sails.log.verbose('Sending 404 ("Not Found") response: \n',data);
@@ -42,7 +39,13 @@ module.exports = function notFound (data, options) {
 
   // If the user-agent wants JSON, always respond with JSON
   if (req.wantsJSON) {
-    return res.jsonx(data);
+    return res.jsonx(data || {
+      success: false,
+      message: "Page not found",
+      next: false
+    });
+  } else {
+    res.status(404);
   }
 
   // If second argument is a string, we take that to mean it refers to a view.
@@ -63,7 +66,8 @@ module.exports = function notFound (data, options) {
   // but fall back to sending JSON(P) if any errors occur.
   else return res.view('errors/404', {
     data: data,
-    layout: "layouts/error"
+    layout: "layouts/error",
+    template: "errors/404"
   }, function (err, html) {
 
     // If a view error occured, fall back to JSON(P).

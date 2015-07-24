@@ -36,7 +36,8 @@
     "sails-postgresql": "0.10.15",
     "sails-redis": "~0.10.4",
     "raven": "0.8.1",
-    "basic-auth": "1.0.3"
+    "basic-auth": "1.0.3",
+    "mixpanel": "0.2.1"
   },
   "devDependencies": {
     "supertest": "^1.0.1",

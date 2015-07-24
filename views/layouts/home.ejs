@@ -11,14 +11,12 @@
 
     <!--STYLES CUSTOM-->
     <% include partials/css.ejs %>
-    <link rel="stylesheet" href="/styles/error/index.css?r=<%= random %>">
+    <link rel="stylesheet" href="/styles/home/index.css?r=<%= random %>">
     <!--STYLES CUSTOM END-->
   </head>
 
   <body>
-    <div class="background <%= template.replace(/\//g, "_") + ' ' + template.split("/")[0] %>"></div>
     <%- body %>
-    <% include partials/footer.ejs %>
 
     <!--TEMPLATES-->
     
@@ -27,6 +25,7 @@
     <!--SCRIPTS CUSTOM-->
     <% include partials/config.ejs %>
     <% include partials/javascript.ejs %>
+    <script src="/js/modal/index.js?r=<%= random %>"></script>
     <!--SCRIPTS CUSTOM END-->
 
     <!--SCRIPTS-->

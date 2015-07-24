@@ -1,0 +1,84 @@
+.section {
+  width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 80px 0;
+  border-top: solid 1px #D3D3D3;
+
+  &:first-child {
+    border: none;
+  }
+
+  .header {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 28px;
+    text-align: center;
+    color: #444444;
+    margin-bottom: 60px;
+    text-transform: capitalize;
+  }
+
+  .message {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #888;
+    margin: -50px 0 50px;
+  }
+
+  .paragraph {
+    font-size: 22px;
+    line-height: 1.6;
+    color: #888;
+    margin: -40px 0 0;
+  }
+
+  .form .input {
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #444;
+
+    &:focus {
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .items {
+    margin: 0 auto;
+    display: inline-block;
+
+    .item {
+      margin: 0 35px;
+      text-align: center;
+      width: 200px;
+      float: left;
+
+      &.storage .icon {
+        color: #25A9DF;
+      }
+
+      &.instant .icon {
+        color: #FD8755;
+      }
+
+      &.variables .icon {
+        color: #8773F1;
+      }
+
+      .icon {
+        font-size: 125px;
+        margin-bottom: 20px;
+      }
+
+      .title {
+        font-size: 20px;
+        color: #444;
+        margin-bottom: 5px;
+      }
+
+      .text {
+        font-size: 16px;
+        line-height: 1.4;
+        color: #888;
+      }
+    }
+  }
+}
