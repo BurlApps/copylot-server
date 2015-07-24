@@ -4,9 +4,9 @@
     <% include partials/meta.ejs %>
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/global/background.css?r=dbnmow3rv0zr529">
-    <link rel="stylesheet" href="/styles/global/index.css?r=dbnmow3rv0zr529">
-    <link rel="stylesheet" href="/styles/global/sweetalert.css?r=dbnmow3rv0zr529">
+    <link rel="stylesheet" href="/styles/global/background.css?r=dw8kquu9233ul3di">
+    <link rel="stylesheet" href="/styles/global/index.css?r=dw8kquu9233ul3di">
+    <link rel="stylesheet" href="/styles/global/sweetalert.css?r=dw8kquu9233ul3di">
     <!--STYLES END-->
 
     <!--STYLES CUSTOM-->
@@ -16,7 +16,7 @@
   </head>
 
   <body>
-    <div class="background error"></div>
+    <div class="background <%= template.replace(/\//g, "_") + ' ' + template.split("/")[0] %>"></div>
     <%- body %>
     <% include partials/footer.ejs %>
 
@@ -30,7 +30,7 @@
     <!--SCRIPTS CUSTOM END-->
 
     <!--SCRIPTS-->
-    <script src="/js/global/sweetalert.min.js?r=dbnmow3rv0zr529"></script>
+    <script src="/js/global/sweetalert.min.js?r=dw8kquu9233ul3di"></script>
     <!--SCRIPTS END-->
   </body>
 </html>

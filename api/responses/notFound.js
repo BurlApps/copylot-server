@@ -66,7 +66,8 @@ module.exports = function notFound (data, options) {
   // but fall back to sending JSON(P) if any errors occur.
   else return res.view('errors/404', {
     data: data,
-    layout: "layouts/error"
+    layout: "layouts/error",
+    template: "errors/404"
   }, function (err, html) {
 
     // If a view error occured, fall back to JSON(P).

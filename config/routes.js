@@ -23,10 +23,18 @@
 module.exports.routes = {
 
   // Home
-  // TODO: Build home pages
   'get /': { "view": "home/index" },
+  'get /beta/joined': {
+    "view": "home/beta",
+    "locals": {
+      "layout": "layouts/error",
+      "template": "home/beta"
+    }
+  },
   'get /terms': "https://docs.google.com/document/d/19THqSGaSekwWTMZMRAhft-EJINhvi5pw5bbl_OoGylw/pub?embedded=true",
   'get /privacy': "https://docs.google.com/document/d/1mVRnyq16bCq1tr1qAqDr-VLonBk67XNmtB0f4Mh6jA4/pub?embedded=true",
+
+  'post /beta': "home/HomeController.beta",
 
 
   // Authentication
