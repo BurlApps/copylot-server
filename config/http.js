@@ -34,12 +34,13 @@ module.exports.http = {
   ***************************************************************************/
 
     order: [
-      'registerSentry',
       'startRequestTimer',
+      'registerSentry',
       'cookieParser',
       'session',
       'passportInit',
       'passportSession',
+      'csrfChecker',
       'setLocals',
       'bodyParser',
       'handleBodyParserError',
@@ -65,7 +66,22 @@ module.exports.http = {
 
     registerSentry: raven.middleware.express(process.env.SENTRY),
 
-    setLocals: function (req, res, next) {
+    csrfChecker: function(req, res, next) {
+      var routesDisabled = sails.config.csrf.routesDisabled
+
+      if(req.path.indexOf("/api") > -1 && routesDisabled.indexOf(req.path) == -1) {
+        if(routesDisabled == "-")
+          routesDisabled = req.path
+        else
+          routesDisabled += ("," + req.path)
+
+        sails.config.csrf.routesDisabled = routesDisabled
+      }
+
+      next()
+    },
+
+    setLocals: function(req, res, next) {
       // Show Traffic
       sails.log.info("Request -", req.method, req.url)
 
