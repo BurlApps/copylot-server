@@ -12,6 +12,7 @@
     </div>
     <form class="form" action="/beta" method="POST">
       <div class="inputs">
+        <input type="hidden" name="_csrf" value="<%= _csrf %>">
         <input class="input name" type="text" name="name" placeholder="YOUR NAME" required step="1" autofocus />
         <input class="input email" type="email" name="email" placeholder="AND EMAIL ADDRESS" required step="2" />
         <button class="button" type="submit">
@@ -79,6 +80,7 @@
     <div class="message">Are you ready to empower your biz team?</div>
     <form class="form" action="/beta" method="POST">
       <div class="inputs">
+        <input type="hidden" name="_csrf" value="<%= _csrf %>">
         <input class="input name" type="text" name="name" placeholder="YOUR NAME" required step="1" autofocus />
         <input class="input email" type="email" name="email" placeholder="AND EMAIL ADDRESS" required step="2" />
         <button class="button" type="submit">
