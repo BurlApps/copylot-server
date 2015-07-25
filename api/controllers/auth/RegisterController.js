@@ -7,7 +7,9 @@ module.exports = {
     res.success("auth/register", {
       layout: 'layouts/modal',
       siteTitle: "Register",
-      next: req.param("next") || ""
+      next: req.param("next") || "",
+      name: req.param("name") || "",
+      email: req.param("email") || ""
     })
   },
 

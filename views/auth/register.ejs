@@ -8,8 +8,8 @@
   <form action="/register" method="POST">
     <input type="hidden" name="_csrf" value="<%= _csrf %>">
     <input type="hidden" name="next" value="<%= next %>">
-    <input type="text" class="input" name="name" placeholder="Full Name" step="1" autofocus required>
-    <input type="email" class="input" name="email" placeholder="Email" step="2" required>
+    <input type="text" class="input" name="name" placeholder="Full Name" value="<%= name %>" step="1" autofocus required>
+    <input type="email" class="input" name="email" placeholder="Email" value="<%= email %>" step="2" required>
     <input type="password" class="input" name="password" placeholder="Password" pattern=".{6,}" step="3" required>
     <input type="submit" class="button" value="Create Account!">
   </form>
