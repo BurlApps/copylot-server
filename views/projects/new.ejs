@@ -11,3 +11,9 @@
     <input type="submit" class="button" value="Create Project!">
   </form>
 </div>
+<% if(user.projects.length > 0) { %>
+  <div class="bottom-text">
+    Whoops, take me back to my
+    <a href="/projects">dashboard</a>.
+  </div>
+<% } %>
