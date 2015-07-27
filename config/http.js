@@ -100,7 +100,8 @@ module.exports.http = {
       res.locals.siteName = "CoPylot"
       res.locals.titleOG = null
       res.locals.visible = true
-      res.locals.description = ""
+      res.locals.description = "Store, Manage, and Deploy text to your apps on the fly. " +
+                               "Why spend development time editing text?"
       res.locals.random = sails.config.systemRandom
       return next();
     },
