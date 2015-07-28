@@ -23,14 +23,8 @@
 module.exports.routes = {
 
   // Home
-  'get /': { "view": "home/index" },
-  'get /beta/joined': {
-    "view": "home/beta",
-    "locals": {
-      "layout": "layouts/error",
-      "template": "home/beta"
-    }
-  },
+  'get /': "home/HomeController.home",
+  'get /beta/joined': "home/HomeController.joined",
   'get /terms': "https://docs.google.com/document/d/19THqSGaSekwWTMZMRAhft-EJINhvi5pw5bbl_OoGylw/pub?embedded=true",
   'get /privacy': "https://docs.google.com/document/d/1mVRnyq16bCq1tr1qAqDr-VLonBk67XNmtB0f4Mh6jA4/pub?embedded=true",
 

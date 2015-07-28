@@ -21,9 +21,14 @@ module.exports.policies = {
 
   '*': true,
 
+  "home/homeController": {
+    "*": "site/loggedInRedirect",
+    "beta": ["site/loggedInRedirect", "site/wantsJSON"]
+  },
+
   "auth/LoginController": {
     "*": "site/loggedInRedirect",
-    "login": "site/wantsJSON",
+    "login": ["site/loggedInRedirect", "site/wantsJSON"],
     "logout": true
   },
 
