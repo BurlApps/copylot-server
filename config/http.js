@@ -86,6 +86,7 @@ module.exports.http = {
       sails.log.info("Request -", req.method, req.url)
 
       // Set Locals
+      res.locals._csrf = res.locals._csrf || ""
       res.locals.sentry = process.env.SENTRY_WEB
       res.locals.production = sails.config.isProduction
       res.locals.user = req.user
