@@ -40,7 +40,7 @@ module.exports.http = {
       'session',
       'passportInit',
       'passportSession',
-      'csrfChecker',
+      //'csrfChecker',
       'setLocals',
       'bodyParser',
       'handleBodyParserError',
