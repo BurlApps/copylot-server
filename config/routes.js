@@ -24,6 +24,7 @@ module.exports.routes = {
 
   // Home
   'get /': "home/HomeController.home",
+  'get /ph': "home/HomeController.ph",
   'get /beta/joined': "home/HomeController.joined",
   'get /terms': "https://docs.google.com/document/d/19THqSGaSekwWTMZMRAhft-EJINhvi5pw5bbl_OoGylw/pub?embedded=true",
   'get /privacy': "https://docs.google.com/document/d/1mVRnyq16bCq1tr1qAqDr-VLonBk67XNmtB0f4Mh6jA4/pub?embedded=true",
