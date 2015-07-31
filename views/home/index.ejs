@@ -1,6 +1,13 @@
+<div class="background <%= ph ? "ph" : "home" %>"></div>
 <div class="hero">
   <div class="rocket"></div>
-  <div class="rocket2"></div>
+
+  <% if(ph) { %>
+    <div class="phlogo"></div>
+  <% } else { %>
+    <div class="rocket2"></div>
+  <% } %>
+
   <div class="header">
     <a href="/" class="logo">
       <%= siteName %>
@@ -8,14 +15,23 @@
     </a>
   </div>
   <div class="container">
-    <div class="message">Now Anyone Can Manage In-App Text</div>
-    <div class="submessage">
-      Store, Manage, and Deploy text to your apps on the fly.<br>
-      Why spend development time editing text?
-    </div>
+    <% if(ph) { %>
+      <div class="message">CMS for Mobile App Text</div>
+      <div class="submessage">
+        Store, Manage, and Deploy text to your apps on the fly.<br>
+        <strong>Hunters will get 50% off forever!</strong>
+      </div>
+    <% } else { %>
+      <div class="message">CMS for Mobile App Text</div>
+      <div class="submessage">
+        Store, Manage, and Deploy text to your apps on the fly.<br>
+        Why spend development time editing text?
+      </div>
+    <% } %>
     <form class="form" action="/beta" method="POST">
       <div class="inputs">
         <input type="hidden" name="_csrf" value="<%= _csrf %>">
+        <input type="hidden" name="ph" value="<%= ph %>">
         <input class="input name" type="text" name="name" placeholder="YOUR NAME" required step="1" autofocus />
         <input class="input email" type="email" name="email" placeholder="AND EMAIL ADDRESS" required step="2" />
         <button class="button" type="submit">
