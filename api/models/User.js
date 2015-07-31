@@ -11,6 +11,10 @@ module.exports = {
       required: true,
       unique: true
     },
+    productHunt: {
+      type: "BOOLEAN",
+      defaultsTo: false
+    },
     emailVerify: {
       type: 'STRING',
       unique: true

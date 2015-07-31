@@ -28,9 +28,8 @@
         Why spend development time editing text?
       </div>
     <% } %>
-    <form class="form" action="/beta" method="POST">
+    <form class="form" action="/register" method="GET">
       <div class="inputs">
-        <input type="hidden" name="_csrf" value="<%= _csrf %>">
         <input type="hidden" name="ph" value="<%= ph %>">
         <input class="input name" type="text" name="name" placeholder="YOUR NAME" required step="1" autofocus />
         <input class="input email" type="email" name="email" placeholder="AND EMAIL ADDRESS" required step="2" />
@@ -97,9 +96,9 @@
   <div class="section take-control">
     <div class="header">Sign Up For The Beta Today!</div>
     <div class="message">Are you ready to empower your biz team?</div>
-    <form class="form" action="/beta" method="POST">
+    <form class="form" action="/register" method="GET">
       <div class="inputs">
-        <input type="hidden" name="_csrf" value="<%= _csrf %>">
+        <input type="hidden" name="ph" value="<%= ph %>">
         <input class="input name" type="text" name="name" placeholder="YOUR NAME" required step="1" autofocus />
         <input class="input email" type="email" name="email" placeholder="AND EMAIL ADDRESS" required step="2" />
         <button class="button" type="submit">
