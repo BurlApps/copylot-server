@@ -19,7 +19,7 @@
       <div class="message">CMS for Mobile App Text</div>
       <div class="submessage">
         Store, Manage, and Deploy text to your apps on the fly.<br>
-        <strong>Hunters will get 50% off forever!</strong>
+        <strong>Hunters get 50% off for 1 year!</strong>
       </div>
     <% } else { %>
       <div class="message">CMS for Mobile App Text</div>
@@ -93,9 +93,20 @@
       whatever you want.
     </div>
   </div>
+  <% if(ph) { %>
+    <div class="section info">
+      <div class="header">50% Discount But No Pricing Info?</div>
+      <div class="paragraph">
+        We are still in the early stages of our product but want to offer a Product<br>
+        Hunt exclusive to show our appreciation for the community. When we launch<br>
+        our paid tiers, all Product Hunters who joined the beta on <strong>this page</strong> will<br>
+        receive a <u>50% discount for 1 YEAR</u>!!!
+      </div>
+    </div>
+  <% } %>
   <div class="section take-control">
     <div class="header">Sign Up For The Beta Today!</div>
-    <div class="message">Are you ready to empower your biz team?</div>
+    <div class="message">Are you ready to empower your team?</div>
     <form class="form" action="/register" method="GET">
       <div class="inputs">
         <input type="hidden" name="ph" value="<%= ph %>">
