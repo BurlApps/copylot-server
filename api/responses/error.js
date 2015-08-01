@@ -1,4 +1,4 @@
-module.exports = function error(message, error) {
+module.exports = function error(message, error, sendToSentry) {
 
   // Get access to `req`, `res`, & `sails`
   var req = this.req;
@@ -12,7 +12,7 @@ module.exports = function error(message, error) {
   console.log(error || message)
   sails.log.verbose(error || message)
 
-  if(error !== undefined && sails.config.isProduction) {
+  if(error !== undefined && sails.config.isProduction && sendToSentry != false) {
     sails.config.sentry.captureError(error)
   }
 

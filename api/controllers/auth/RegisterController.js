@@ -33,7 +33,11 @@ module.exports = {
         })
       })
     }).catch(function(err) {
-      res.error("Email Already Taken :(", err)
+      if("email" in err.invalidAttributes) {
+        res.error("Email Already Taken :(", err, false)
+      } else {
+        res.error("Something went wrong", err)
+      }
     })
   }
 
