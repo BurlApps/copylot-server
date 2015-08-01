@@ -11,7 +11,6 @@ module.exports = {
 	index: function(req, res) {
     res.success("account/index", {
       layout: 'layouts/modal',
-      user: req.user,
       siteTitle: "Account"
     })
 	},
