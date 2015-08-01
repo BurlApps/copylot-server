@@ -12,8 +12,10 @@ class Projects
     @beenChanged = false
 
     # Initialize Events
-    @redactorPlugin()
-    @createRedactor()
+    if $.Redactor?
+      @redactorPlugin()
+      @createRedactor()
+
     @bindEvents()
 
   redactorPlugin: ->
@@ -383,4 +385,5 @@ $ ->
     new Projects()
 
   catch error
+    console.error error
     Raven.captureException error
