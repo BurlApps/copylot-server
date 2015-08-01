@@ -29,6 +29,10 @@ mixpanel.track('Web.Page.View', {
   'Name' : "<%= siteTitle %>",
   'URL' : window.location.pathname
 })
+
+mixpanel.track('Web: <%= template %>', {
+  'URL' : window.location.pathname
+})
 </script>
 <!-- end Mixpanel -->
 
