@@ -16,12 +16,13 @@ mixpanel.init("<%= mixpanelToken %>", {
   mixpanel.people.set({
     "ID": "<%= user.id %>",
     "$name": "<%= user.name  %>",
-    "$email": "<%= user.email %>"
+    "$email": "<%= user.email %>",
+    "Registered": true
   })
   mixpanel.register({
     "User ID": "<%= user.id %>",
     "User Name": "<%= user.name  %>",
-    "User Email": "<%= user.email %>"
+    "User Email": "<%= user.email %>",
   });
 <% } %>
 
