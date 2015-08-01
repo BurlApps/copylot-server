@@ -28,6 +28,7 @@ $ ->
                 "ID": response.user
                 "$name": response.name
                 "$email": response.email
+                "Registered": true
 
             if response.next?
               setTimeout((()->
