@@ -69,7 +69,7 @@ module.exports = {
     sendToWorker: function() {
       var block = this
 
-      sails.config.queue.producer("block", function(queue) {
+      Queue.producer("block", function(queue) {
         queue.publish("block", {
           id: block.id,
           html: block.html

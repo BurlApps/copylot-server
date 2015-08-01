@@ -24,7 +24,7 @@ module.exports = {
       type: 'STRING',
       required: true,
       unique: true,
-      defaultsTo: sails.config.random(36)
+      defaultsTo: Random.random(36)
     }
   }
 };

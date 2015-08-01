@@ -40,10 +40,10 @@ module.exports = {
       return this.projects[index]
     },
     resetPassword: function(cb) {
-      this.emailVerify = sails.config.random(20)
+      this.emailVerify = Random.random(20)
       this.save()
 
-      sails.config.mailgun.messages().send({
+      Mailgun.messages().send({
         from: 'CoPylot <bot@copylot.io>',
         to: this.email,
         subject: "Reset password for CoPylot",
@@ -83,14 +83,14 @@ module.exports = {
   beforeCreate: function(user, cb) {
     return User.hash(user.password).then(function(hash) {
       user.password = hash
-      user.emailVerify = sails.config.random(20)
+      user.emailVerify = Random.random(20)
       cb()
     }).catch(function(err) {
       cb(error)
     })
   },
   afterCreate: function(user, cb) {
-    sails.config.mailgun.messages().send({
+    Mailgun.messages().send({
       from: 'CoPylot <bot@copylot.io>',
       to: user.email,
       subject: "Verify your email for CoPylot",

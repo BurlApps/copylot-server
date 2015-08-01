@@ -1,6 +1,6 @@
 var jackrabbit = require("jackrabbit")
 
-module.exports.queue = {
+module.exports = {
 
   producer: function(key, callback) {
     var queue = jackrabbit(process.env.RABBITMQ_BIGWIG_TX_URL)

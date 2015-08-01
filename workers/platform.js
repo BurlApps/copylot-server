@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  sails.config.queue.consumer("platform", function(queue) {
+  Queue.consumer("platform", function(queue) {
     sails.log.info("Platform Worker Started")
 
     queue.handle("platform", function(job, done) {
