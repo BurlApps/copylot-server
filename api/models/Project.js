@@ -18,7 +18,7 @@ module.exports = {
     secret: {
       type: 'STRING',
       required: true,
-      defaultsTo: sails.config.random(36)
+      defaultsTo: Random.random(36)
     },
     invites: {
       collection: 'invite',
@@ -50,7 +50,7 @@ module.exports = {
         inviter: user.id,
         project: this.id
       }).then(function(invite) {
-        return sails.config.mailgun.messages().send({
+        return Mailgun.messages().send({
           from: 'CoPylot <bot@copylot.io>',
           to: email,
           subject: user.name + " invited you to " + project.name,

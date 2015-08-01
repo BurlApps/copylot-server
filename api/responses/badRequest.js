@@ -28,7 +28,7 @@ module.exports = function badRequest(data, options) {
   // Log error to console
   if (data !== undefined) {
     if(sails.config.isProduction)
-      sails.config.sentry.captureError(data)
+      Sentry.captureError(data)
 
     sails.log.verbose('Sending 400 ("Bad Request") response: \n',data);
   }

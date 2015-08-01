@@ -60,7 +60,7 @@ module.exports = {
     sendToWorker: function() {
       var platform = this
 
-      sails.config.queue.producer("platform", function(queue) {
+      Queue.producer("platform", function(queue) {
         queue.publish("platform", {
           id: platform.id
         })
