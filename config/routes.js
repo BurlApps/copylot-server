@@ -61,7 +61,7 @@ module.exports.routes = {
 
   // Projects
   'get /projects': "project/BlockController.index",
-  'get /projects/new': "project/ProjectController.new",
+  'get /projects/create': "project/ProjectController.new",
   'get /projects/:project': "project/BlockController.index",
   'get /projects/:project/settings/management': "project/ProjectController.management",
   'get /projects/:project/settings/management/team/invite/:invite/remove': "project/InviteController.delete",
