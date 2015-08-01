@@ -1,6 +1,6 @@
 module.exports = function(req, res, next) {
   if(req.user.projects.length == 0) {
-    return res.redirect("/projects/new")
+    return res.redirect("/projects/create")
   }
 
   if(req.param("project") == null) {
