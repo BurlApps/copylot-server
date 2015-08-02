@@ -96,10 +96,24 @@
   height: 650px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.2);
 
-  background-image: url("/images/cirlces.png?r=`Math.round(Math.random()*100)`");
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: contain;
+  .cirlces {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+
+    opacity: 0.125;
+    background-image: url("/images/cirlces.png?r=`Math.round(Math.random()*100)`");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+
+    &.ph {
+      opacity: 0.25;
+    }
+  }
 
   .rocket {
     position: absolute;
