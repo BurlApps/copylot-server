@@ -103,7 +103,7 @@ module.exports.http = {
       res.locals.visible = true
       res.locals.description = "Store, Manage, and Deploy text to your apps on the fly. " +
                                "Why spend development time editing text?"
-      res.locals.random = sails.config.systemRandom
+      res.locals.random = Random.system
       return next();
     },
 
