@@ -90,6 +90,7 @@ module.exports.http = {
       res.locals._csrf = res.locals._csrf || ""
       res.locals.production = sails.config.isProduction
       res.locals.user = req.user
+      res.locals.project = false
       res.locals.host = process.env.HOST || sails.getBaseurl()
       res.locals.hostname = req.host
       res.locals.url = res.locals.host + req.url
