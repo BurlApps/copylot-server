@@ -18,7 +18,7 @@ require('sails').load({
     responses: false,
     session: false,
     sockets: false,
-    views: false
+    views: false,
   }
 }, function(err, app) {
   if(!err && app) {

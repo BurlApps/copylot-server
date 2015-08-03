@@ -36,7 +36,6 @@ module.exports.http = {
     order: [
       'startRequestTimer',
       'registerSentry',
-      'hostChecker',
       'cookieParser',
       'session',
       'passportInit',
@@ -66,15 +65,6 @@ module.exports.http = {
     passportSession : require('passport').session(),
 
     registerSentry: raven.middleware.express(process.env.SENTRY),
-
-    hostChecker: function(req, res, next) {
-      console.log(sails.getBaseurl())
-
-      if(process.env.HOST !== sails.getBaseurl())
-        return res.redirect(process.env.HOST)
-
-      next()
-    },
 
     csrfChecker: function(req, res, next) {
       var routesDisabled = sails.config.csrf.routesDisabled
