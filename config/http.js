@@ -69,6 +69,7 @@ module.exports.http = {
 
     hostChecker: function(req, res, next) {
       console.log(sails.getBaseurl())
+
       if(process.env.HOST !== sails.getBaseurl())
         return res.redirect(process.env.HOST)
 
