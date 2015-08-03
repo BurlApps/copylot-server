@@ -68,6 +68,7 @@ module.exports.http = {
     registerSentry: raven.middleware.express(process.env.SENTRY),
 
     hostChecker: function(req, res, next) {
+      console.log(sails.getBaseurl())
       if(process.env.HOST !== sails.getBaseurl())
         return res.redirect(process.env.HOST)
 
