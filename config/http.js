@@ -11,6 +11,7 @@
 
 var moment = require("moment")
 var raven = require("raven")
+var crypto = require('crypto')
 
 module.exports.http = {
 
@@ -87,7 +88,6 @@ module.exports.http = {
 
       // Set Locals
       res.locals._csrf = res.locals._csrf || ""
-      res.locals.sentry = process.env.SENTRY_WEB
       res.locals.production = sails.config.isProduction
       res.locals.user = req.user
       res.locals.host = process.env.HOST || sails.getBaseurl()
@@ -96,6 +96,9 @@ module.exports.http = {
       res.locals.path = req.url
       res.locals.mixpanelToken = process.env.MIXPANEL
       res.locals.heapToken = process.env.HEAP
+      res.locals.sentryToken = process.env.SENTRY_WEB
+      res.locals.intercomToken = process.env.INTERCOM
+      res.locals.intercomSecret = process.env.INTERCOM_SECRET
       res.locals.config = {}
       res.locals.siteTitle = null
       res.locals.siteName = "CoPylot"
@@ -108,6 +111,9 @@ module.exports.http = {
     },
 
     filters: {
+      email_hash: function(email, secret) {
+        return crypto.createHmac('sha256', secret).update(email).digest('hex')
+      },
       isActive: function(paneA, paneB) {
         return (paneA == paneB) ? "active" : ""
       },
