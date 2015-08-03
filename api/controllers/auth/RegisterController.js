@@ -35,6 +35,8 @@ module.exports = {
     }).catch(function(err) {
       if("email" in err.invalidAttributes) {
         res.error("Email Already Taken :(", err, false)
+      } else if("password" in err.invalidAttributes) {
+        res.error("Password is to short :(", err, false)
       } else {
         res.error("Something went wrong", err)
       }
