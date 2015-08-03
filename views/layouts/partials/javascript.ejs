@@ -53,8 +53,8 @@ heap.load("<%= heapToken %>");
 </script>
 <!-- end Heap -->
 
-<!-- start Sentry -->
 <% if(hostname != "localhost") { %>
+<!-- start Sentry -->
   <script type="text/javascript">
     Raven.config('<%= sentryToken %>', {
       release: "<%= random %>",
@@ -69,8 +69,8 @@ heap.load("<%= heapToken %>");
       })
     <% } %>
   </script>
-<% } %>
 <!-- end Sentry -->
+<% } %>
 
 <!-- start Intercom -->
 <script>
@@ -82,7 +82,17 @@ heap.load("<%= heapToken %>");
       user_hash: "<%=: user.email | email_hash:(intercomSecret) %>",
       name: "<%= user.name  %>",
       email: "<%= user.email  %>",
-      created_at: <%= user.createdAt / 1000 | 0  %>
+      created_at: <%= user.createdAt / 1000 | 0  %>,
+      updated_at: <%= project.updatedAt / 1000 | 0  %>,
+    <% } %>
+
+    <% if(project) { %>
+      company: {
+        id: "<%= project.id %>",
+        name: "<%= project.name %>",
+        created_at: <%= project.createdAt / 1000 | 0  %>,
+        updated_at: <%= project.updatedAt / 1000 | 0  %>
+      }
     <% } %>
   };
 </script>
