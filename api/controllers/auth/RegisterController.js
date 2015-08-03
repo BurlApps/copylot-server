@@ -7,7 +7,7 @@ module.exports = {
     res.success("auth/register", {
       layout: 'layouts/modal',
       siteTitle: "Register",
-      ph: req.param("ph") || "",
+      ph: req.param("ph") || "false",
       next: req.param("next") || "",
       name: req.param("name") || "",
       email: req.param("email") || ""
@@ -20,7 +20,7 @@ module.exports = {
       name: req.param("name"),
       email: req.param("email"),
       password: req.param("password"),
-      productHunt: (req.param("ph") === true)
+      productHunt: (req.param("ph") == "true")
     }).then(function(user) {
       if(!user) throw Error("User not created")
 
