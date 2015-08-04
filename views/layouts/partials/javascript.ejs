@@ -78,6 +78,7 @@ heap.load("<%= heapToken %>");
     app_id: "<%= intercomToken %>",
     <% if(user) { %>
       user_id: "<%= user.id %>",
+      mixpanel_id: "<%= user.id %>",
       user_name: "<%= user.name %>",
       user_hash: "<%=: user.email | email_hash:(intercomSecret) %>",
       name: "<%= user.name  %>",
