@@ -41,13 +41,13 @@
   <% } else { %>
     <div class="new-block-message">
       <div class="message">
-        Add <span>CoPylot</span> to Your App
+        Add our SDK in <span>10 Minutes</span>
       </div>
       <div class="submessage">
-        All the text in your app will <strong>appear here</strong> once you<br>
-        install our SDK and run your <%=: pane | platformFormat %> app once.<br>
+        All the text in your app will automagically <strong>appear here</strong><br>
+         once you install our SDK and run the app once.<br>
       </div>
-      <a class="new-button" target="_blank"
+      <a class="new-button docs-link" target="_blank"
         href="//docs.copylot.io/docs/<%= pane != "settings/management" ? pane : "ios" %>?app[id]=<%= project.id %>&app[secret]=<%= project.secret %>">
         Install CoPylot
       </a>
