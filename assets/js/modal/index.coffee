@@ -10,7 +10,7 @@ $ ->
       button = form.find ".button"
 
       if !e.target.checkValidity()
-        message = "You are missing fields :("
+        message = "Please Fill Out All Fields"
         button.addClass("error").val(message).text(message)
 
       else if enablePosting
