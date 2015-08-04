@@ -17,7 +17,7 @@ mixpanel.init("<%= mixpanelToken %>", {
     "ID": "<%= user.id %>",
     "$name": "<%= user.name  %>",
     "$email": "<%= user.email %>",
-    "Registered": true
+    "Registered": true,
   })
   mixpanel.register({
     "User ID": "<%= user.id %>",
@@ -90,8 +90,9 @@ heap.load("<%= heapToken %>");
       company: {
         id: "<%= project.id %>",
         name: "<%= project.name %>",
+        setup: <%= project.setup || false  %>,
         created_at: <%= project.createdAt / 1000 | 0  %>,
-        updated_at: <%= project.updatedAt / 1000 | 0  %>
+        updated_at: <%= project.updatedAt / 1000 | 0  %>,
       }
     <% } %>
   };

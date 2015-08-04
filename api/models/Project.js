@@ -42,6 +42,11 @@ module.exports = {
       collection: 'installation',
       via: 'project'
     },
+    setup: {
+      required: true,
+      type: "BOOLEAN",
+      defaultsTo: false
+    },
     sendInvite: function(user, email) {
       var project = this
 
