@@ -30,7 +30,7 @@
     <a class="item <%=: pane | isActive:("settings/management") %>" href="/projects/<%= project.id %>/settings/management">
       <span class="fa fa-bars"></span> Management
     </a>
-    <a class="item <%=: pane | isActive:("settings/install") %>" target="_blank"
+    <a class="item docs-link <%=: pane | isActive:("settings/install") %>" target="_blank"
       href="//docs.copylot.io/docs/<%= pane != "settings/management" ? pane : "ios" %>?app[id]=<%= project.id %>&app[secret]=<%= project.secret %>">
       <span class="fa fa-terminal"></span> Install SDK
     </a>
