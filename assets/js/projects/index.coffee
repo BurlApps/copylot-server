@@ -339,46 +339,54 @@ class Projects
       button = form.find(".save-button")
       verb = form.find(".save-button").val().toLowerCase()
 
-      if verb == "save"
-        button.addClass("saving").val "saving"
+      if !e.target.checkValidity()
+        swal
+          title: "Oops..."
+          text: "Please give the block a title."
+          type: "error"
+          confirmButtonColor: "#D23939"
+
       else
-        button.addClass("saving").val "creating"
-
-      $.post form.attr("action"),
-        _csrf: config.csrf
-        title: form.find(".block-title").val()
-        html: form.find("textarea").val()
-      , (response)->
-        button.removeClass("saving").val(verb)
-
-        if response.success
-          if verb == "create"
-            swal
-              title: "Created!"
-              type: "success"
-              confirmButtonColor: "#38A0DC"
-
-            button.val "save"
-          else
-            button.addClass("saved").val "saved"
-
-            setTimeout ->
-               button.removeClass("saved").val "save"
-            , 3000
-
-          self.beenChanged = false
-          form.find(".block-title").prop('readonly', true)
-          form.find(".delete-button").show()
-          form.attr("action", response.url)
-          history.replaceState(null, null, response.url)
-          config.path = response.url
-
+        if verb == "save"
+          button.addClass("saving").val "saving"
         else
-          swal
-            title: "Oops..."
-            text: response.message or "Something went wrong :("
-            type: "error"
-            confirmButtonColor: "#D23939"
+          button.addClass("saving").val "creating"
+
+        $.post form.attr("action"),
+          _csrf: config.csrf
+          title: form.find(".block-title").val()
+          html: form.find("textarea").val()
+        , (response)->
+          button.removeClass("saving").val(verb)
+
+          if response.success
+            if verb == "create"
+              swal
+                title: "Created!"
+                type: "success"
+                confirmButtonColor: "#38A0DC"
+
+              button.val "save"
+            else
+              button.addClass("saved").val "saved"
+
+              setTimeout ->
+                 button.removeClass("saved").val "save"
+              , 3000
+
+            self.beenChanged = false
+            form.find(".block-title").prop('readonly', true)
+            form.find(".delete-button").show()
+            form.attr("action", response.url)
+            history.replaceState(null, null, response.url)
+            config.path = response.url
+
+          else
+            swal
+              title: "Oops..."
+              text: response.message or "Something went wrong :("
+              type: "error"
+              confirmButtonColor: "#D23939"
 
 $ ->
   try
