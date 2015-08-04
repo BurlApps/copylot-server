@@ -12,6 +12,11 @@ module.exports = {
       data.platform = req.platform.payload
     }
 
+    if(!req.project.setup) {
+      project.setup = true
+      project.save()
+    }
+
     res.success(data)
   },
 
