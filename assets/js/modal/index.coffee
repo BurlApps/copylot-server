@@ -6,9 +6,14 @@ $ ->
       e.preventDefault()
       e.stopPropagation()
 
-      if enablePosting
-        form = $ this
-        button = form.find ".button"
+      form = $ this
+      button = form.find ".button"
+
+      if !e.target.checkValidity()
+        message = "You are missing fields :("
+        button.addClass("error").val(message).text(message)
+
+      else if enablePosting
         enablePosting = false
 
         button.addClass("active").val("Sending...").text("Sending...")
