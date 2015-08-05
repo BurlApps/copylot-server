@@ -13,8 +13,8 @@ module.exports = {
     }
 
     if(!req.project.setup) {
-      project.setup = true
-      project.save()
+      req.project.setup = true
+      req.project.save()
     }
 
     res.success(data)
