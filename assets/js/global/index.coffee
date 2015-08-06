@@ -1,7 +1,7 @@
 $ ->
   $(".contact-link").click (e)->
     e.preventDefault()
-    Intercom 'show'
+    Intercom 'showNewMessage'
 
   $(".docs-link").click ->
     mixpanel.track "Web.Docs.Home"
