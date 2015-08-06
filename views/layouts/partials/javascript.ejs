@@ -17,7 +17,7 @@ mixpanel.init("<%= mixpanelToken %>", {
     "ID": "<%= user.id %>",
     "$name": "<%= user.name  %>",
     "$email": "<%= user.email %>",
-    "Registered": true,
+    "Registered": true
   })
   mixpanel.register({
     "User ID": "<%= user.id %>",
@@ -28,7 +28,8 @@ mixpanel.init("<%= mixpanelToken %>", {
 
 mixpanel.track('Web.Page.View', {
   'Name' : "<%= siteTitle %>",
-  'URL' : window.location.pathname
+  'URL' : window.location.pathname,
+  "Template": "<%= template %>"
 })
 
 mixpanel.track('Web: <%= template %>', {
