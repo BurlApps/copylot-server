@@ -95,6 +95,10 @@ heap.load("<%= heapToken %>");
         setup: <%= project.setup || false  %>,
         created_at: <%= project.createdAt / 1000 | 0  %>,
         updated_at: <%= project.updatedAt / 1000 | 0  %>,
+
+        <% if(blocks) { %>
+          blocks: <%= blocks.length %>
+        <% } %>
       }
     <% } %>
   };

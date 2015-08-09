@@ -101,6 +101,7 @@ module.exports.http = {
       res.locals.intercomToken = process.env.INTERCOM
       res.locals.intercomSecret = process.env.INTERCOM_SECRET
       res.locals.config = {}
+      res.locals.blocks = null
       res.locals.siteTitle = null
       res.locals.siteName = "CoPylot"
       res.locals.titleOG = null
