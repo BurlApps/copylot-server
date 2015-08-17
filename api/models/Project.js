@@ -67,6 +67,10 @@ module.exports = {
       })
     }
   },
+  beforeValidate: function(values, cb) {
+    values.setup = !!values.setup
+    cb()
+  },
   afterCreate: function(project, cb) {
     Promise.resolve().then(function() {
       return Platform.create({
