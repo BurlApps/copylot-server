@@ -8,7 +8,7 @@ module.exports = {
     }
 
     if(req.param("version") != req.platform.version) {
-      data.newPayload = true
+      data.newPayload = !!req.platform.payload
       data.platform = req.platform.payload
     }
 
