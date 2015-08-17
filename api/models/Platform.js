@@ -47,6 +47,7 @@ module.exports = {
         project: platform.project,
         platform: platform.id
       }).then(function(blocks) {
+        platform.version += 1
         return PlatformPayload(platform, blocks)
       }).then(function(payload) {
         sails.log.info(JSON.stringify(payload))
@@ -66,5 +67,14 @@ module.exports = {
         })
       })
     }
+  },
+  afterCreate: function(platform, cb) {
+    Queue.producer("platform", function(queue) {
+      queue.publish("platform", {
+        id: platform.id
+      })
+
+      cb()
+    })
   }
 };

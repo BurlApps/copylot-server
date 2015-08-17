@@ -7,17 +7,26 @@ module.exports = {
       platform: null
     }
 
-    if(req.param("version") != req.platform.version) {
-      data.newPayload = !!req.platform.payload
-      data.platform = req.platform.payload
-    }
+    Promise.resolve().then(function() {
+      if(req.platform.payload) return
 
-    if(!req.project.setup) {
+      PlatformPayload(req.platform, []).then(function(payload) {
+        req.platform.payload = payload
+        return req.platform.save()
+      })
+    }).then(function() {
+      if(req.param("version") != req.platform.version) {
+        data.newPayload = true
+        data.platform = req.platform.payload
+      }
+    }).then(function() {
+      return res.success(data)
+    }).then(function() {
+      if(req.project.setup) return
+
       req.project.setup = true
-      req.project.save()
-    }
-
-    res.success(data)
+      return req.project.save()
+    })
   },
 
   block: function(req, res) {
