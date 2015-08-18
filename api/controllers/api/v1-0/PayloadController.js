@@ -8,7 +8,7 @@ module.exports = {
     }
 
     Promise.resolve().then(function() {
-      if(req.platform.payload) return
+      if(req.platform.payload.version) return
 
       PlatformPayload(req.platform, []).then(function(payload) {
         req.platform.payload = payload
