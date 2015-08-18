@@ -11,6 +11,7 @@ module.exports = {
       })
     }).on('error', function(error) {
       sails.log.error(error)
+      module.exports.producer(key, callback)
     })
   },
 
@@ -23,6 +24,7 @@ module.exports = {
       })
     }).on('error', function(error) {
       sails.log.error(error)
+      module.exports.consumer(key, callback)
     })
   }
 
