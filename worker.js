@@ -22,7 +22,10 @@ require('sails').load({
   }
 }, function(err, app) {
   if(!err && app) {
-    return require("./workers/" + process.argv[2])(app)
+    require("./workers/block")(app)
+    require("./workers/platform")(app)
+
+    //return require("./workers/" + process.argv[2])(app)
   } else {
     return console.error(err)
   }
